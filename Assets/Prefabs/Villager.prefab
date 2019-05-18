@@ -1009,11 +1009,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2f72f2d37195746a9daf2446cce53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Task: 1
   _WoodHeld: 0
   _StoneHeld: 0
-  _Task: 0
   _PreviousTask: 0
-  _Supplies: {fileID: 0}
+  _FindObject: {fileID: 0}
   _ReturnZone: {fileID: 0}
   _Axe: {fileID: 250408125}
   _Pickaxe: {fileID: 1791877583}

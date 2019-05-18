@@ -4,22 +4,27 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Villager : MonoBehaviour, IVillager, ITakeDamage
 {
+    [Header("Villager Task")]
+    public VillagerTask _Task;
+    bool Started = false;
+    [Header("Resources")]
     public int _WoodHeld;
     public int _StoneHeld;
-    bool Started = false;
-    public VillagerTask _Task;
+
     [HideInInspector]
     public VillagerTask _PreviousTask;
-    private NavMeshAgent _Nav;
 
+    private NavMeshAgent _Nav;
     private WorldResource _ResourceOfInterest;
 
-    public FindObjectOfInterest _Supplies;
-    bool _CollectingResource = false;
-    bool _ReturningGoods = false;
+    private bool _CollectingResource = false;
+    private bool _ReturningGoods = false;
 
-    public GameObject _ReturnZone;
-    Vector3 OldPosition;
+    [Header("Find Object Link")]
+    public FindObjectOfInterest _FindObject;
+    
+    
+    private Vector3 OldPosition;
 
     [Header("Tools")]
     public GameObject _Axe;
@@ -190,11 +195,13 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
             }
             if (_ResourceOfInterest != null && _ResourceOfInterest._SupplyAmmount <= 0)
             {
-                _Supplies.DeleteWorldResource(_ResourceOfInterest);
+                _FindObject.DeleteWorldResource(_ResourceOfInterest);
                 Destroy(_ResourceOfInterest.gameObject);
             }
             _CollectingResource = false;
             CancelTool();
+            _FindObject.RefreshLists();
+
             yield return null;
         }
     }
@@ -223,7 +230,7 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     {
         if (_ResourceOfInterest == null)
         {
-            _ResourceOfInterest = _Supplies.ClosestResourceOfInterest(_Supplies._WoodSupplies, transform.position, gameObject);
+            _ResourceOfInterest = _FindObject.ClosestResourceOfInterest(_FindObject._WoodSupplies, transform.position, gameObject);
 
         }
         else
@@ -244,7 +251,7 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
         }
         else
         {
-            _ResourceOfInterest = _Supplies.ClosestResourceOfInterest(_Supplies._StoneSupplies, transform.position, gameObject);
+            _ResourceOfInterest = _FindObject.ClosestResourceOfInterest(_FindObject._StoneSupplies, transform.position, gameObject);
         }
         
     }
@@ -266,14 +273,25 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     #region ReturnGoods
     void ReturnGoods()
     {
+        //Pauses the villager from collecting anymore
         StopCoroutine(CollectResource(_ResourceOfInterest));
-        _Nav.destination = _ReturnZone.transform.position;
-        if (Vector3.Distance(transform.position, _ReturnZone.transform.position) < 2)
+
+        Building _ResourceCollection = _FindObject.ClosestBuildingOfInterest(_FindObject._ResourceCollection, transform.position);
+        if (_ResourceCollection != null)
         {
-            _WoodHeld = 0;
-            _StoneHeld = 0;
-            _Task = _PreviousTask;
-            _ReturningGoods = false;
+
+            _Nav.destination = _ResourceCollection.transform.position;
+
+
+            //DropOff the goods
+            if (Vector3.Distance(transform.position, _ResourceCollection.transform.position) < 2)
+            {
+                _WoodHeld = 0;
+                _StoneHeld = 0;
+                //Return to previous task
+                _Task = _PreviousTask;
+                _ReturningGoods = false;
+            }
         }
     }
     #endregion

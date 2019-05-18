@@ -8,32 +8,52 @@ public class FindObjectOfInterest : MonoBehaviour
     [Header("Resource Lists")]
     public List<WorldResource> _WoodSupplies = new List<WorldResource>();
     public List<WorldResource> _StoneSupplies = new List<WorldResource>();
-    
-    void RefreshLists()
+    [Header("Building Lists")]
+    public List<Building> _Houses = new List<Building>();
+    public List<Building> _ResourceCollection = new List<Building>();
+
+    public void RefreshLists()
     {
+        //Clear All Lists
         _WoodSupplies.Clear();
         _StoneSupplies.Clear();
+        _Houses.Clear();
+        _ResourceCollection.Clear();
 
-        #region Find Wood
-        WorldResource[] wood = FindObjectsOfType<WorldResource>();
-        foreach (WorldResource _wood in wood)
+        //Resources
+        #region Find Resources
+        WorldResource[] resource = FindObjectsOfType<WorldResource>();
+        foreach (WorldResource _resource in resource)
         {
-            if (_wood._ResourceType == ResourceType.wood)
+            if (_resource._ResourceType == ResourceType.wood)
             {
-                _WoodSupplies.Add(_wood);
+                _WoodSupplies.Add(_resource);
+            }
+            if (_resource._ResourceType == ResourceType.stone)
+            {
+                _StoneSupplies.Add(_resource);
             }
         }
         #endregion
-        #region Find Stone
-        WorldResource[] stone = FindObjectsOfType<WorldResource>();
-        foreach (WorldResource _stone in stone)
+        
+        //Buildings
+        #region Find Buildings
+        Building[] buildings = FindObjectsOfType<Building>();
+        foreach (Building _Building in buildings)
         {
-            if (_stone._ResourceType == ResourceType.stone)
+            //Add building to houses list
+            if (_Building._BuildingType == BuildingType.House)
             {
-                _StoneSupplies.Add(_stone);
+                _Houses.Add(_Building);
+            }
+            //Add building to resource collection list
+            if (_Building._BuildingType == BuildingType.ResourceCollection)
+            {
+                _ResourceCollection.Add(_Building);
             }
         }
         #endregion
+        
     }
     void Awake()
     {
@@ -87,6 +107,27 @@ public class FindObjectOfInterest : MonoBehaviour
     }
     #endregion
 
-   
-    
+    #region Find Closest building
+    public Building ClosestBuildingOfInterest(List<Building> _BuildingToFind, Vector3 VillagerPosition)
+    {
+        float ClosestDistance = 50;
+        Building _ClosestBuilding = null;
+
+        foreach (Building _Building in _BuildingToFind)
+        {
+
+            if (_Building != null)
+            {
+                float Distance = Vector3.Distance(VillagerPosition, _Building.transform.position);
+                if (Distance < ClosestDistance)
+                {
+                    ClosestDistance = Distance;
+                    _ClosestBuilding = _Building;
+                }
+            }
+        }
+        return _ClosestBuilding;
+    }
+    #endregion
+
 }
