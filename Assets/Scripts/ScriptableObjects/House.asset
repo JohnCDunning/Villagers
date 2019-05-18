@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: House
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingObject
+  _BuildingType: 0
+  _ConstructionPrefab: {fileID: 1851045261926119257, guid: 66877e7273ce00843944e747a07eee73,
+    type: 3}
+  _ObjectPrefab: {fileID: 7286274230067444553, guid: ffc94e2c976de764ea3815ce0a38abea,
+    type: 3}
+  _BuildingName: House
+  _WoodCost: 100
+  _StoneCost: 100
+  _FoodCost: 50
