@@ -12,6 +12,7 @@ public class FindObjectOfInterest : MonoBehaviour
     public List<Building> _Houses = new List<Building>();
     public List<Building> _ResourceCollection = new List<Building>();
 
+    #region RefreshAllLists
     public void RefreshLists()
     {
         //Clear All Lists
@@ -55,6 +56,7 @@ public class FindObjectOfInterest : MonoBehaviour
         #endregion
         
     }
+    #endregion
     void Awake()
     {
         //Finds every wood in the world and adds to a list

@@ -1014,6 +1014,8 @@ MonoBehaviour:
   _WoodHeld: 0
   _StoneHeld: 0
   _PreviousTask: 0
+  _ResourceOfInterest: {fileID: 0}
+  _ReturningGoods: 0
   _FindObject: {fileID: 0}
   _Axe: {fileID: 250408125}
   _Pickaxe: {fileID: 1791877583}

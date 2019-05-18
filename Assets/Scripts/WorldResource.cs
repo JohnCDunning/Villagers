@@ -21,6 +21,8 @@ public class WorldResource : MonoBehaviour
     [HideInInspector]
     public GameObject _VillagerTravelingToThis;
 
+    public GameObject _Outline;
+
     private void Start()
     {
         _OriginalAmount = _SupplyAmmount;

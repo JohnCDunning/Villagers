@@ -15,10 +15,12 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     public VillagerTask _PreviousTask;
 
     private NavMeshAgent _Nav;
-    private WorldResource _ResourceOfInterest;
+    [HideInInspector]
+    public WorldResource _ResourceOfInterest;
 
     private bool _CollectingResource = false;
-    private bool _ReturningGoods = false;
+    [HideInInspector]
+    public bool _ReturningGoods = false;
 
     [Space]
     public FindObjectOfInterest _FindObject;
@@ -47,6 +49,31 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     {
         StartCoroutine(StartDelay());
     }
+    public void SetTaskFromUI(int _TaskNumber)
+    {
+        _ReturningGoods = false;
+
+        _ResourceOfInterest._VillagerTravelingToThis = null;
+        _ResourceOfInterest._SupplyBeingTaken = false;
+        _ResourceOfInterest = null;
+
+
+
+        switch (_TaskNumber)
+        {
+            case 1:
+                _Task = VillagerTask.Gather_Wood;
+                break;
+            case 2:
+                _Task = VillagerTask.Gather_Stone;
+                break;
+            case 3:
+                _Task = VillagerTask.Hunt_Food;
+                break;
+            
+        }
+    }
+
     void Update()
     {
         
@@ -57,7 +84,7 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
         {
             SetTask();
         }
-        if(_StoneHeld > 20 || _WoodHeld > 20)
+        if(_StoneHeld >= 20 || _WoodHeld >= 20)
         {
             StopCoroutine(CollectResource(_ResourceOfInterest));
             if (_ReturningGoods == false)
