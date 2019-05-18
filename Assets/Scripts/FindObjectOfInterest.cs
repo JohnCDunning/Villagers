@@ -9,14 +9,16 @@ public class FindObjectOfInterest : MonoBehaviour
     public List<WorldResource> _WoodSupplies = new List<WorldResource>();
     public List<WorldResource> _StoneSupplies = new List<WorldResource>();
     
-    void Awake()
+    void RefreshLists()
     {
-        //Finds every wood in the world and adds to a list
+        _WoodSupplies.Clear();
+        _StoneSupplies.Clear();
+
         #region Find Wood
         WorldResource[] wood = FindObjectsOfType<WorldResource>();
         foreach (WorldResource _wood in wood)
         {
-            if(_wood._ResourceType == ResourceType.wood)
+            if (_wood._ResourceType == ResourceType.wood)
             {
                 _WoodSupplies.Add(_wood);
             }
@@ -32,6 +34,11 @@ public class FindObjectOfInterest : MonoBehaviour
             }
         }
         #endregion
+    }
+    void Awake()
+    {
+        //Finds every wood in the world and adds to a list
+        RefreshLists();
 
     }
    

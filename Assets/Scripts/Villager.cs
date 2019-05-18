@@ -22,8 +22,11 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     Vector3 OldPosition;
 
     [Header("Tools")]
-    public GameObject Axe;
-    public GameObject Pickaxe;
+    public GameObject _Axe;
+    public GameObject _Pickaxe;
+    [Header("GatheredResources")]
+    public GameObject _Wood;
+    public GameObject _Stone;
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(Random.Range(0, 2f));
@@ -77,13 +80,14 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
         switch (_Task)
         {
             case VillagerTask.Gather_Wood:
-              
-                Axe.SetActive(true); Pickaxe.SetActive(false);
+                _Axe.SetActive(true); _Pickaxe.SetActive(false);
+                _Stone.SetActive(false); _Wood.SetActive(false);
                 Gather_Wood();
                 break;
             case VillagerTask.Gather_Stone:
 
-                Axe.SetActive(false); Pickaxe.SetActive(true);
+                _Axe.SetActive(false); _Pickaxe.SetActive(true);
+                _Stone.SetActive(false); _Wood.SetActive(false);
                 Gather_Stone();
                 break;
             case VillagerTask.Hunt_Food:
@@ -93,6 +97,16 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
                 Farm();
                 break;
             case VillagerTask.ReturnGoods:
+                _Axe.SetActive(false); _Pickaxe.SetActive(false);
+                switch (_PreviousTask)
+                {
+                    case VillagerTask.Gather_Wood:
+                        _Stone.SetActive(false); _Wood.SetActive(true);
+                        break;
+                    case VillagerTask.Gather_Stone:
+                        _Stone.SetActive(true); _Wood.SetActive(false);
+                        break;
+                }
                 ReturnGoods();
                 break;
             case VillagerTask.Sleep:
@@ -180,7 +194,7 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
                 Destroy(_ResourceOfInterest.gameObject);
             }
             _CollectingResource = false;
-            GetComponentInChildren<Animator>().ResetTrigger("Swing");
+            CancelTool();
             yield return null;
         }
     }
@@ -188,12 +202,18 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     #region UseTool
     void UseTool()
     {
-        GetComponentInChildren<Animator>().SetTrigger("Swing");
-        //GetComponentInChildren<AudioSource>().Play();
+        if (GetComponentInChildren<Animator>() != null)
+        {
+            GetComponentInChildren<Animator>().SetTrigger("Swing");
+        }
+       
     }
     void CancelTool()
     {
-        GetComponentInChildren<Animator>().ResetTrigger("Swing");
+        if (GetComponentInChildren<Animator>() != null)
+        {
+            GetComponentInChildren<Animator>().ResetTrigger("Swing");
+        }
     }
     #endregion
 
