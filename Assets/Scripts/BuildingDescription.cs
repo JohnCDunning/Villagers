@@ -8,6 +8,7 @@ public class BuildingDescription : MonoBehaviour
     public BuildingObject _Description;
 
     [Header("Text Links")]
+    public TextMeshProUGUI _DescriptionText;
     public TextMeshProUGUI _BuildingName;
     public TextMeshProUGUI _WoodCost;
     public TextMeshProUGUI _StoneCost;
@@ -19,10 +20,10 @@ public class BuildingDescription : MonoBehaviour
         if(_Description != null)
         {
             _BuildingName.text = _Description._BuildingName;
+            _DescriptionText.text = _Description._BuildingDescription;
             _WoodCost.text = _Description._WoodCost.ToString();
             _StoneCost.text = _Description._StoneCost.ToString();
             _FoodCost.text = _Description._FoodCost.ToString();
-
         }
     }
 }

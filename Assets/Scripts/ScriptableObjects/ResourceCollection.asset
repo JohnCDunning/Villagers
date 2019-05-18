@@ -18,6 +18,8 @@ MonoBehaviour:
   _ObjectPrefab: {fileID: 95953438532374429, guid: 61c451be1e2b0ac428160b71ce9962c7,
     type: 3}
   _BuildingName: Resource Collection
+  _BuildingDescription: Return goods here
   _WoodCost: 50
   _StoneCost: 50
   _FoodCost: 0
+  _ConstructionSize: 6

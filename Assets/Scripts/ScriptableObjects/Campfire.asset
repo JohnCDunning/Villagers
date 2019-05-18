@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: House
+  m_Name: Campfire
   m_EditorClassIdentifier: Assembly-CSharp::BuildingObject
-  _BuildingType: 0
-  _ConstructionPrefab: {fileID: 1851045261926119257, guid: 66877e7273ce00843944e747a07eee73,
+  _BuildingType: 2
+  _ConstructionPrefab: {fileID: 2794586705636637818, guid: 628d2492252c0ac41820ad23f3da4f57,
     type: 3}
-  _ObjectPrefab: {fileID: 7286274230067444553, guid: ffc94e2c976de764ea3815ce0a38abea,
+  _ObjectPrefab: {fileID: 2835898805626409566, guid: 22a24e0e8aa47cf419ec37c191fdab07,
     type: 3}
-  _BuildingName: House
-  _BuildingDescription: A house to keep warm in the night
-  _WoodCost: 100
-  _StoneCost: 100
-  _FoodCost: 50
-  _ConstructionSize: 8
+  _BuildingName: Campfire
+  _BuildingDescription: A cozy campfire to warm the villagers
+  _WoodCost: 25
+  _StoneCost: 25
+  _FoodCost: 0
+  _ConstructionSize: 3.5

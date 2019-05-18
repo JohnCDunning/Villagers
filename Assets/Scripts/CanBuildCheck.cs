@@ -8,7 +8,6 @@ public class CanBuildCheck : MonoBehaviour
     public GameObject _ConstructionBuilding;
     [HideInInspector]
     public GameObject _BuildingToSpawn;
-    public GameObject _CanBuildSphere;
     public Material _CanBuild;
     public Material _CantBuild;
     public bool CanBuild = true;
@@ -18,11 +17,11 @@ public class CanBuildCheck : MonoBehaviour
 
         if(CanBuild == true)
         {
-            _CanBuildSphere.GetComponent<Renderer>().material = _CanBuild;
+            GetComponent<Renderer>().material = _CanBuild;
         }
         else
         {
-            _CanBuildSphere.GetComponent<Renderer>().material = _CantBuild;
+            GetComponent<Renderer>().material = _CantBuild;
         }
     }
     private void OnTriggerStay(Collider other)

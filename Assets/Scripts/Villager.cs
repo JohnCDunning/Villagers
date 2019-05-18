@@ -20,7 +20,7 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     private bool _CollectingResource = false;
     private bool _ReturningGoods = false;
 
-    [Header("Find Object Link")]
+    [Space]
     public FindObjectOfInterest _FindObject;
     
     
@@ -32,6 +32,8 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     [Header("GatheredResources")]
     public GameObject _Wood;
     public GameObject _Stone;
+    [Space]
+    public GameObject _Outline;
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(Random.Range(0, 2f));
@@ -47,6 +49,9 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     }
     void Update()
     {
+        
+
+
         //Run SetTask
         if (Started)
         {
@@ -223,7 +228,6 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
         }
     }
     #endregion
-
     //Villager will find wood to cut
     #region Gather_Wood
     void Gather_Wood()
@@ -302,4 +306,6 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
 
     }
     #endregion
+
+   
 }
