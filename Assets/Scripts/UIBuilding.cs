@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 public class UIBuilding : MonoBehaviour, IPointerEnterHandler,IPointerExitHandler
 {
     public BuildingObject _BuildingDetails;
     public GameObject _Description;
+    private CollectedResources _CurrentResources;
+
+    void Start()
+    {
+        _CurrentResources = CollectedResources._Instance;
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         _Description.SetActive(true);
@@ -17,17 +24,31 @@ public class UIBuilding : MonoBehaviour, IPointerEnterHandler,IPointerExitHandle
     }
     void Update()
     {
-
+        //NOT COMPATIBLE WITH FOOD YET
+        if(_BuildingDetails._WoodCost < _CurrentResources._CollectedWood && _BuildingDetails._StoneCost < _CurrentResources._CollectedStone)
+        {
+            GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            GetComponent<Button>().interactable = false;
+        }
     }
     //Shows the object the user is about to place
     public void DisplayConstructionHoligram()
     {
+        _CurrentResources._CollectedWood -= _BuildingDetails._WoodCost;
+        _CurrentResources._CollectedStone -= _BuildingDetails._StoneCost;
+
         CanBuildCheck _BuildCheck = ConstructObject._Instance._ContructionSphere.GetComponent<CanBuildCheck>();
+
         if (_BuildCheck != _BuildingDetails._ConstructionPrefab)
         {
             Destroy(_BuildCheck._ConstructionBuilding);
+
             GameObject _Building = Instantiate(_BuildingDetails._ConstructionPrefab, Vector3.zero, _BuildingDetails._ConstructionPrefab.transform.rotation, _BuildCheck.transform);
             _Building.transform.localPosition = Vector3.zero;
+
             _BuildCheck._ConstructionBuilding = _Building;
             _BuildCheck._BuildingToSpawn = _BuildingDetails._ObjectPrefab;
         }

@@ -9,11 +9,16 @@ public enum ResourceType
 }
 public class WorldResource : MonoBehaviour
 {
-    
+    [Header("Resource Variables")]
     public ResourceType _ResourceType;
+
+    [Space]
     public int _SupplyAmmount;
+
     private int _OriginalAmount;
+    [HideInInspector]
     public bool _SupplyBeingTaken = false;
+    [HideInInspector]
     public GameObject _VillagerTravelingToThis;
 
     private void Start()
