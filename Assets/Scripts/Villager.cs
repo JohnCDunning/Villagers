@@ -321,7 +321,7 @@ public class Villager : MonoBehaviour
                     CollectedResources._Instance._CollectedStone += _StoneHeld;
                     _ResourcePopup.ShowResourcePopup(ResourceType.stone, _StoneHeld);
                 }
-                if (_StoneHeld != 0)
+                if (_FoodHeld != 0)
                 {
                     CollectedResources._Instance._CollectedFood += _FoodHeld;
                     _ResourcePopup.ShowResourcePopup(ResourceType.food, _FoodHeld);

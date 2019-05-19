@@ -816,12 +816,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1533337135464550505}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &206204531 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9051959531550484853, guid: a031c939637dc604b8a99832831ee895,
-    type: 3}
-  m_PrefabInstance: {fileID: 1476570808}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &225365430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,7 +1154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c651834741af964e94193e3b74f863a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _CollectedWood: 100
+  _CollectedWood: 500
   _CollectedStone: 100
   _CollectedFood: 50
   _CollectedWoodText: {fileID: 985783382}
@@ -1178,10 +1172,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: BerryBush (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4674785815371011766, guid: 9a0faf9051db68e4e9505fef927166f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.64
+      value: 21.9
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
@@ -1191,7 +1190,7 @@ PrefabInstance:
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.76
+      value: -23.53
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
@@ -1549,12 +1548,6 @@ Transform:
   m_Father: {fileID: 1945908714}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &571508784 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 658380063, guid: a031c939637dc604b8a99832831ee895,
-    type: 3}
-  m_PrefabInstance: {fileID: 1476570808}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &586071173
 GameObject:
   m_ObjectHideFlags: 0
@@ -2677,12 +2670,6 @@ Transform:
   m_Father: {fileID: 1615363075}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1281158675 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 250408125, guid: a031c939637dc604b8a99832831ee895,
-    type: 3}
-  m_PrefabInstance: {fileID: 1476570808}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1291627530
 GameObject:
   m_ObjectHideFlags: 0
@@ -3046,20 +3033,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: BerryBush (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4674785815371011766, guid: 9a0faf9051db68e4e9505fef927166f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.98
+      value: 21.24
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.17
+      value: -20.94
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
@@ -3243,55 +3235,6 @@ PrefabInstance:
     - target: {fileID: 8486613174862473734, guid: a031c939637dc604b8a99832831ee895,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8486613174862473784, guid: a031c939637dc604b8a99832831ee895,
-        type: 3}
-      propertyPath: _ObjectsInHand.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8486613174862473784, guid: a031c939637dc604b8a99832831ee895,
-        type: 3}
-      propertyPath: _ResourcesHeld.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8486613174862473784, guid: a031c939637dc604b8a99832831ee895,
-        type: 3}
-      propertyPath: _Food
-      value: 
-      objectReference: {fileID: 6233215597003510929}
-    - target: {fileID: 8486613174862473784, guid: a031c939637dc604b8a99832831ee895,
-        type: 3}
-      propertyPath: _ObjectsInHand.Array.data[0]
-      value: 
-      objectReference: {fileID: 1281158675}
-    - target: {fileID: 8486613174862473784, guid: a031c939637dc604b8a99832831ee895,
-        type: 3}
-      propertyPath: _ObjectsInHand.Array.data[1]
-      value: 
-      objectReference: {fileID: 2034036353}
-    - target: {fileID: 8486613174862473784, guid: a031c939637dc604b8a99832831ee895,
-        type: 3}
-      propertyPath: _ObjectsInHand.Array.data[2]
-      value: 
-      objectReference: {fileID: 924579324064816185}
-    - target: {fileID: 8486613174862473784, guid: a031c939637dc604b8a99832831ee895,
-        type: 3}
-      propertyPath: _ObjectsInHand.Array.data[3]
-      value: 
-      objectReference: {fileID: 571508784}
-    - target: {fileID: 8486613174862473784, guid: a031c939637dc604b8a99832831ee895,
-        type: 3}
-      propertyPath: _ObjectsInHand.Array.data[4]
-      value: 
-      objectReference: {fileID: 206204531}
-    - target: {fileID: 8486613174862473784, guid: a031c939637dc604b8a99832831ee895,
-        type: 3}
-      propertyPath: _ObjectsInHand.Array.data[5]
-      value: 
-      objectReference: {fileID: 6233215597003510929}
-    - target: {fileID: 250408125, guid: a031c939637dc604b8a99832831ee895, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -8422,20 +8365,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: BerryBush (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4674785815371011766, guid: 9a0faf9051db68e4e9505fef927166f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.38
+      value: 20.64
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.95
+      value: -18.720001
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
@@ -9453,12 +9401,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!1 &2034036353 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1791877583, guid: a031c939637dc604b8a99832831ee895,
-    type: 3}
-  m_PrefabInstance: {fileID: 1476570808}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2048540637
 GameObject:
   m_ObjectHideFlags: 0
@@ -9931,12 +9873,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1438349915846911666, guid: 805cbda39c2c61041b34c11bb892b3c0,
     type: 3}
   m_PrefabInstance: {fileID: 2139082344}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &924579324064816185 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 924579324064816185, guid: a031c939637dc604b8a99832831ee895,
-    type: 3}
-  m_PrefabInstance: {fileID: 1476570808}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1225114513324588510
 Transform:
@@ -15287,20 +15223,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: BerryBush
       objectReference: {fileID: 0}
+    - target: {fileID: 4674785815371011766, guid: 9a0faf9051db68e4e9505fef927166f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.3
+      value: 19.56
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.6
+      value: -23.37
       objectReference: {fileID: 0}
     - target: {fileID: 8555560795024368805, guid: 9a0faf9051db68e4e9505fef927166f5,
         type: 3}
@@ -15522,12 +15463,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 805cbda39c2c61041b34c11bb892b3c0, type: 3}
---- !u!1 &6233215597003510929 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6233215597003510929, guid: a031c939637dc604b8a99832831ee895,
-    type: 3}
-  m_PrefabInstance: {fileID: 1476570808}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &7504511847841160157
 MeshRenderer:
   m_ObjectHideFlags: 0

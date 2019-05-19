@@ -1200,15 +1200,15 @@ MonoBehaviour:
   _FoodHeld: 0
   _ReturningGoods: 0
   _ResourceOfInterest: {fileID: 0}
-  _Axe: {fileID: 250408125}
-  _Pickaxe: {fileID: 1791877583}
-  _FoodBasket: {fileID: 924579324064816185}
-  _Wood: {fileID: 658380063}
-  _Stone: {fileID: 9051959531550484853}
-  _Food: {fileID: 924579324064816185}
   _Outline: {fileID: 1409936340}
   _ResourcePopup: {fileID: 560339711}
-  _ObjectsInHand: []
+  _ObjectsInHand:
+  - {fileID: 250408125}
+  - {fileID: 1791877583}
+  - {fileID: 924579324064816185}
+  - {fileID: 658380063}
+  - {fileID: 9051959531550484853}
+  - {fileID: 6233215597003510929}
 --- !u!1 &9051959531550484853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,6 +1449,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36885c50bf9770a49b2077403884384e, type: 3}
+--- !u!1 &6233215597003510929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 36885c50bf9770a49b2077403884384e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2711511780313451928}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6979327454830093954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 36885c50bf9770a49b2077403884384e,
@@ -1529,15 +1535,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6abbce8b4147c384581362addacf77b8, type: 3}
---- !u!4 &4219760871621733930 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 6abbce8b4147c384581362addacf77b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 9220327391707170096}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &924579324064816185 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 6abbce8b4147c384581362addacf77b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 9220327391707170096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4219760871621733930 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 6abbce8b4147c384581362addacf77b8,
     type: 3}
   m_PrefabInstance: {fileID: 9220327391707170096}
   m_PrefabAsset: {fileID: 0}

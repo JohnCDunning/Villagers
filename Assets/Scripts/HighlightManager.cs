@@ -22,12 +22,14 @@ public class HighlightManager : MonoBehaviour
     }
     void HighlightVillager()
     {
+
         if (_RayInfo.ObjectRaycast().GetComponent<Villager>() != null)
         {
             Villager _Villager = _RayInfo.ObjectRaycast().GetComponent<Villager>();
             if (_Villager != _SelectedVillager)
             {
                 _Villager._Outline.SetActive(true);
+               
                 if (_SelectedVillager != null)
                 {
                     _SelectedVillager._Outline.SetActive(false);

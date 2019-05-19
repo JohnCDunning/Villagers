@@ -68,6 +68,7 @@ public class FindObjectOfInterest : MonoBehaviour
     {
         //Finds every wood in the world and adds to a list
         RefreshLists();
+        InvokeRepeating("RefreshLists", 0, 1);
 
     }
    

@@ -50,7 +50,9 @@ public class ConstructObject : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0) && _RotatingObject == true)
             {
+                
                 PlaceNewBuilding();
+                
             }
         }
     }
