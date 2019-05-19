@@ -39,8 +39,18 @@ public class PlantGrowth : MonoBehaviour
         if (_CurrentPlant == null)
         {
             _CurrentPlant = Instantiate(_PlantToGrow, transform.position, Quaternion.identity, transform);
+            _CurrentPlant.transform.localScale = Vector3.zero;
+            StartCoroutine(GrowPlant());
             _TimeSinceLastPlant = 0;
             Planted = true;
+        }
+    }
+    IEnumerator GrowPlant()
+    {
+        for(float i = 0;i<1;i+= 1 * Time.deltaTime)
+        {
+            _CurrentPlant.transform.localScale = new Vector3(i, i, i);
+            yield return new WaitForEndOfFrame();
         }
     }
 }
