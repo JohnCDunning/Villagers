@@ -36,6 +36,7 @@ public class Villager : MonoBehaviour
 
     [Space]
     public GameObject _Outline;
+    public UIResourcePopup _ResourcePopup;
 
     IEnumerator StartDelay()
     {
@@ -298,8 +299,18 @@ public class Villager : MonoBehaviour
             //DropOff the goods
             if (Vector3.Distance(transform.position, _ResourceCollection.transform.position) < 2)
             {
-                CollectedResources._Instance._CollectedWood += _WoodHeld;
-                CollectedResources._Instance._CollectedWood += _StoneHeld;
+               
+                if(_WoodHeld != 0)
+                {
+                    CollectedResources._Instance._CollectedWood += _WoodHeld;
+                    _ResourcePopup.ShowResourcePopup(ResourceType.wood, _WoodHeld);
+                }
+                if(_StoneHeld != 0)
+                {
+                    CollectedResources._Instance._CollectedStone += _StoneHeld;
+                    _ResourcePopup.ShowResourcePopup(ResourceType.stone, _StoneHeld);
+                }
+                
                 _WoodHeld = 0;
                 _StoneHeld = 0;
                 //Return to previous task
