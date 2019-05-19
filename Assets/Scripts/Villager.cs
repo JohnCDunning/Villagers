@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class Villager : MonoBehaviour, IVillager, ITakeDamage
+public class Villager : MonoBehaviour
 {
     [Header("Villager Task")]
     public VillagerTask _Task;
@@ -11,10 +11,10 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     public int _WoodHeld;
     public int _StoneHeld;
 
-    [HideInInspector]
+   
     public VillagerTask _PreviousTask;
 
-    private NavMeshAgent _Nav;
+    public NavMeshAgent _Nav;
     [HideInInspector]
     public WorldResource _ResourceOfInterest;
 
@@ -23,8 +23,7 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     public bool _ReturningGoods = false;
 
     [Space]
-    public FindObjectOfInterest _FindObject;
-    
+    private FindObjectOfInterest _FindObject;
     
     private Vector3 OldPosition;
 
@@ -43,19 +42,30 @@ public class Villager : MonoBehaviour, IVillager, ITakeDamage
     }
     void Awake()
     {
-        _Nav = GetComponent<NavMeshAgent>();
+       
+        _FindObject = FindObjectOfType<FindObjectOfInterest>();
     }
     void Start()
     {
         StartCoroutine(StartDelay());
     }
+    public void SetSpawnPoint(Vector3 _Spawn)
+    {
+        while (_Nav.isOnNavMesh == true)
+        {
+            _Nav.destination = _Spawn;
+        }
+    }
     public void SetTaskFromUI(int _TaskNumber)
     {
-        _ReturningGoods = false;
-
-        _ResourceOfInterest._VillagerTravelingToThis = null;
-        _ResourceOfInterest._SupplyBeingTaken = false;
-        _ResourceOfInterest = null;
+        
+        if (_ResourceOfInterest != null)
+        {
+            _ReturningGoods = false;
+            _ResourceOfInterest._VillagerTravelingToThis = null;
+            _ResourceOfInterest._SupplyBeingTaken = false;
+            _ResourceOfInterest = null;
+        }
 
 
 
