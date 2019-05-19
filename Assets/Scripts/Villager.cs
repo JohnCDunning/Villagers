@@ -11,7 +11,6 @@ public class Villager : MonoBehaviour
     public int _WoodHeld;
     public int _StoneHeld;
 
-   
     public VillagerTask _PreviousTask;
 
     public NavMeshAgent _Nav;
@@ -51,10 +50,7 @@ public class Villager : MonoBehaviour
     }
     public void SetSpawnPoint(Vector3 _Spawn)
     {
-        while (_Nav.isOnNavMesh == true)
-        {
             _Nav.destination = _Spawn;
-        }
     }
     public void SetTaskFromUI(int _TaskNumber)
     {
@@ -158,6 +154,10 @@ public class Villager : MonoBehaviour
                 break;
             case VillagerTask.Sleep:
                 Sleep();
+                break;
+            case VillagerTask.DoNothing:
+                
+               
                 break;
         }
     }

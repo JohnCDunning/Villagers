@@ -9,11 +9,11 @@ public class SpawnVillager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(_Villager, transform.position, Quaternion.identity);
-        Invoke("SetVillagerPositionChange", 1);
+        Villager villager = Instantiate(_Villager, transform.position, Quaternion.identity).GetComponent<Villager>();
+        SetVillagerPositionChange(villager);
     }
-    void SetVillagerPositionChange()
+    void SetVillagerPositionChange(Villager villager)
     {
-        _Villager.GetComponent<Villager>().SetSpawnPoint(_MoveToSpawn.position);
+        villager.SetSpawnPoint(_MoveToSpawn.position);
     }
 }
