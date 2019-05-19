@@ -56,6 +56,17 @@ public class InputManager : MonoBehaviour
             return false;
         }
     }
+    public bool LeftMouseUp()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     public bool RightMouseDown()
     {
         if (Input.GetMouseButton(1))
@@ -67,7 +78,7 @@ public class InputManager : MonoBehaviour
             return false;
         }
     }
-    bool LeftMouse()
+    public bool LeftMouse()
     {
         if (Input.GetMouseButton(0))
         {
@@ -78,7 +89,7 @@ public class InputManager : MonoBehaviour
             return false;
         }
     }
-    bool RightMouse()
+    public bool RightMouse()
     {
         if (Input.GetMouseButton(1))
         {

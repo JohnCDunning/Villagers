@@ -47,6 +47,7 @@ public class UIBuilding : MonoBehaviour, IPointerEnterHandler,IPointerExitHandle
 
             GameObject _Building = Instantiate(_BuildingDetails._ConstructionPrefab, Vector3.zero, _BuildingDetails._ConstructionPrefab.transform.rotation, _BuildCheck.transform);
             _Building.transform.localPosition = Vector3.zero;
+            _Building.transform.localRotation = Quaternion.identity;
             _Building.transform.localScale = Vector3.one / _BuildingDetails._ConstructionSize; //To correct the over scaled parent object - Over scaled for bigger hitbox
 
             _BuildCheck._ConstructionBuilding = _Building;

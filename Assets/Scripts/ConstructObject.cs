@@ -11,22 +11,58 @@ public class ConstructObject : MonoBehaviour
     private CanBuildCheck _BuildCheck;
     [Space]
     public RaycastInfo _RayInfo;
+    public InputManager _Input;
 
+    public bool _CanPlaceObject = false;
+    public bool _RotatingObject = false;
     // Start is called before the first frame update
     void Start()
     {
         _Instance = this;
         _BuildCheck = _ContructionSphere.GetComponent<CanBuildCheck>();
     }
+    public void StartTimer()
+    {
+        StartCoroutine(CanPlaceObject());
+    }
+    IEnumerator CanPlaceObject()
+    {
+        yield return new WaitForSeconds(0.4f);
+        _CanPlaceObject = true;
+    }
     private void Update()
     {
-        _ContructionSphere.transform.position = _RayInfo.LocationToBuild();
-        if (Input.GetMouseButtonDown(0) && _BuildCheck._ConstructionBuilding != null && _BuildCheck.CanBuild)
+        //Default Update position
+        if (_RotatingObject == false)
         {
-            GameObject newBuilding = Instantiate(_BuildCheck._BuildingToSpawn, _BuildCheck.transform.position, _BuildCheck._BuildingToSpawn.transform.rotation);
-            Destroy(_BuildCheck._ConstructionBuilding);
-            _BuildCheck._ConstructionBuilding = null;
-            _ContructionSphere.gameObject.SetActive(false);
+            _ContructionSphere.transform.position = _RayInfo.LocationToBuild();
+        }
+        else
+        {
+            Vector3 pos = _RayInfo.LocationToBuild();
+            _ContructionSphere.transform.LookAt(new Vector3(pos.x,_ContructionSphere.position.y,pos.z));
+        }
+        if (_BuildCheck.CanBuild == true)
+        {
+            if (Input.GetMouseButtonUp(0) && _CanPlaceObject == true)
+            {
+                _RotatingObject = true;
+            }
+            if (Input.GetMouseButtonDown(0) && _RotatingObject == true)
+            {
+                PlaceNewBuilding();
+            }
         }
     }
+    //Finalize building
+    void PlaceNewBuilding()
+    {
+        GameObject newBuilding = Instantiate(_BuildCheck._BuildingToSpawn, _BuildCheck.transform.position, _ContructionSphere.transform.rotation);
+        Destroy(_BuildCheck._ConstructionBuilding);
+        _BuildCheck._ConstructionBuilding = null;
+        _ContructionSphere.gameObject.SetActive(false);
+
+        _CanPlaceObject = false;
+        _RotatingObject = false;
+}
 }

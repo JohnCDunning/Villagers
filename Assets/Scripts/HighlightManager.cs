@@ -47,7 +47,7 @@ public class HighlightManager : MonoBehaviour
     }
     public void SetVillagerTask(int _TaskNumber)
     {
-        _SelectedVillager.SetTaskFromUI(_TaskNumber);
+        _SelectedVillager.NewTask(_TaskNumber);
 
     }
     void WorldResourceOutlineAnimation()

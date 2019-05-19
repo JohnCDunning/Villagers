@@ -6,34 +6,37 @@ public class Villager : MonoBehaviour
 {
     [Header("Villager Task")]
     public VillagerTask _Task;
-    bool Started = false;
+    public VillagerTask _PreviousTask;
+
+    [Space]
+    public NavMeshAgent _Nav;
+    
     [Header("Resources")]
     public int _WoodHeld;
     public int _StoneHeld;
-
-    public VillagerTask _PreviousTask;
-
-    public NavMeshAgent _Nav;
-    [HideInInspector]
-    public WorldResource _ResourceOfInterest;
-
-    private bool _CollectingResource = false;
     [HideInInspector]
     public bool _ReturningGoods = false;
 
-    [Space]
+    [HideInInspector]
+    public WorldResource _ResourceOfInterest;
+
+    private bool Started = false;
+    private bool _CollectingResource = false;
     private FindObjectOfInterest _FindObject;
     
-    private Vector3 OldPosition;
-
+    [Space]
+    
     [Header("Tools")]
     public GameObject _Axe;
     public GameObject _Pickaxe;
+
     [Header("GatheredResources")]
     public GameObject _Wood;
     public GameObject _Stone;
+
     [Space]
     public GameObject _Outline;
+
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(Random.Range(0, 2f));
@@ -41,30 +44,29 @@ public class Villager : MonoBehaviour
     }
     void Awake()
     {
-       
         _FindObject = FindObjectOfType<FindObjectOfInterest>();
     }
     void Start()
     {
         StartCoroutine(StartDelay());
     }
+    #region Move To spawn point
     public void SetSpawnPoint(Vector3 _Spawn)
     {
             _Nav.destination = _Spawn;
     }
-    public void SetTaskFromUI(int _TaskNumber)
+    #endregion
+    #region Set new task for villager
+    public void NewTask(int _TaskNumber)
     {
-        
         if (_ResourceOfInterest != null)
         {
             _ReturningGoods = false;
-            _ResourceOfInterest._VillagerTravelingToThis = null;
             _ResourceOfInterest._SupplyBeingTaken = false;
+            _ResourceOfInterest._VillagerTravelingToThis = null;
             _ResourceOfInterest = null;
         }
-
-
-
+        
         switch (_TaskNumber)
         {
             case 1:
@@ -76,21 +78,24 @@ public class Villager : MonoBehaviour
             case 3:
                 _Task = VillagerTask.Hunt_Food;
                 break;
-            
         }
     }
+    #endregion
 
     void Update()
     {
-        
-
-
         //Run SetTask
         if (Started)
         {
             SetTask();
         }
-        if(_StoneHeld >= 20 || _WoodHeld >= 20)
+        //See if the villager should return goods
+        ReturnGoodsTest();
+    }
+    #region ShouldIReturnGoods
+    void ReturnGoodsTest()
+    {
+        if (_StoneHeld >= 20 || _WoodHeld >= 20)
         {
             StopCoroutine(CollectResource(_ResourceOfInterest));
             if (_ReturningGoods == false)
@@ -102,6 +107,7 @@ public class Villager : MonoBehaviour
             }
         }
     }
+    #endregion
     #region IsObjectWithinHittingDistance
     bool _ObjectOfInterestIsClose()
     {
@@ -116,48 +122,36 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
-    //Set all tasks depending on villager role
     #region SetTask
     void SetTask()
     {
         switch (_Task)
         {
             case VillagerTask.Gather_Wood:
-                _Axe.SetActive(true); _Pickaxe.SetActive(false);
-                _Stone.SetActive(false); _Wood.SetActive(false);
-                Gather_Wood();
+                _Axe.SetActive(true); _Pickaxe.SetActive(false);_Stone.SetActive(false); _Wood.SetActive(false);
+
+                Gather_Resource(_FindObject._WoodSupplies);
                 break;
             case VillagerTask.Gather_Stone:
 
-                _Axe.SetActive(false); _Pickaxe.SetActive(true);
-                _Stone.SetActive(false); _Wood.SetActive(false);
-                Gather_Stone();
+                _Axe.SetActive(false); _Pickaxe.SetActive(true);_Stone.SetActive(false); _Wood.SetActive(false);
+
+                Gather_Resource(_FindObject._StoneSupplies);
                 break;
-            case VillagerTask.Hunt_Food:
-                Hunt_Food();
-                break;
-            case VillagerTask.Farm:
-                Farm();
-                break;
+                
             case VillagerTask.ReturnGoods:
                 _Axe.SetActive(false); _Pickaxe.SetActive(false);
-                switch (_PreviousTask)
+
+                //Shows the resource the villager has the most of
+                if(_WoodHeld > _StoneHeld)
                 {
-                    case VillagerTask.Gather_Wood:
-                        _Stone.SetActive(false); _Wood.SetActive(true);
-                        break;
-                    case VillagerTask.Gather_Stone:
-                        _Stone.SetActive(true); _Wood.SetActive(false);
-                        break;
+                    _Stone.SetActive(false); _Wood.SetActive(true);
+                }
+                else
+                {
+                    _Stone.SetActive(true); _Wood.SetActive(false);
                 }
                 ReturnGoods();
-                break;
-            case VillagerTask.Sleep:
-                Sleep();
-                break;
-            case VillagerTask.DoNothing:
-                
-               
                 break;
         }
     }
@@ -265,46 +259,27 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
-    //Villager will find wood to cut
-    #region Gather_Wood
-    void Gather_Wood()
+    #region Gather_Resources
+    void Gather_Resource(List<WorldResource> _WorldResource)
     {
         if (_ResourceOfInterest == null)
         {
-            _ResourceOfInterest = _FindObject.ClosestResourceOfInterest(_FindObject._WoodSupplies, transform.position, gameObject);
+            _ResourceOfInterest = _FindObject.ClosestResourceOfInterest(_WorldResource, transform.position, gameObject);
 
         }
         else
         {
             CanIGatherResource();
         }
-    
     }
     #endregion
-    //Villager will find stone to mine
-    #region Gather_Stone
-    void Gather_Stone()
-    {
-        if (_ResourceOfInterest != null)
-        {
-            CanIGatherResource();
-      
-        }
-        else
-        {
-            _ResourceOfInterest = _FindObject.ClosestResourceOfInterest(_FindObject._StoneSupplies, transform.position, gameObject);
-        }
-        
-    }
-    #endregion
-    //Villager will find animals to hunt
+
     #region Hunt_Food
     void Hunt_Food()
     {
         
     }
     #endregion
-    //Villager will find farm to gather food
     #region Farm
     void Farm()
     {
@@ -336,7 +311,6 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
-    //Villager will find their assigned bed and sleep
     #region Sleep
     void Sleep()
     {
