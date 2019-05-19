@@ -7,7 +7,7 @@ public class FollowMousePosition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.position = new Vector2(-3000, -3000);
     }
 
     // Update is called once per frame
