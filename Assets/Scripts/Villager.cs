@@ -14,6 +14,7 @@ public class Villager : MonoBehaviour
     [Header("Resources")]
     public int _WoodHeld;
     public int _StoneHeld;
+    public int _FoodHeld;
     [HideInInspector]
     public bool _ReturningGoods = false;
 
@@ -29,10 +30,12 @@ public class Villager : MonoBehaviour
     [Header("Tools")]
     public GameObject _Axe;
     public GameObject _Pickaxe;
+    public GameObject _FoodBasket;
 
     [Header("GatheredResources")]
     public GameObject _Wood;
     public GameObject _Stone;
+    public GameObject _Food;
 
     [Space]
     public GameObject _Outline;
@@ -77,7 +80,7 @@ public class Villager : MonoBehaviour
                 _Task = VillagerTask.Gather_Stone;
                 break;
             case 3:
-                _Task = VillagerTask.Hunt_Food;
+                _Task = VillagerTask.Gather_Food;
                 break;
         }
     }
@@ -129,29 +132,41 @@ public class Villager : MonoBehaviour
         switch (_Task)
         {
             case VillagerTask.Gather_Wood:
-                _Axe.SetActive(true); _Pickaxe.SetActive(false);_Stone.SetActive(false); _Wood.SetActive(false);
+                _Axe.SetActive(true); _Pickaxe.SetActive(false);_FoodBasket.SetActive(false);_Food.SetActive(false); _Stone.SetActive(false); _Wood.SetActive(false);
 
                 Gather_Resource(_FindObject._WoodSupplies);
                 break;
             case VillagerTask.Gather_Stone:
 
-                _Axe.SetActive(false); _Pickaxe.SetActive(true);_Stone.SetActive(false); _Wood.SetActive(false);
+                _Axe.SetActive(false); _Pickaxe.SetActive(true); _FoodBasket.SetActive(false); _Food.SetActive(false); _Stone.SetActive(false); _Wood.SetActive(false);
 
                 Gather_Resource(_FindObject._StoneSupplies);
+                break;
+            case VillagerTask.Gather_Food:
+                _Axe.SetActive(false); _Pickaxe.SetActive(false); _FoodBasket.SetActive(true); _Food.SetActive(false); _Stone.SetActive(false); _Wood.SetActive(false);
+
+                Gather_Resource(_FindObject._FoodSupplies);
                 break;
                 
             case VillagerTask.ReturnGoods:
                 _Axe.SetActive(false); _Pickaxe.SetActive(false);
 
                 //Shows the resource the villager has the most of
-                if(_WoodHeld > _StoneHeld)
+
+                //TO DO - ADD A FOR LOOP TO FIGURE OUT LARGEST QUANTITY
+                if(_WoodHeld > _StoneHeld && _WoodHeld > _FoodHeld)
                 {
-                    _Stone.SetActive(false); _Wood.SetActive(true);
+                    _Stone.SetActive(false); _Wood.SetActive(true);_Food.SetActive(false);
                 }
-                else
+                if (_StoneHeld > _WoodHeld && _StoneHeld > _FoodHeld)
                 {
-                    _Stone.SetActive(true); _Wood.SetActive(false);
+                    _Stone.SetActive(true); _Wood.SetActive(false); _Food.SetActive(false);
                 }
+                if(_FoodHeld > _WoodHeld && _FoodHeld > _StoneHeld)
+                {
+                    _Stone.SetActive(false); _Wood.SetActive(false); _Food.SetActive(true);
+                }
+               
                 ReturnGoods();
                 break;
         }
@@ -208,6 +223,9 @@ public class Villager : MonoBehaviour
                         case ResourceType.stone:
                             _StoneHeld += 5;
                             break;
+                        case ResourceType.food:
+                            _FoodHeld += 5;
+                            break;
                     }
                     _ResourceOfInterest._SupplyAmmount -= 5;
                 }
@@ -220,6 +238,9 @@ public class Villager : MonoBehaviour
                             break;
                         case ResourceType.stone:
                             _StoneHeld += _ResourceOfInterest._SupplyAmmount;
+                            break;
+                        case ResourceType.food:
+                            _FoodHeld += _ResourceOfInterest._SupplyAmmount;
                             break;
                     }
 
@@ -270,13 +291,6 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
-
-    #region Hunt_Food
-    void Hunt_Food()
-    {
-        
-    }
-    #endregion
     #region Farm
     void Farm()
     {
@@ -310,9 +324,15 @@ public class Villager : MonoBehaviour
                     CollectedResources._Instance._CollectedStone += _StoneHeld;
                     _ResourcePopup.ShowResourcePopup(ResourceType.stone, _StoneHeld);
                 }
-                
+                if (_StoneHeld != 0)
+                {
+                    CollectedResources._Instance._CollectedFood += _FoodHeld;
+                    _ResourcePopup.ShowResourcePopup(ResourceType.food, _FoodHeld);
+                }
+
                 _WoodHeld = 0;
                 _StoneHeld = 0;
+                _FoodHeld = 0;
                 //Return to previous task
                 _Task = _PreviousTask;
                 _ReturningGoods = false;

@@ -8,10 +8,11 @@ public class CollectedResources : MonoBehaviour
     [Header("Resource Values")]
     public int _CollectedWood;
     public int _CollectedStone;
-
+    public int _CollectedFood;
     [Header("Resource Text Boxes")]
     public TextMeshProUGUI _CollectedWoodText;
     public TextMeshProUGUI _CollectedStoneText;
+    public TextMeshProUGUI _CollectedFoodText;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class CollectedResources : MonoBehaviour
     {
         SetCollectedUI(_CollectedWood, _CollectedWoodText);
         SetCollectedUI(_CollectedStone, _CollectedStoneText);
+        SetCollectedUI(_CollectedFood, _CollectedFoodText);
     }
 
     void SetCollectedUI(int _ResourceAmount, TextMeshProUGUI _ResourceText)

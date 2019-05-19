@@ -6,7 +6,8 @@ public class UIResourcePopup : MonoBehaviour
 {
     public GameObject _WoodPopup;
     public GameObject _StonePopup;
-    
+    public GameObject _FoodPopup;
+
     public void ShowResourcePopup(ResourceType _ResourceType, int _ResourceAmount)
     {
         switch (_ResourceType)
@@ -19,6 +20,10 @@ public class UIResourcePopup : MonoBehaviour
             case ResourceType.stone:
                 GameObject StonePopup = Instantiate(_StonePopup, transform.position, Quaternion.identity, transform);
                 StonePopup.GetComponentInChildren<TextMeshProUGUI>().text = "+" + _ResourceAmount.ToString();
+                break;
+            case ResourceType.food:
+                GameObject FoodPopup = Instantiate(_FoodPopup, transform.position, Quaternion.identity, transform);
+                FoodPopup.GetComponentInChildren<TextMeshProUGUI>().text = "+" + _ResourceAmount.ToString();
                 break;
         }
     }

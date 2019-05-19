@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ResourceType
-{
-    wood,
-    stone
-}
+
 public class WorldResource : MonoBehaviour
 {
     [Header("Resource Variables")]

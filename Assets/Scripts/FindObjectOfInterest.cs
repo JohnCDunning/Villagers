@@ -8,6 +8,7 @@ public class FindObjectOfInterest : MonoBehaviour
     [Header("Resource Lists")]
     public List<WorldResource> _WoodSupplies = new List<WorldResource>();
     public List<WorldResource> _StoneSupplies = new List<WorldResource>();
+    public List<WorldResource> _FoodSupplies = new List<WorldResource>();
     [Header("Building Lists")]
     public List<Building> _Houses = new List<Building>();
     public List<Building> _ResourceCollection = new List<Building>();
@@ -18,6 +19,8 @@ public class FindObjectOfInterest : MonoBehaviour
         //Clear All Lists
         _WoodSupplies.Clear();
         _StoneSupplies.Clear();
+        _FoodSupplies.Clear();
+
         _Houses.Clear();
         _ResourceCollection.Clear();
 
@@ -33,6 +36,10 @@ public class FindObjectOfInterest : MonoBehaviour
             if (_resource._ResourceType == ResourceType.stone)
             {
                 _StoneSupplies.Add(_resource);
+            }
+            if (_resource._ResourceType == ResourceType.food)
+            {
+                _FoodSupplies.Add(_resource);
             }
         }
         #endregion
@@ -74,6 +81,10 @@ public class FindObjectOfInterest : MonoBehaviour
         if (_StoneSupplies.Contains(_Resource))
         {
             _StoneSupplies.Remove(_Resource);
+        }
+        if (_FoodSupplies.Contains(_Resource))
+        {
+            _FoodSupplies.Remove(_Resource);
         }
     }
     #endregion

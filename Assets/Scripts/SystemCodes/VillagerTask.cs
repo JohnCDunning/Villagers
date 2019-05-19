@@ -5,8 +5,7 @@ public enum VillagerTask
     DoNothing,
     Gather_Wood,
     Gather_Stone,
-    Hunt_Food,
-    Farm,
+    Gather_Food,
     ReturnGoods,
     Sleep
 }
