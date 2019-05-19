@@ -279,6 +279,8 @@ MonoBehaviour:
     type: 3}
   _StonePopup: {fileID: 5174948275939249585, guid: 82ca3f0b6c2d61749914de64b9bc1240,
     type: 3}
+  _FoodPopup: {fileID: 882438774500794566, guid: f1d44017ab7c4594f86519be29848bcb,
+    type: 3}
 --- !u!1 &658380063
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,12 +1197,15 @@ MonoBehaviour:
   _Nav: {fileID: 8486613174862473785}
   _WoodHeld: 0
   _StoneHeld: 0
+  _FoodHeld: 0
   _ReturningGoods: 0
   _ResourceOfInterest: {fileID: 0}
   _Axe: {fileID: 250408125}
   _Pickaxe: {fileID: 1791877583}
+  _FoodBasket: {fileID: 924579324064816185}
   _Wood: {fileID: 658380063}
   _Stone: {fileID: 9051959531550484853}
+  _Food: {fileID: 924579324064816185}
   _Outline: {fileID: 1409936340}
   _ResourcePopup: {fileID: 560339711}
 --- !u!1 &9051959531550484853
@@ -1523,6 +1528,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6abbce8b4147c384581362addacf77b8, type: 3}
+--- !u!1 &924579324064816185 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 6abbce8b4147c384581362addacf77b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 9220327391707170096}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4219760871621733930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 6abbce8b4147c384581362addacf77b8,

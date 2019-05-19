@@ -21,8 +21,8 @@ public class UIBuilding : MonoBehaviour, IPointerEnterHandler,IPointerExitHandle
     }
     void Update()
     {
-        //NOT COMPATIBLE WITH FOOD YET
-        if(_BuildingDetails._WoodCost < _CurrentResources._CollectedWood && _BuildingDetails._StoneCost < _CurrentResources._CollectedStone)
+     
+        if(_BuildingDetails._WoodCost <= _CurrentResources._CollectedWood && _BuildingDetails._StoneCost <= _CurrentResources._CollectedStone && _BuildingDetails._FoodCost <= _CurrentResources._CollectedFood)
         {
             GetComponent<Button>().interactable = true;
         }

@@ -99,7 +99,7 @@ public class Villager : MonoBehaviour
     #region ShouldIReturnGoods
     void ReturnGoodsTest()
     {
-        if (_StoneHeld >= 20 || _WoodHeld >= 20)
+        if (_StoneHeld >= 20 || _WoodHeld >= 20 || _FoodHeld >= 20)
         {
             StopCoroutine(CollectResource(_ResourceOfInterest));
             if (_ReturningGoods == false)

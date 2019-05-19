@@ -13,7 +13,7 @@ public class ConstructObject : MonoBehaviour
     public RaycastInfo _RayInfo;
     public InputManager _Input;
 
-    public bool _CanPlaceObject = false;
+    private bool _CanPlaceObject = false;
     public bool _RotatingObject = false;
     // Start is called before the first frame update
     void Start()

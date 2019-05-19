@@ -65,6 +65,11 @@ public class HighlightManager : MonoBehaviour
                 _Object._Outline.GetComponent<Animator>().SetTrigger("ShowOutline");
                 SetVillagerTask(2);
             }
+            if (_Object._ResourceType == ResourceType.food)
+            {
+                _Object._Outline.GetComponent<Animator>().SetTrigger("ShowOutline");
+                SetVillagerTask(3);
+            }
         }
         CancelVillagerSelection();
     }
