@@ -24,22 +24,12 @@ public class Villager : MonoBehaviour
     private bool Started = false;
     private bool _CollectingResource = false;
     private FindObjectOfInterest _FindObject;
-    
-    [Space]
-    
-    [Header("Tools")]
-    public GameObject _Axe;
-    public GameObject _Pickaxe;
-    public GameObject _FoodBasket;
-
-    [Header("GatheredResources")]
-    public GameObject _Wood;
-    public GameObject _Stone;
-    public GameObject _Food;
 
     [Space]
     public GameObject _Outline;
     public UIResourcePopup _ResourcePopup;
+
+    public GameObject[] _ObjectsInHand;
 
     IEnumerator StartDelay()
     {
@@ -63,6 +53,7 @@ public class Villager : MonoBehaviour
     #region Set new task for villager
     public void NewTask(int _TaskNumber)
     {
+        CancelTool();
         if (_ResourceOfInterest != null)
         {
             _ReturningGoods = false;
@@ -126,47 +117,53 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
+    #region Disable everything but one thing
+    void DisableEverythingBut(GameObject _ObjectToStay)
+    {
+        foreach(GameObject _object in _ObjectsInHand)
+        {
+            if(_object != _ObjectToStay)
+            {
+                _object.SetActive(false);
+            }
+            else
+            {
+                _object.SetActive(true);
+            }
+        }
+    }
+    #endregion
     #region SetTask
     void SetTask()
     {
         switch (_Task)
         {
             case VillagerTask.Gather_Wood:
-                _Axe.SetActive(true); _Pickaxe.SetActive(false);_FoodBasket.SetActive(false);_Food.SetActive(false); _Stone.SetActive(false); _Wood.SetActive(false);
-
+                DisableEverythingBut(_ObjectsInHand[0]);
                 Gather_Resource(_FindObject._WoodSupplies);
                 break;
             case VillagerTask.Gather_Stone:
-
-                _Axe.SetActive(false); _Pickaxe.SetActive(true); _FoodBasket.SetActive(false); _Food.SetActive(false); _Stone.SetActive(false); _Wood.SetActive(false);
-
+                DisableEverythingBut(_ObjectsInHand[1]);
                 Gather_Resource(_FindObject._StoneSupplies);
                 break;
             case VillagerTask.Gather_Food:
-                _Axe.SetActive(false); _Pickaxe.SetActive(false); _FoodBasket.SetActive(true); _Food.SetActive(false); _Stone.SetActive(false); _Wood.SetActive(false);
-
+                DisableEverythingBut(_ObjectsInHand[2]);
                 Gather_Resource(_FindObject._FoodSupplies);
                 break;
                 
             case VillagerTask.ReturnGoods:
-                _Axe.SetActive(false); _Pickaxe.SetActive(false);
-
-                //Shows the resource the villager has the most of
-
-                //TO DO - ADD A FOR LOOP TO FIGURE OUT LARGEST QUANTITY
-                if(_WoodHeld > _StoneHeld && _WoodHeld > _FoodHeld)
+                if (_WoodHeld > _StoneHeld && _WoodHeld > _FoodHeld)
                 {
-                    _Stone.SetActive(false); _Wood.SetActive(true);_Food.SetActive(false);
+                    DisableEverythingBut(_ObjectsInHand[3]);
                 }
                 if (_StoneHeld > _WoodHeld && _StoneHeld > _FoodHeld)
                 {
-                    _Stone.SetActive(true); _Wood.SetActive(false); _Food.SetActive(false);
+                    DisableEverythingBut(_ObjectsInHand[4]);
                 }
                 if(_FoodHeld > _WoodHeld && _FoodHeld > _StoneHeld)
                 {
-                    _Stone.SetActive(false); _Wood.SetActive(false); _Food.SetActive(true);
+                    DisableEverythingBut(_ObjectsInHand[5]);
                 }
-               
                 ReturnGoods();
                 break;
         }

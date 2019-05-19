@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Farm
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingObject
+  _BuildingType: 0
+  _ConstructionPrefab: {fileID: 8077689506537751081, guid: 392fb244b39aacd42a5dc2013eb0c457,
+    type: 3}
+  _ObjectPrefab: {fileID: 8077689506537751081, guid: 18732ef87263dac45be9491634a96891,
+    type: 3}
+  _BuildingName: Farm
+  _BuildingDescription: A farm to grow food
+  _WoodCost: 150
+  _StoneCost: 0
+  _FoodCost: 50
+  _ConstructionSize: 10
