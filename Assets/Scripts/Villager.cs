@@ -202,11 +202,9 @@ public class Villager : MonoBehaviour
                     switch (_ResourceOfInterest._ResourceType)
                     {
                         case ResourceType.wood:
-                            CollectedResources._Instance._CollectedWood += 5;
                             _WoodHeld += 5;
                             break;
                         case ResourceType.stone:
-                            CollectedResources._Instance._CollectedStone += 5;
                             _StoneHeld += 5;
                             break;
                     }
@@ -217,11 +215,9 @@ public class Villager : MonoBehaviour
                     switch (_ResourceOfInterest._ResourceType)
                     {
                         case ResourceType.wood:
-                            CollectedResources._Instance._CollectedWood += _ResourceOfInterest._SupplyAmmount;
                             _WoodHeld += _ResourceOfInterest._SupplyAmmount;
                             break;
                         case ResourceType.stone:
-                            CollectedResources._Instance._CollectedStone += _ResourceOfInterest._SupplyAmmount;
                             _StoneHeld += _ResourceOfInterest._SupplyAmmount;
                             break;
                     }
@@ -302,6 +298,8 @@ public class Villager : MonoBehaviour
             //DropOff the goods
             if (Vector3.Distance(transform.position, _ResourceCollection.transform.position) < 2)
             {
+                CollectedResources._Instance._CollectedWood += _WoodHeld;
+                CollectedResources._Instance._CollectedWood += _StoneHeld;
                 _WoodHeld = 0;
                 _StoneHeld = 0;
                 //Return to previous task
