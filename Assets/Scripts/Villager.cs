@@ -85,21 +85,26 @@ public class Villager : MonoBehaviour
             SetTask();
         }
         //See if the villager should return goods
-        ReturnGoodsTest();
+        if (ShouldIReturnGoods() == true)
+        {
+        }
+
     }
     #region ShouldIReturnGoods
-    void ReturnGoodsTest()
+    bool ShouldIReturnGoods()
     {
         if (_StoneHeld >= 20 || _WoodHeld >= 20 || _FoodHeld >= 20)
         {
-            StopCoroutine(CollectResource(_ResourceOfInterest));
-            if (_ReturningGoods == false)
+            if(_Task != VillagerTask.ReturnGoods)
             {
-                CancelTool();
                 _PreviousTask = _Task;
                 _Task = VillagerTask.ReturnGoods;
-                _ReturningGoods = true;
             }
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     #endregion
@@ -109,10 +114,13 @@ public class Villager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
         {
+            LookAtObjectOfInterest();
+            Debug.DrawLine(transform.position, hit.point, Color.red, 1);
             return true;
         }
         else
         {
+            StartCoroutine(LookingAtInterest());
             return false;
         }
     }
@@ -122,7 +130,7 @@ public class Villager : MonoBehaviour
     {
         foreach(GameObject _object in _ObjectsInHand)
         {
-            if(_object != _ObjectToStay)
+            if (_object != _ObjectToStay)
             {
                 _object.SetActive(false);
             }
@@ -179,6 +187,7 @@ public class Villager : MonoBehaviour
             if (Vector3.Distance(transform.position, _ResourceOfInterest.transform.position) < 2 && _CollectingResource == false)
             {
                 LookAtObjectOfInterest();
+                StartCoroutine(LookingAtInterest());
                 if (_ObjectOfInterestIsClose())
                 {
                     StartCoroutine(CollectResource(_ResourceOfInterest));
@@ -192,7 +201,22 @@ public class Villager : MonoBehaviour
     {
         Quaternion lookOnLook = Quaternion.LookRotation(_ResourceOfInterest.transform.position - transform.position);
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookOnLook, 1.5f *Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookOnLook, 1f * Time.deltaTime);
+     
+        
+    }
+    IEnumerator LookingAtInterest()
+    {
+        for(float i = 0;i<1;i+= 1 * Time.deltaTime)
+        {
+            if (_ResourceOfInterest != null)
+            {
+                Quaternion lookOnLook = Quaternion.LookRotation(_ResourceOfInterest.transform.position - transform.position);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookOnLook, 0.5f * Time.deltaTime);
+                yield return new WaitForEndOfFrame();
+            }
+        }
     }
     #endregion
     #region CollectingResourceCoRoutine
@@ -208,8 +232,14 @@ public class Villager : MonoBehaviour
                 {
                     break;
                 }
+                if (ShouldIReturnGoods() == false)
+                {
+                    StartCoroutine(LookingAtInterest());
+                    UseTool();
+                }
                 yield return new WaitForSeconds(0.6f);
-                UseTool();
+                
+              
                 if ((_ResourceOfInterest._SupplyAmmount - 5) > 0)
                 {
                     switch (_ResourceOfInterest._ResourceType)
@@ -250,7 +280,8 @@ public class Villager : MonoBehaviour
                 Destroy(_ResourceOfInterest.gameObject);
             }
             _CollectingResource = false;
-            CancelTool();
+            
+            
             _FindObject.RefreshLists();
 
             yield return null;
@@ -260,6 +291,7 @@ public class Villager : MonoBehaviour
     #region UseTool
     void UseTool()
     {
+       
         if (GetComponentInChildren<Animator>() != null)
         {
             GetComponentInChildren<Animator>().SetTrigger("Swing");

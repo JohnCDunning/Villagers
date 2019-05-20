@@ -109,7 +109,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.67, y: 1.495, z: 0.67}
+  m_Extents: {x: 0.46, y: 1.495, z: 0.46}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -175,13 +175,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8991133684051238465}
-  m_LocalRotation: {x: -0, y: -0, z: -0.06168584, w: 0.99809563}
+  m_LocalRotation: {x: -0.0000000037252899, y: -0, z: -0.035960924, w: 0.99935323}
   m_LocalPosition: {x: -0.02054, y: 1.899, z: 0.000000074506}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1438349915846911666}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -7.0730004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -4.122}
 --- !u!33 &8991133684050395715
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -240,9 +240,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.57
-  m_Height: 6.6
+  m_Height: 4.51
   m_Direction: 1
-  m_Center: {x: 0, y: 3.34, z: 0.00000047683716}
+  m_Center: {x: 0, y: 3.93, z: 0.00000047683716}
 --- !u!54 &8991133684051238467
 Rigidbody:
   m_ObjectHideFlags: 0
