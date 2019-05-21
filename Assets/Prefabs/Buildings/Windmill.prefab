@@ -105,9 +105,11 @@ GameObject:
   - component: {fileID: 1747946322969771820}
   - component: {fileID: 7285405090060371226}
   - component: {fileID: 3901942737877137891}
+  - component: {fileID: 5675881957726018913}
+  - component: {fileID: 1181499694784896902}
   m_Layer: 0
   m_Name: Windmill
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,3 +175,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!208 &5675881957726018913
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322154813785296191}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.779, y: 3.1250002, z: 1.572}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 3.1030002, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!65 &1181499694784896902
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322154813785296191}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.5575538, y: 6.250877, z: 3.1439023}
+  m_Center: {x: 0, y: 3.1031764, z: -0.000000059604645}

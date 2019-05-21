@@ -1925,9 +1925,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c651834741af964e94193e3b74f863a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _CollectedWood: 500
-  _CollectedStone: 500
-  _CollectedFood: 500
+  _CollectedWood: 1000
+  _CollectedStone: 1000
+  _CollectedFood: 1000
   _CollectedWoodText: {fileID: 985783382}
   _CollectedStoneText: {fileID: 1291627532}
   _CollectedFoodText: {fileID: 321389765}
