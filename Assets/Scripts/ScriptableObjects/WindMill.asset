@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Farm
+  m_Name: WindMill
   m_EditorClassIdentifier: Assembly-CSharp::BuildingObject
-  _BuildingType: 3
-  _ConstructionPrefab: {fileID: 8077689506537751081, guid: 392fb244b39aacd42a5dc2013eb0c457,
+  _BuildingType: 4
+  _ConstructionPrefab: {fileID: 1287999890716231558, guid: 6837122bc1b21c246b4e2e89373707cf,
     type: 3}
-  _ObjectPrefab: {fileID: 8077689506537751081, guid: 18732ef87263dac45be9491634a96891,
+  _ObjectPrefab: {fileID: 3322154813785296191, guid: 5a493e2312b10a740bd9e220e1f25ec3,
     type: 3}
-  _BuildingName: Farm
-  _BuildingDescription: A farm to grow food
-  _WoodCost: 150
-  _StoneCost: 0
-  _FoodCost: 50
-  _ConstructionSize: 10
+  _BuildingName: WindMill
+  _BuildingDescription: Helps crops nearbye
+  _WoodCost: 350
+  _StoneCost: 150
+  _FoodCost: 100
+  _ConstructionSize: 8

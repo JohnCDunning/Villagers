@@ -2,5 +2,7 @@
 {
     House,
     ResourceCollection,
-    Campfire
+    Campfire,
+    Farm,
+    WindMill
 }
