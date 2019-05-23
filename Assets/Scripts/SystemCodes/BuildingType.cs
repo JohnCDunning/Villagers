@@ -4,5 +4,6 @@
     ResourceCollection,
     Campfire,
     Farm,
-    WindMill
+    WindMill,
+    VillageCenter
 }

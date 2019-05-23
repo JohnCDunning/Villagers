@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: VillageCenter
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingObject
+  _BuildingType: 5
+  _ConstructionPrefab: {fileID: 8588700972303653324, guid: 0ece19a9b345462409b66ce359112c7e,
+    type: 3}
+  _ObjectPrefab: {fileID: 3561893597034857344, guid: d339c842265a4454795c37a6a823ff96,
+    type: 3}
+  _BuildingName: Village Center
+  _BuildingDescription: The heard of any good village
+  _WoodCost: 300
+  _StoneCost: 300
+  _FoodCost: 250
+  _ConstructionSize: 14
