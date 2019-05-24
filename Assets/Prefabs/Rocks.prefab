@@ -128,7 +128,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.18
+  m_Radius: 1.42
   m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!208 &8541624433171285344
 NavMeshObstacle:
