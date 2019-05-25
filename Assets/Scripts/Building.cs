@@ -5,6 +5,8 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     public BuildingType _BuildingType;
+    public GameObject _Outline;
+    public BuildingDetails _BuildingDetails;
     // Start is called before the first frame update
     void Start()
     {

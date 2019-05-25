@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 960f43a1fad462f459be6bdd53ae4dd3, type: 3}
   m_Name: House
   m_EditorClassIdentifier: Assembly-CSharp::BuildingObject
   _BuildingType: 0
@@ -18,8 +18,12 @@ MonoBehaviour:
   _ObjectPrefab: {fileID: 7286274230067444553, guid: ffc94e2c976de764ea3815ce0a38abea,
     type: 3}
   _BuildingName: House
-  _BuildingDescription: A house to keep warm in the night
-  _WoodCost: 100
-  _StoneCost: 100
+  _BuildingDescription: A house good enough for a king
+  _WoodCost: 80
+  _StoneCost: 40
   _FoodCost: 50
-  _ConstructionSize: 8
+  _ConstructionSize: 7
+  _Upgrades:
+  - {fileID: 4971362922453126733, guid: db0b95c54f5ab2a45bd2e056ed0ddb9a, type: 3}
+  - {fileID: 4971362922453126733, guid: db0b95c54f5ab2a45bd2e056ed0ddb9a, type: 3}
+  - {fileID: 4971362922453126733, guid: db0b95c54f5ab2a45bd2e056ed0ddb9a, type: 3}

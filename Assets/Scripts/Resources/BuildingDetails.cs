@@ -2,7 +2,7 @@
 using System.Collections;
 
 [CreateAssetMenu(fileName = "Building", menuName = "Building", order = 1)]
-public class BuildingObject : ScriptableObject
+public class BuildingDetails : ScriptableObject
 {
     [Header("Building Settings")]
     [Space]
@@ -18,5 +18,8 @@ public class BuildingObject : ScriptableObject
     [Header("Building Construction Settings")]
     [Space]
     public float _ConstructionSize;
+
+    [Header("Upgrades")]
+    public GameObject[] _Upgrades;
 
 }

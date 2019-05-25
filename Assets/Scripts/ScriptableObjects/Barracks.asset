@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 960f43a1fad462f459be6bdd53ae4dd3, type: 3}
-  m_Name: Campfire
+  m_Name: Barracks
   m_EditorClassIdentifier: Assembly-CSharp::BuildingObject
-  _BuildingType: 2
-  _ConstructionPrefab: {fileID: 2794586705636637818, guid: 628d2492252c0ac41820ad23f3da4f57,
+  _BuildingType: 6
+  _ConstructionPrefab: {fileID: 5791471877854315585, guid: 494c4f913de1c584a9e16bc1453a0704,
     type: 3}
-  _ObjectPrefab: {fileID: 2835898805626409566, guid: 22a24e0e8aa47cf419ec37c191fdab07,
+  _ObjectPrefab: {fileID: 2427458362596464101, guid: b66176e340092814a84ed2c7ff9cf12c,
     type: 3}
-  _BuildingName: Campfire
-  _BuildingDescription: Warm up the villagers
-  _WoodCost: 50
-  _StoneCost: 20
+  _BuildingName: Barracks
+  _BuildingDescription: Military Building
+  _WoodCost: 200
+  _StoneCost: 200
   _FoodCost: 0
-  _ConstructionSize: 4
+  _ConstructionSize: 9
+  _Upgrades:
+  - {fileID: 4971362922453126733, guid: 22ccf73b0c6495d409e4ec619c331456, type: 3}

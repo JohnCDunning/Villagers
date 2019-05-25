@@ -5,5 +5,6 @@
     Campfire,
     Farm,
     WindMill,
-    VillageCenter
+    VillageCenter,
+    Barracks
 }

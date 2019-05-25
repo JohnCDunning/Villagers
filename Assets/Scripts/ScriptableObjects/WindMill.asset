@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 960f43a1fad462f459be6bdd53ae4dd3, type: 3}
   m_Name: WindMill
   m_EditorClassIdentifier: Assembly-CSharp::BuildingObject
   _BuildingType: 4
@@ -17,9 +17,11 @@ MonoBehaviour:
     type: 3}
   _ObjectPrefab: {fileID: 3322154813785296191, guid: 5a493e2312b10a740bd9e220e1f25ec3,
     type: 3}
-  _BuildingName: WindMill
-  _BuildingDescription: Helps crops nearbye
-  _WoodCost: 350
-  _StoneCost: 150
-  _FoodCost: 100
-  _ConstructionSize: 8
+  _BuildingName: Windmill
+  _BuildingDescription: Assists in farming
+  _WoodCost: 250
+  _StoneCost: 100
+  _FoodCost: 50
+  _ConstructionSize: 7
+  _Upgrades:
+  - {fileID: 4971362922453126733, guid: db0b95c54f5ab2a45bd2e056ed0ddb9a, type: 3}

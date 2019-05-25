@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class UIBuilding : MonoBehaviour, IPointerEnterHandler,IPointerExitHandler
 {
-    public BuildingObject _BuildingDetails;
+    public BuildingDetails _BuildingDetails;
     public GameObject _Description;
     public CollectedResources _CurrentResources;
 

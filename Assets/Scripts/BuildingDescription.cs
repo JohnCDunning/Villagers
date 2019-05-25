@@ -5,7 +5,7 @@ using TMPro;
 public class BuildingDescription : MonoBehaviour
 {
     [Header("DisplayedVariables")]
-    public BuildingObject _Description;
+    public BuildingDetails _Description;
 
     [Header("Text Links")]
     public TextMeshProUGUI _DescriptionText;
