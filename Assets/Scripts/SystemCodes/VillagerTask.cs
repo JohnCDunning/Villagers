@@ -7,5 +7,6 @@ public enum VillagerTask
     Gather_Stone,
     Gather_Food,
     ReturnGoods,
+    MoveToPoint,
     Sleep
 }

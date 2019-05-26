@@ -47,7 +47,9 @@ public class Villager : MonoBehaviour
     #region Move To spawn point
     public void SetSpawnPoint(Vector3 _Spawn)
     {
-            _Nav.destination = _Spawn;
+        _Task = VillagerTask.MoveToPoint;
+        Debug.Log("Yeeee");
+        _Nav.destination = _Spawn;
     }
     #endregion
     #region Set new task for villager
@@ -228,6 +230,10 @@ public class Villager : MonoBehaviour
             //Reduces wood amount
             while (_ResourceOfInterest._SupplyAmmount > 0)
             {
+                if(_Task == VillagerTask.MoveToPoint)
+                {
+                    break;
+                }
                 if (_Task == VillagerTask.ReturnGoods)
                 {
                     break;
@@ -329,42 +335,45 @@ public class Villager : MonoBehaviour
     #region ReturnGoods
     void ReturnGoods()
     {
-        //Pauses the villager from collecting anymore
-        StopCoroutine(CollectResource(_ResourceOfInterest));
-
-        Building _ResourceCollection = _FindObject.ClosestBuildingOfInterest(_FindObject._ResourceCollection, transform.position);
-        if (_ResourceCollection != null)
+        if (_Task == VillagerTask.ReturnGoods)
         {
+            //Pauses the villager from collecting anymore
+            StopCoroutine(CollectResource(_ResourceOfInterest));
 
-            _Nav.destination = _ResourceCollection.transform.position;
-
-
-            //DropOff the goods
-            if (Vector3.Distance(transform.position, _ResourceCollection.transform.position) < 2)
+            Building _ResourceCollection = _FindObject.ClosestBuildingOfInterest(_FindObject._ResourceCollection, transform.position);
+            if (_ResourceCollection != null)
             {
-               
-                if(_WoodHeld != 0)
-                {
-                    CollectedResources._Instance._CollectedWood += _WoodHeld;
-                    _ResourcePopup.ShowResourcePopup(ResourceType.wood, _WoodHeld);
-                }
-                if(_StoneHeld != 0)
-                {
-                    CollectedResources._Instance._CollectedStone += _StoneHeld;
-                    _ResourcePopup.ShowResourcePopup(ResourceType.stone, _StoneHeld);
-                }
-                if (_FoodHeld != 0)
-                {
-                    CollectedResources._Instance._CollectedFood += _FoodHeld;
-                    _ResourcePopup.ShowResourcePopup(ResourceType.food, _FoodHeld);
-                }
 
-                _WoodHeld = 0;
-                _StoneHeld = 0;
-                _FoodHeld = 0;
-                //Return to previous task
-                _Task = _PreviousTask;
-                _ReturningGoods = false;
+                _Nav.destination = _ResourceCollection.transform.position;
+
+
+                //DropOff the goods
+                if (Vector3.Distance(transform.position, _ResourceCollection.transform.position) < 2)
+                {
+
+                    if (_WoodHeld != 0)
+                    {
+                        CollectedResources._Instance._CollectedWood += _WoodHeld;
+                        _ResourcePopup.ShowResourcePopup(ResourceType.wood, _WoodHeld);
+                    }
+                    if (_StoneHeld != 0)
+                    {
+                        CollectedResources._Instance._CollectedStone += _StoneHeld;
+                        _ResourcePopup.ShowResourcePopup(ResourceType.stone, _StoneHeld);
+                    }
+                    if (_FoodHeld != 0)
+                    {
+                        CollectedResources._Instance._CollectedFood += _FoodHeld;
+                        _ResourcePopup.ShowResourcePopup(ResourceType.food, _FoodHeld);
+                    }
+
+                    _WoodHeld = 0;
+                    _StoneHeld = 0;
+                    _FoodHeld = 0;
+                    //Return to previous task
+                    _Task = _PreviousTask;
+                    _ReturningGoods = false;
+                }
             }
         }
     }

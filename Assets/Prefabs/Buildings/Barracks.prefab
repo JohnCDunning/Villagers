@@ -660,7 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa8ff57943773944bf5837672994a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _SpawnAtStart: 1
+  _SpawnAtStart: 0
   _Villager: {fileID: 8486613174862473730, guid: a031c939637dc604b8a99832831ee895,
     type: 3}
   _MoveToSpawn: {fileID: 9219002244180704598}

@@ -27,6 +27,7 @@ public class HighlightManager : MonoBehaviour
         {
             HighlightVillager();
             HighlightBuilding();
+            
           
             if (_UpgradeManager._BuildingUpgradeUI.GetComponent<UIMouseCheck>()._MouseEntered == false) //So clicking on UI doesnt deselect objects
             {
@@ -44,7 +45,14 @@ public class HighlightManager : MonoBehaviour
         if (_Input.RightMouseDown())
         {
             WorldResourceOutlineAnimation();
-            CancelVillagerSelection();
+          
+
+            if(_SelectedVillager != null)
+            {
+                _SelectedVillager.SetSpawnPoint(_RayInfo.LocationToBuild());
+                Debug.Log("Moved villager");
+
+            }
         }
 
         if(_SelectedVillager != null)
@@ -113,6 +121,15 @@ public class HighlightManager : MonoBehaviour
     }
     void WorldResourceOutlineAnimation()
     {
+        if(_RayInfo.ObjectRaycast().GetComponent<Building>() == true && _SelectedVillager != null)
+        {
+            Building _Building = _RayInfo.ObjectRaycast().GetComponent<Building>();
+            //Return goods
+           /// if (_Building._BuildingType == BuildingType.ResourceCollection)
+           // {
+               // _SelectedVillager._Task = VillagerTask.ReturnGoods;
+           // }
+        }
         if (_RayInfo.ObjectRaycast().GetComponent<WorldResource>() == true && _SelectedVillager != null)
         {
             WorldResource _Object = _RayInfo.ObjectRaycast().GetComponent<WorldResource>();
@@ -120,18 +137,21 @@ public class HighlightManager : MonoBehaviour
             {
                 _Object._Outline.GetComponent<Animator>().SetTrigger("ShowOutline");
                 SetVillagerTask(1);
+                CancelVillagerSelection();
             }
             if (_Object._ResourceType == ResourceType.stone)
             {
                 _Object._Outline.GetComponent<Animator>().SetTrigger("ShowOutline");
                 SetVillagerTask(2);
+                CancelVillagerSelection();
             }
             if (_Object._ResourceType == ResourceType.food)
             {
                 _Object._Outline.GetComponent<Animator>().SetTrigger("ShowOutline");
                 SetVillagerTask(3);
+                CancelVillagerSelection();
             }
         }
-        CancelVillagerSelection();
+        
     }
 }
