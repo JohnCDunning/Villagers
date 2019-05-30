@@ -1214,6 +1214,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8486613174862473784, guid: a031c939637dc604b8a99832831ee895,
+        type: 3}
+      propertyPath: _VillagerAnimator
+      value: 
+      objectReference: {fileID: 3166231813942743571}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a031c939637dc604b8a99832831ee895, type: 3}
 --- !u!4 &195401809 stripped
@@ -20350,6 +20355,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &3166231813942743571 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3166231813942743571, guid: a031c939637dc604b8a99832831ee895,
+    type: 3}
+  m_PrefabInstance: {fileID: 195401808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!108 &3376749087682076343
 Light:
   m_ObjectHideFlags: 0

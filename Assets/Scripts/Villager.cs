@@ -7,9 +7,11 @@ public class Villager : MonoBehaviour
     [Header("Villager Task")]
     public VillagerTask _Task;
     public VillagerTask _PreviousTask;
+    public VillagerAnimState _AnimState;
 
     [Space]
     public NavMeshAgent _Nav;
+    public Animator _VillagerAnimator;
     
     [Header("Resources")]
     public int _WoodHeld;
@@ -81,6 +83,17 @@ public class Villager : MonoBehaviour
 
     void Update()
     {
+        switch (_AnimState)
+        {
+            case VillagerAnimState.idle:
+                _VillagerAnimator.SetBool("idle", true);
+                _VillagerAnimator.SetBool("walking", false);
+                break;
+            case VillagerAnimState.walking:
+                _VillagerAnimator.SetBool("walking", true);
+                _VillagerAnimator.SetBool("idle", false);
+                break;
+        }
         //Run SetTask
         if (Started)
         {
@@ -185,15 +198,24 @@ public class Villager : MonoBehaviour
         if (_ResourceOfInterest != null)
         {
             _Nav.destination = _ResourceOfInterest.transform.position;
+            
             //If the villager is within range. Start collecting
-            if (Vector3.Distance(transform.position, _ResourceOfInterest.transform.position) < 2 && _CollectingResource == false)
+            if (Vector3.Distance(transform.position, _ResourceOfInterest.transform.position) < 2)
             {
-                LookAtObjectOfInterest();
-                StartCoroutine(LookingAtInterest());
-                if (_ObjectOfInterestIsClose())
+                if (_CollectingResource == false)
                 {
-                    StartCoroutine(CollectResource(_ResourceOfInterest));
+                    LookAtObjectOfInterest();
+                    StartCoroutine(LookingAtInterest());
+                    if (_ObjectOfInterestIsClose())
+                    {
+                        StartCoroutine(CollectResource(_ResourceOfInterest));
+
+                    }
                 }
+            }
+            else
+            {
+                _AnimState = VillagerAnimState.walking;
             }
         }
     }
@@ -224,6 +246,7 @@ public class Villager : MonoBehaviour
     #region CollectingResourceCoRoutine
     IEnumerator CollectResource(WorldResource _ResourceOfInterest)
     {
+        
         _CollectingResource = true;
         if (_Task != VillagerTask.ReturnGoods)
         {
@@ -243,6 +266,7 @@ public class Villager : MonoBehaviour
                     StartCoroutine(LookingAtInterest());
                     UseTool();
                 }
+                _AnimState = VillagerAnimState.idle;
                 yield return new WaitForSeconds(0.6f);
                 
               
@@ -298,18 +322,18 @@ public class Villager : MonoBehaviour
     void UseTool()
     {
        
-        if (GetComponentInChildren<Animator>() != null)
-        {
-            GetComponentInChildren<Animator>().SetTrigger("Swing");
-        }
+        //if (GetComponentInChildren<Animator>() != null)
+        //{
+        //    GetComponentInChildren<Animator>().SetTrigger("Swing");
+       //}
        
     }
     void CancelTool()
     {
-        if (GetComponentInChildren<Animator>() != null)
-        {
-            GetComponentInChildren<Animator>().ResetTrigger("Swing");
-        }
+        //if (GetComponentInChildren<Animator>() != null)
+        //{
+        //    GetComponentInChildren<Animator>().ResetTrigger("Swing");
+        //}
     }
     #endregion
     #region Gather_Resources
@@ -326,12 +350,7 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
-    #region Farm
-    void Farm()
-    {
-
-    }
-    #endregion
+    
     #region ReturnGoods
     void ReturnGoods()
     {
@@ -346,7 +365,7 @@ public class Villager : MonoBehaviour
 
                 _Nav.destination = _ResourceCollection.transform.position;
 
-
+                _AnimState = VillagerAnimState.walking;
                 //DropOff the goods
                 if (Vector3.Distance(transform.position, _ResourceCollection.transform.position) < 2)
                 {
