@@ -267,7 +267,7 @@ public class Villager : MonoBehaviour
                     UseTool();
                 }
                 _AnimState = VillagerAnimState.idle;
-                yield return new WaitForSeconds(0.6f);
+                yield return new WaitForSeconds(1.5f);
                 
               
                 if ((_ResourceOfInterest._SupplyAmmount - 5) > 0)
@@ -321,7 +321,7 @@ public class Villager : MonoBehaviour
     #region UseTool
     void UseTool()
     {
-       
+        _VillagerAnimator.SetTrigger("useTool");
         //if (GetComponentInChildren<Animator>() != null)
         //{
         //    GetComponentInChildren<Animator>().SetTrigger("Swing");
