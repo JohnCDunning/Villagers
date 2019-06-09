@@ -4,18 +4,36 @@ using UnityEngine;
 
 public class AnimationTrigger : MonoBehaviour
 {
-    public AudioSource _AudioSource;
-    public AudioClip _AudioToPlay;
-    public ParticleSystem _ParticleSystem;
-  
+
+    private ParticleSystem _ParticleSystem;
+    private AudioClip _AudioClip;
+
+    public void SetReferences()
+    {
+        if (_AudioClip == null)
+        {
+            if (transform.GetComponentInChildren<AudioClipReference>()._AudioClip != null)
+                _AudioClip = transform.GetComponentInChildren<AudioClipReference>()._AudioClip;
+        }
+
+        if (_ParticleSystem == null)
+        {
+            _ParticleSystem = transform.GetComponentInChildren<ParticleSystem>();
+        }
+    }
+   
     public void TriggerSound()
     {
-        _AudioSource.pitch = Random.Range(0.8f, 1.4f);
-        _AudioSource.PlayOneShot(_AudioToPlay);
+        _ParticleSystem.GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.4f);
+        _ParticleSystem.GetComponent<AudioSource>().Play();
         
     }
     public void TriggerParticles()
     {
-        _ParticleSystem.Emit(10);
+        if (_ParticleSystem != null)
+        {
+            _ParticleSystem.Emit(10);
+        }
+        
     }
 }

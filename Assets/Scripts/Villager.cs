@@ -8,6 +8,10 @@ public class Villager : MonoBehaviour
     public VillagerTask _Task;
     public VillagerTask _PreviousTask;
     public VillagerAnimState _AnimState;
+    public GameObject _CurrentToolHeld;
+    public GameObject _CurrentResourceHeld;
+    public GameObject[] _Tools;
+    public GameObject[] _ResourcesHeld;
 
     [Space]
     public NavMeshAgent _Nav;
@@ -17,11 +21,9 @@ public class Villager : MonoBehaviour
     public int _WoodHeld;
     public int _StoneHeld;
     public int _FoodHeld;
-    [HideInInspector]
-    public bool _ReturningGoods = false;
 
-    [HideInInspector]
-    public WorldResource _ResourceOfInterest;
+    [HideInInspector] public bool _ReturningGoods = false;
+    [HideInInspector] public WorldResource _ResourceOfInterest;
 
     private bool Started = false;
     private bool _CollectingResource = false;
@@ -29,6 +31,8 @@ public class Villager : MonoBehaviour
 
     [Space]
     public GameObject _Outline;
+    public Transform _ToolSpawn;
+    public Transform _ResourceSpawn;
     public UIResourcePopup _ResourcePopup;
 
     public GameObject[] _ObjectsInHand;
@@ -114,7 +118,10 @@ public class Villager : MonoBehaviour
             {
                 _PreviousTask = _Task;
                 _Task = VillagerTask.ReturnGoods;
+
+
             }
+            Destroy(_CurrentToolHeld);
             return true;
         }
         else
@@ -140,56 +147,51 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
-    #region Disable everything but one thing
-    void DisableEverythingBut(GameObject _ObjectToStay)
-    {
-        foreach(GameObject _object in _ObjectsInHand)
-        {
-            if (_object != _ObjectToStay)
-            {
-                _object.SetActive(false);
-            }
-            else
-            {
-                _object.SetActive(true);
-            }
-        }
-    }
-    #endregion
+
+
     #region SetTask
     void SetTask()
     {
         switch (_Task)
         {
             case VillagerTask.Gather_Wood:
-                DisableEverythingBut(_ObjectsInHand[0]);
+
                 Gather_Resource(_FindObject._WoodSupplies);
                 break;
             case VillagerTask.Gather_Stone:
-                DisableEverythingBut(_ObjectsInHand[1]);
+
                 Gather_Resource(_FindObject._StoneSupplies);
                 break;
             case VillagerTask.Gather_Food:
-                DisableEverythingBut(_ObjectsInHand[2]);
+
                 Gather_Resource(_FindObject._FoodSupplies);
                 break;
-                
+
             case VillagerTask.ReturnGoods:
-                if (_WoodHeld > _StoneHeld && _WoodHeld > _FoodHeld)
+                if (_CurrentResourceHeld == null)
                 {
-                    DisableEverythingBut(_ObjectsInHand[3]);
-                }
-                if (_StoneHeld > _WoodHeld && _StoneHeld > _FoodHeld)
-                {
-                    DisableEverythingBut(_ObjectsInHand[4]);
-                }
-                if(_FoodHeld > _WoodHeld && _FoodHeld > _StoneHeld)
-                {
-                    DisableEverythingBut(_ObjectsInHand[5]);
+                    if (_WoodHeld > _StoneHeld && _WoodHeld > _FoodHeld) //Wood is the most held
+                    {
+                        SpawnHeldResource(0);
+                    }
+                    if (_StoneHeld > _WoodHeld && _StoneHeld > _FoodHeld) //Stone is the most held
+                    {
+                        SpawnHeldResource(1);
+                    }
+                    if (_FoodHeld > _WoodHeld && _FoodHeld > _StoneHeld) //Food most held
+                    {
+                        SpawnHeldResource(2);
+                    }
                 }
                 ReturnGoods();
                 break;
         }
+    }
+    void SpawnHeldResource(int resourceType)
+    {
+        GameObject resource = Instantiate(_ResourcesHeld[resourceType], _ResourceSpawn);
+        resource.transform.localPosition = Vector3.zero;
+        _CurrentResourceHeld = resource;
     }
     #endregion
     #region Can the villager gather the resource
@@ -321,6 +323,27 @@ public class Villager : MonoBehaviour
     #region UseTool
     void UseTool()
     {
+        if(_CurrentToolHeld == null)
+        {
+            switch (_Task)
+            {
+                case VillagerTask.Gather_Wood:
+                    GameObject axe = Instantiate(_Tools[0], _ToolSpawn);
+                    axe.transform.localPosition = Vector3.zero;
+                    axe.transform.rotation = _ToolSpawn.rotation;
+                    _CurrentToolHeld = axe;
+                    break;
+                case VillagerTask.Gather_Stone:
+                    GameObject pickaxe = Instantiate(_Tools[1], _ToolSpawn);
+                    pickaxe.transform.localPosition = Vector3.zero;
+                    pickaxe.transform.rotation = _ToolSpawn.rotation;
+                    _CurrentToolHeld = pickaxe;
+                    break;
+                case VillagerTask.Gather_Food:
+                    break;
+            }
+        }
+        _VillagerAnimator.SetLayerWeight(1, 0);
         _VillagerAnimator.SetTrigger("useTool");
         //if (GetComponentInChildren<Animator>() != null)
         //{
@@ -356,13 +379,16 @@ public class Villager : MonoBehaviour
     {
         if (_Task == VillagerTask.ReturnGoods)
         {
+            if (_CurrentToolHeld != null)
+                Destroy(_CurrentToolHeld);
+
             //Pauses the villager from collecting anymore
             StopCoroutine(CollectResource(_ResourceOfInterest));
 
             Building _ResourceCollection = _FindObject.ClosestBuildingOfInterest(_FindObject._ResourceCollection, transform.position);
             if (_ResourceCollection != null)
             {
-
+                _VillagerAnimator.SetLayerWeight(1, 1);
                 _Nav.destination = _ResourceCollection.transform.position;
 
                 _AnimState = VillagerAnimState.walking;
@@ -392,6 +418,8 @@ public class Villager : MonoBehaviour
                     //Return to previous task
                     _Task = _PreviousTask;
                     _ReturningGoods = false;
+                    Destroy(_CurrentResourceHeld);
+                    _VillagerAnimator.SetLayerWeight(1, 0);
                 }
             }
         }
