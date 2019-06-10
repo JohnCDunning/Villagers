@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ResourceType: 2
-  _SupplyAmmount: 25
+  _SupplyAmount: 300
   _SupplyBeingTaken: 0
   _VillagerTravelingToThis: {fileID: 0}
   _Outline: {fileID: 3729475238076328144}

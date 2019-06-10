@@ -262,78 +262,47 @@ public class Villager : MonoBehaviour
     }
     #endregion
     #region CollectingResourceCoRoutine
-    IEnumerator CollectResource(WorldResource _ResourceOfInterest)
+    IEnumerator CollectResource(WorldResource _ResourceOfInterest) //Manages hitting resources;
     {
-        
-        _CollectingResource = true;
-        if (_Task != VillagerTask.ReturnGoods)
+        _CollectingResource = true; //So the coroutine only starts once
+        _AnimState = VillagerAnimState.idle; //Idle start position
+
+        if (_CarryAmount < _CarryCapacity)
         {
-            //Reduces wood amount
-            while (_ResourceOfInterest._SupplyAmmount > 0)
+            yield return new WaitForSeconds(1);
+
+            UseTool(); //Starts hit animation
+
+            if (_Task != VillagerTask.ReturnGoods)
             {
-                if(_Task == VillagerTask.MoveToPoint)
+                if (_ResourceOfInterest._SupplyAmount > 0)
                 {
-                    break;
-                }
-                if (_Task == VillagerTask.ReturnGoods)
-                {
-                    break;
-                }
-                if (ShouldIReturnGoods() == false)
-                {
-                    StartCoroutine(LookingAtInterest());
-                    UseTool();
-                }
-                _AnimState = VillagerAnimState.idle;
-                yield return new WaitForSeconds(1.5f);
-                
-              
-                if ((_ResourceOfInterest._SupplyAmmount - 5) > 0)
-                {
-                    switch (_ResourceOfInterest._ResourceType)
-                    {
-                        case ResourceType.wood:
-                            _WoodHeld += 5;
-                            break;
-                        case ResourceType.stone:
-                            _StoneHeld += 5;
-                            break;
-                        case ResourceType.food:
-                            _FoodHeld += 5;
-                            break;
-                    }
-                    _ResourceOfInterest._SupplyAmmount -= 5;
+                    AddResource(1); //Adds 1 resource of the mined type
+                    _ResourceOfInterest._SupplyAmount -= 1;
                 }
                 else
                 {
-                    switch (_ResourceOfInterest._ResourceType)
-                    {
-                        case ResourceType.wood:
-                            _WoodHeld += _ResourceOfInterest._SupplyAmmount;
-                            break;
-                        case ResourceType.stone:
-                            _StoneHeld += _ResourceOfInterest._SupplyAmmount;
-                            break;
-                        case ResourceType.food:
-                            _FoodHeld += _ResourceOfInterest._SupplyAmmount;
-                            break;
-                    }
-
-                    _ResourceOfInterest._SupplyAmmount -= _ResourceOfInterest._SupplyAmmount;
+                    Destroy(_ResourceOfInterest.gameObject);
+                    _FindObject.RefreshLists();
                 }
             }
-            
-            if (_ResourceOfInterest != null && _ResourceOfInterest._SupplyAmmount <= 0)
-            {
-                _FindObject.DeleteWorldResource(_ResourceOfInterest);
-                Destroy(_ResourceOfInterest.gameObject);
-            }
-            _CollectingResource = false;
-            
-            
-            _FindObject.RefreshLists();
-
-            yield return null;
+        }
+        _CollectingResource = false;
+        yield return null;
+    }
+    void AddResource(int amount)
+    {
+        switch (_ResourceOfInterest._ResourceType)
+        {
+            case ResourceType.wood:
+                _WoodHeld+= amount;
+                break;
+            case ResourceType.stone:
+                _StoneHeld += amount;
+                break;
+            case ResourceType.food:
+                _FoodHeld += amount;
+                break;
         }
     }
     #endregion

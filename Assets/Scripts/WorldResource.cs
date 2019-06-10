@@ -9,7 +9,7 @@ public class WorldResource : MonoBehaviour
     public ResourceType _ResourceType;
 
     [Space]
-    public int _SupplyAmmount;
+    public int _SupplyAmount;
 
     private int _OriginalAmount;
     [HideInInspector]
@@ -21,13 +21,13 @@ public class WorldResource : MonoBehaviour
 
     private void Start()
     {
-        _OriginalAmount = _SupplyAmmount;
+        _OriginalAmount = _SupplyAmount;
     }
     private void Update()
     {
         if (_ResourceType == ResourceType.wood)
         {
-            if (_SupplyAmmount <= _OriginalAmount / 2)
+            if (_SupplyAmount <= _OriginalAmount / 2)
             {
                 GetComponentInChildren<Rigidbody>().isKinematic = false;
             }
