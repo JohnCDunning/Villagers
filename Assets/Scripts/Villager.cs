@@ -6,10 +6,12 @@ public class Villager : MonoBehaviour
 {
     [Header("Villager Task")]
     public VillagerTask _Task;
-    public VillagerTask _PreviousTask;
-    public VillagerAnimState _AnimState;
-    public GameObject _CurrentToolHeld;
-    public GameObject _CurrentResourceHeld;
+    [HideInInspector] public VillagerTask _PreviousTask;
+    [HideInInspector] public VillagerAnimState _AnimState;
+
+    [HideInInspector] public GameObject _CurrentToolHeld;
+    [HideInInspector] public GameObject _CurrentResourceHeld;
+
     public GameObject[] _Tools;
     public GameObject[] _ResourcesHeld;
 
@@ -22,33 +24,39 @@ public class Villager : MonoBehaviour
     public int _StoneHeld;
     public int _FoodHeld;
 
+    public int _CarryCapacity;
+    public int _CarryAmount;
+
     [HideInInspector] public bool _ReturningGoods = false;
     [HideInInspector] public WorldResource _ResourceOfInterest;
 
-    private bool Started = false;
     private bool _CollectingResource = false;
     private FindObjectOfInterest _FindObject;
-
     [Space]
     public GameObject _Outline;
+
+    [Header("Tools spawn")]
     public Transform _ToolSpawn;
     public Transform _ResourceSpawn;
+
+    [Header("UIPopup")]
     public UIResourcePopup _ResourcePopup;
 
-    public GameObject[] _ObjectsInHand;
-
-    IEnumerator StartDelay()
-    {
-        yield return new WaitForSeconds(Random.Range(0, 2f));
-        Started = true;
-    }
     void Awake()
     {
         _FindObject = FindObjectOfType<FindObjectOfInterest>();
     }
-    void Start()
+    void Update()
     {
-        StartCoroutine(StartDelay());
+        SetTask();
+        SetAnimationState();
+        
+        _CarryAmount = (_WoodHeld + _StoneHeld + _FoodHeld);
+        if(_CarryAmount >= _CarryCapacity)
+        {
+            _Task = VillagerTask.ReturnGoods;
+            ReturnGoods();
+        }
     }
     #region Move To spawn point
     public void SetSpawnPoint(Vector3 _Spawn)
@@ -69,7 +77,7 @@ public class Villager : MonoBehaviour
             _ResourceOfInterest._VillagerTravelingToThis = null;
             _ResourceOfInterest = null;
         }
-        
+
         switch (_TaskNumber)
         {
             case 1:
@@ -84,8 +92,8 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
-
-    void Update()
+    #region SetAnimationState
+    void SetAnimationState()
     {
         switch (_AnimState)
         {
@@ -98,17 +106,8 @@ public class Villager : MonoBehaviour
                 _VillagerAnimator.SetBool("idle", false);
                 break;
         }
-        //Run SetTask
-        if (Started)
-        {
-            SetTask();
-        }
-        //See if the villager should return goods
-        if (ShouldIReturnGoods() == true)
-        {
-        }
-
     }
+    #endregion
     #region ShouldIReturnGoods
     bool ShouldIReturnGoods()
     {
@@ -118,8 +117,6 @@ public class Villager : MonoBehaviour
             {
                 _PreviousTask = _Task;
                 _Task = VillagerTask.ReturnGoods;
-
-
             }
             Destroy(_CurrentToolHeld);
             return true;
@@ -147,8 +144,6 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
-
-
     #region SetTask
     void SetTask()
     {
@@ -170,23 +165,44 @@ public class Villager : MonoBehaviour
             case VillagerTask.ReturnGoods:
                 if (_CurrentResourceHeld == null)
                 {
-                    if (_WoodHeld > _StoneHeld && _WoodHeld > _FoodHeld) //Wood is the most held
-                    {
-                        SpawnHeldResource(0);
-                    }
-                    if (_StoneHeld > _WoodHeld && _StoneHeld > _FoodHeld) //Stone is the most held
-                    {
-                        SpawnHeldResource(1);
-                    }
-                    if (_FoodHeld > _WoodHeld && _FoodHeld > _StoneHeld) //Food most held
-                    {
-                        SpawnHeldResource(2);
-                    }
+                    SpawnCorrectHeldResource();
                 }
                 ReturnGoods();
                 break;
         }
     }
+    void SpawnCorrectHeldResource()
+    {
+        List<int> resources = new List<int>();
+        resources.Add(_WoodHeld);
+        resources.Add(_StoneHeld);
+        resources.Add(_FoodHeld);
+
+        int highestResource = 0;
+        int resourceCount = 0;
+
+        for(int i = 0;i<3; i++)
+        {
+            if (resources[i] >= highestResource)
+            {
+                highestResource = resources[i];
+                resourceCount = i;
+            }
+        }
+        switch (resourceCount)
+        {
+            case 0:
+                SpawnHeldResource(0);
+                break;
+            case 1:
+                SpawnHeldResource(1);
+                break;
+            case 2:
+                SpawnHeldResource(2);
+                break;
+        }
+    }
+
     void SpawnHeldResource(int resourceType)
     {
         GameObject resource = Instantiate(_ResourcesHeld[resourceType], _ResourceSpawn);
@@ -306,6 +322,7 @@ public class Villager : MonoBehaviour
                     _ResourceOfInterest._SupplyAmmount -= _ResourceOfInterest._SupplyAmmount;
                 }
             }
+            
             if (_ResourceOfInterest != null && _ResourceOfInterest._SupplyAmmount <= 0)
             {
                 _FindObject.DeleteWorldResource(_ResourceOfInterest);
@@ -373,7 +390,6 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
-    
     #region ReturnGoods
     void ReturnGoods()
     {
@@ -425,12 +441,4 @@ public class Villager : MonoBehaviour
         }
     }
     #endregion
-    #region Sleep
-    void Sleep()
-    {
-
-    }
-    #endregion
-
-   
 }
