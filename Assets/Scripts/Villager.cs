@@ -57,6 +57,14 @@ public class Villager : MonoBehaviour
             _Task = VillagerTask.ReturnGoods;
             ReturnGoods();
         }
+        if (_Nav.velocity.magnitude > 0.1)
+        {
+            _AnimState = VillagerAnimState.walking;
+        }
+        else
+        {
+            _AnimState = VillagerAnimState.idle;
+        }
     }
     #region Move To spawn point
     public void SetSpawnPoint(Vector3 _Spawn)
@@ -64,6 +72,7 @@ public class Villager : MonoBehaviour
         _Task = VillagerTask.MoveToPoint;
         Debug.Log("Yeeee");
         _Nav.destination = _Spawn;
+        
     }
     #endregion
     #region Set new task for villager
@@ -375,8 +384,6 @@ public class Villager : MonoBehaviour
             {
                 _VillagerAnimator.SetLayerWeight(1, 1);
                 _Nav.destination = _ResourceCollection.transform.position;
-
-                _AnimState = VillagerAnimState.walking;
                 //DropOff the goods
                 if (Vector3.Distance(transform.position, _ResourceCollection.transform.position) < 2)
                 {
