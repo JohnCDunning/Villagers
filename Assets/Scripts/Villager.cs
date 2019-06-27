@@ -9,26 +9,19 @@ public class Villager : MonoBehaviour
     [HideInInspector] public VillagerTask _PreviousTask;
     [HideInInspector] public VillagerAnimState _AnimState;
 
-    [HideInInspector] public GameObject _CurrentToolHeld;
+    public GameObject _CurrentToolHeld;
     [HideInInspector] public GameObject _CurrentResourceHeld;
-
-    public GameObject[] _Tools;
-    public GameObject[] _ResourcesHeld;
-
+    
     [Space]
     public NavMeshAgent _Nav;
     public Animator _VillagerAnimator;
     
     [Header("Resources")]
-    public int _WoodHeld;
-    public int _StoneHeld;
-    public int _FoodHeld;
-
     public int _CarryCapacity;
     public int _CarryAmount;
 
-    [HideInInspector] public bool _ReturningGoods = false;
-    [HideInInspector] public WorldResource _ResourceOfInterest;
+    private bool _ReturningGoods = false;
+    private WorldResource _ResourceOfInterest;
 
     private bool _CollectingResource = false;
     private FindObjectOfInterest _FindObject;
@@ -41,9 +34,27 @@ public class Villager : MonoBehaviour
 
     [Header("UIPopup")]
     public UIResourcePopup _ResourcePopup;
+    
+    public Dictionary<string, int> _Supplies = new Dictionary<string, int>();
+    public Dictionary<string, GameObject> _HeldItem = new Dictionary<string, GameObject>();
+
+    public GameObject[] _Tools;
+    public GameObject[] _ResourcesHeld;
 
     void Awake()
     {
+        _Supplies.Add("Wood", 0);
+        _Supplies.Add("Stone", 0);
+        _Supplies.Add("Food", 0);
+
+        _HeldItem.Add("Axe", _Tools[0]);
+        _HeldItem.Add("Pickaxe", _Tools[1]);
+        _HeldItem.Add("Basket", _Tools[2]);
+
+        _HeldItem.Add("Wood",_ResourcesHeld[0]);
+        _HeldItem.Add("Stone", _ResourcesHeld[1]);
+        _HeldItem.Add("Food", _ResourcesHeld[2]);
+
         _FindObject = FindObjectOfType<FindObjectOfInterest>();
     }
     void Update()
@@ -51,7 +62,7 @@ public class Villager : MonoBehaviour
         SetTask();
         SetAnimationState();
         
-        _CarryAmount = (_WoodHeld + _StoneHeld + _FoodHeld);
+        _CarryAmount = (_Supplies["Wood"] + _Supplies["Stone"] + _Supplies["Food"]);
         if(_CarryAmount >= _CarryCapacity)
         {
             _Task = VillagerTask.ReturnGoods;
@@ -70,15 +81,15 @@ public class Villager : MonoBehaviour
     public void SetSpawnPoint(Vector3 _Spawn)
     {
         _Task = VillagerTask.MoveToPoint;
-        Debug.Log("Yeeee");
         _Nav.destination = _Spawn;
-        
+        if (_CurrentToolHeld != null)
+            Destroy(_CurrentToolHeld.gameObject);
+
     }
     #endregion
     #region Set new task for villager
     public void NewTask(int _TaskNumber)
     {
-        CancelTool();
         if (_ResourceOfInterest != null)
         {
             _ReturningGoods = false;
@@ -120,14 +131,15 @@ public class Villager : MonoBehaviour
     #region ShouldIReturnGoods
     bool ShouldIReturnGoods()
     {
-        if (_StoneHeld >= 20 || _WoodHeld >= 20 || _FoodHeld >= 20)
+        if (_Supplies["Stone"] >= _CarryCapacity || _Supplies["Wood"] >= _CarryCapacity || _Supplies["Food"] >= _CarryCapacity)
         {
             if(_Task != VillagerTask.ReturnGoods)
             {
                 _PreviousTask = _Task;
                 _Task = VillagerTask.ReturnGoods;
+                Destroy(_CurrentToolHeld);
             }
-            Destroy(_CurrentToolHeld);
+           
             return true;
         }
         else
@@ -159,15 +171,12 @@ public class Villager : MonoBehaviour
         switch (_Task)
         {
             case VillagerTask.Gather_Wood:
-
                 Gather_Resource(_FindObject._WoodSupplies);
                 break;
             case VillagerTask.Gather_Stone:
-
                 Gather_Resource(_FindObject._StoneSupplies);
                 break;
             case VillagerTask.Gather_Food:
-
                 Gather_Resource(_FindObject._FoodSupplies);
                 break;
 
@@ -180,13 +189,19 @@ public class Villager : MonoBehaviour
                 break;
         }
     }
+
+    /// <summary>
+    /// REFACTOR
+    /// </summary>
     void SpawnCorrectHeldResource()
     {
+       
         List<int> resources = new List<int>();
-        resources.Add(_WoodHeld);
-        resources.Add(_StoneHeld);
-        resources.Add(_FoodHeld);
-
+        
+        resources.Add(_Supplies["Wood"]);
+        resources.Add(_Supplies["Stone"]);
+        resources.Add(_Supplies["Food"]);
+    
         int highestResource = 0;
         int resourceCount = 0;
 
@@ -240,10 +255,6 @@ public class Villager : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                _AnimState = VillagerAnimState.walking;
-            }
         }
     }
     #endregion
@@ -251,10 +262,7 @@ public class Villager : MonoBehaviour
     void LookAtObjectOfInterest()
     {
         Quaternion lookOnLook = Quaternion.LookRotation(_ResourceOfInterest.transform.position - transform.position);
-
         transform.rotation = Quaternion.Slerp(transform.rotation, lookOnLook, 1f * Time.deltaTime);
-     
-        
     }
     IEnumerator LookingAtInterest()
     {
@@ -274,8 +282,6 @@ public class Villager : MonoBehaviour
     IEnumerator CollectResource(WorldResource _ResourceOfInterest) //Manages hitting resources;
     {
         _CollectingResource = true; //So the coroutine only starts once
-        _AnimState = VillagerAnimState.idle; //Idle start position
-
         if (_CarryAmount < _CarryCapacity)
         {
             yield return new WaitForSeconds(1);
@@ -304,54 +310,46 @@ public class Villager : MonoBehaviour
         switch (_ResourceOfInterest._ResourceType)
         {
             case ResourceType.wood:
-                _WoodHeld+= amount;
+                _Supplies["Wood"] += amount;
                 break;
             case ResourceType.stone:
-                _StoneHeld += amount;
+                _Supplies["Stone"] += amount;
                 break;
             case ResourceType.food:
-                _FoodHeld += amount;
+                _Supplies["Food"] += amount;
                 break;
         }
     }
     #endregion
+    void SpawnTool(string tool)
+    {
+        if (_CurrentToolHeld == null)
+        {
+            GameObject selectedTool = Instantiate(_HeldItem[tool], _ToolSpawn);
+            selectedTool.transform.localPosition = Vector3.zero;
+            selectedTool.transform.rotation = _ToolSpawn.rotation;
+            _CurrentToolHeld = selectedTool;
+        }
+    }
     #region UseTool
     void UseTool()
     {
-        if(_CurrentToolHeld == null)
+        switch (_Task)
         {
-            switch (_Task)
-            {
-                case VillagerTask.Gather_Wood:
-                    GameObject axe = Instantiate(_Tools[0], _ToolSpawn);
-                    axe.transform.localPosition = Vector3.zero;
-                    axe.transform.rotation = _ToolSpawn.rotation;
-                    _CurrentToolHeld = axe;
-                    break;
-                case VillagerTask.Gather_Stone:
-                    GameObject pickaxe = Instantiate(_Tools[1], _ToolSpawn);
-                    pickaxe.transform.localPosition = Vector3.zero;
-                    pickaxe.transform.rotation = _ToolSpawn.rotation;
-                    _CurrentToolHeld = pickaxe;
-                    break;
-                case VillagerTask.Gather_Food:
-                    break;
-            }
+            case VillagerTask.Gather_Wood:
+                SpawnTool("Axe");
+                _VillagerAnimator.SetTrigger("UseAxe");
+                break;
+            case VillagerTask.Gather_Stone:
+                SpawnTool("Pickaxe");
+                _VillagerAnimator.SetTrigger("UsePickaxe");
+                break;
+            case VillagerTask.Gather_Food:
+                SpawnTool("Basket");
+                _VillagerAnimator.SetTrigger("UseBasket");
+                break;
         }
         _VillagerAnimator.SetLayerWeight(1, 0);
-        _VillagerAnimator.SetTrigger("useTool");
-        //if (GetComponentInChildren<Animator>() != null)
-        //{
-        //    GetComponentInChildren<Animator>().SetTrigger("Swing");
-       //}
-       
-    }
-    void CancelTool()
-    {
-        //if (GetComponentInChildren<Animator>() != null)
-        //{
-        //    GetComponentInChildren<Animator>().ResetTrigger("Swing");
-        //}
     }
     #endregion
     #region Gather_Resources
@@ -387,26 +385,26 @@ public class Villager : MonoBehaviour
                 //DropOff the goods
                 if (Vector3.Distance(transform.position, _ResourceCollection.transform.position) < 2)
                 {
+                    if (_Supplies["Wood"] != 0)
+                    {
+                        CollectedResources._Instance._CollectedWood += _Supplies["Wood"];
+                        _ResourcePopup.ShowResourcePopup(ResourceType.wood, _Supplies["Wood"]);
+                    }
+                    if (_Supplies["Stone"] != 0)
+                    {
+                        CollectedResources._Instance._CollectedStone += _Supplies["Stone"];
+                        _ResourcePopup.ShowResourcePopup(ResourceType.stone, _Supplies["Stone"]);
+                    }
+                    if (_Supplies["Food"] != 0)
+                    {
+                        CollectedResources._Instance._CollectedFood += _Supplies["Food"];
+                        _ResourcePopup.ShowResourcePopup(ResourceType.food, _Supplies["Food"]);
+                    }
 
-                    if (_WoodHeld != 0)
-                    {
-                        CollectedResources._Instance._CollectedWood += _WoodHeld;
-                        _ResourcePopup.ShowResourcePopup(ResourceType.wood, _WoodHeld);
-                    }
-                    if (_StoneHeld != 0)
-                    {
-                        CollectedResources._Instance._CollectedStone += _StoneHeld;
-                        _ResourcePopup.ShowResourcePopup(ResourceType.stone, _StoneHeld);
-                    }
-                    if (_FoodHeld != 0)
-                    {
-                        CollectedResources._Instance._CollectedFood += _FoodHeld;
-                        _ResourcePopup.ShowResourcePopup(ResourceType.food, _FoodHeld);
-                    }
+                    _Supplies["Wood"] = 0;
+                    _Supplies["Stone"] = 0;
+                    _Supplies["Food"] = 0;
 
-                    _WoodHeld = 0;
-                    _StoneHeld = 0;
-                    _FoodHeld = 0;
                     //Return to previous task
                     _Task = _PreviousTask;
                     _ReturningGoods = false;

@@ -324,32 +324,22 @@ MonoBehaviour:
   _AnimState: 0
   _CurrentToolHeld: {fileID: 0}
   _CurrentResourceHeld: {fileID: 0}
-  _Tools:
-  - {fileID: 7038133409663787765, guid: c5145b6916458f2498d11ea769d6c9f0, type: 3}
-  - {fileID: 7038133409663787765, guid: be1946842500ce64e94775b9f1cc5759, type: 3}
-  - {fileID: 7038133409663787765, guid: be1946842500ce64e94775b9f1cc5759, type: 3}
-  _ResourcesHeld:
-  - {fileID: 1236763876940056995, guid: 95914727e3833b54cbc8aea2c134e03b, type: 3}
-  - {fileID: 5329554379890042812, guid: 67a51cbbbdaeff14aa78eace6f654c71, type: 3}
-  - {fileID: 6928702792880924380, guid: 209e5f33110a1ab45b17b3842fccabb7, type: 3}
   _Nav: {fileID: 8486613174862473785}
   _VillagerAnimator: {fileID: 3166231813942743571}
-  _WoodHeld: 0
-  _StoneHeld: 0
-  _FoodHeld: 0
-  _ReturningGoods: 0
-  _ResourceOfInterest: {fileID: 0}
+  _CarryCapacity: 5
+  _CarryAmount: 0
   _Outline: {fileID: 1409936340}
   _ToolSpawn: {fileID: 739787988}
   _ResourceSpawn: {fileID: 1688169919}
   _ResourcePopup: {fileID: 560339711}
-  _ObjectsInHand:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _Tools:
+  - {fileID: 7038133409663787765, guid: c5145b6916458f2498d11ea769d6c9f0, type: 3}
+  - {fileID: 7038133409663787765, guid: be1946842500ce64e94775b9f1cc5759, type: 3}
+  - {fileID: 2319949381686342546, guid: 0abb079c3425a804990414ea9c699a93, type: 3}
+  _ResourcesHeld:
+  - {fileID: 1236763876940056995, guid: 95914727e3833b54cbc8aea2c134e03b, type: 3}
+  - {fileID: 5329554379890042812, guid: 67a51cbbbdaeff14aa78eace6f654c71, type: 3}
+  - {fileID: 6928702792880924380, guid: 209e5f33110a1ab45b17b3842fccabb7, type: 3}
 --- !u!1001 &487855219
 PrefabInstance:
   m_ObjectHideFlags: 0

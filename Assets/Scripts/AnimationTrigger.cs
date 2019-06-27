@@ -10,12 +10,6 @@ public class AnimationTrigger : MonoBehaviour
 
     public void SetReferences()
     {
-        if (_AudioClip == null)
-        {
-            if (transform.GetComponentInChildren<AudioClipReference>()._AudioClip != null)
-                _AudioClip = transform.GetComponentInChildren<AudioClipReference>()._AudioClip;
-        }
-
         if (_ParticleSystem == null)
         {
             _ParticleSystem = transform.GetComponentInChildren<ParticleSystem>();
