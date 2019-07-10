@@ -340,14 +340,6 @@ public class Villager : MonoBehaviour
                 SpawnTool("Axe");
                 _VillagerAnimator.SetTrigger("UseAxe");
                 break;
-            case VillagerTask.Gather_Stone:
-                SpawnTool("Pickaxe");
-                _VillagerAnimator.SetTrigger("UsePickaxe");
-                break;
-            case VillagerTask.Gather_Food:
-                SpawnTool("Basket");
-                _VillagerAnimator.SetTrigger("UseBasket");
-                break;
         }
         _VillagerAnimator.SetLayerWeight(1, 0);
     }
