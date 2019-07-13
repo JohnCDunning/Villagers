@@ -8,150 +8,45 @@ public class HighlightManager : MonoBehaviour
     public RaycastInfo _RayInfo;
     public UpgradeManager _UpgradeManager;
 
-    Villager _SelectedVillager;
-    Building _SelectedBuilding;
-
+    ISelectable _CurrentlySelectedObject;
     
     private void Update()
     {
-        if(_SelectedBuilding != null)
-        {
-            _UpgradeManager._SelectedBuilding = _SelectedBuilding.gameObject;
-        }
-        else
-        {
-            _UpgradeManager._SelectedBuilding = null;
-        }
-
         if (_Input.LeftMouseDown())
         {
-            HighlightVillager();
-            HighlightBuilding();
-            
-          
+            //Highlight if hits a selectable object
+            if (_RayInfo.ObjectRaycast().GetComponent<ISelectable>() != null)
+            {
+                SelectObject(_RayInfo.ObjectRaycast().GetComponent<ISelectable>());
+                return;
+            }
+            //Unselect if hits nothing
             if (_UpgradeManager._BuildingUpgradeUI.GetComponent<UIMouseCheck>()._MouseEntered == false) //So clicking on UI doesnt deselect objects
             {
-                if (_RayInfo.ObjectRaycast().GetComponent<Building>() == null)
-                {
-                    CancelBuildingSelection();
-
-                }
-                if (_RayInfo.ObjectRaycast().GetComponent<Villager>() == null)
-                {
-                    CancelVillagerSelection();
-                }
+                if(_CurrentlySelectedObject != null)
+                    _CurrentlySelectedObject.UnSelect();
             }
         }
         if (_Input.RightMouseDown())
         {
-            WorldResourceOutlineAnimation();
-          
-
-            if(_SelectedVillager != null)
+            if (_RayInfo.ObjectRaycast().GetComponent<ISelectable>() != null)
             {
-                _SelectedVillager.SetSpawnPoint(_RayInfo.LocationToBuild());
-                Debug.Log("Moved villager");
-
+                InteractObject(_RayInfo.ObjectRaycast().GetComponent<ISelectable>());
             }
         }
+    }
+    void InteractObject(ISelectable SelectableObject)
+    {
+        if(SelectableObject != _CurrentlySelectedObject)
+            SelectableObject.InteractSelect();
+    }
+    void SelectObject(ISelectable SelectableObject)
+    {
+        if(_CurrentlySelectedObject != null)
+            _CurrentlySelectedObject.UnSelect();
 
-        if(_SelectedVillager != null)
-        {
-            _SelectedVillager._Outline.SetActive(true);
-        }
-        if (_SelectedBuilding != null)
-        {
-            _SelectedBuilding._Outline.SetActive(true);
-        }
+        _CurrentlySelectedObject = SelectableObject;
+        _CurrentlySelectedObject.Select();
     }
     
-    void HighlightBuilding()
-    {
-        if (_RayInfo.ObjectRaycast().GetComponent<Building>() != null)
-        {
-            Building _Building = _RayInfo.ObjectRaycast().GetComponent<Building>();
-            if(_Building != _SelectedBuilding)
-            {
-                if(_SelectedBuilding != null)
-                {
-                    _SelectedBuilding._Outline.SetActive(false);
-                }
-                
-                _SelectedBuilding = _Building;
-                _UpgradeManager.ApplyUpgrades(_Building.gameObject);
-            }
-        }
-    }
-    void HighlightVillager()
-    {
-        if (_RayInfo.ObjectRaycast().GetComponent<Villager>() != null)
-        {
-            Villager _Villager = _RayInfo.ObjectRaycast().GetComponent<Villager>();
-            if (_Villager != _SelectedVillager)
-            {
-                if (_SelectedVillager != null)
-                {
-                    _SelectedVillager._Outline.SetActive(false);
-                }
-                _SelectedVillager = _Villager;
-            }
-        }
-
-    }
-    public void CancelVillagerSelection()
-    {
-        if (_SelectedVillager != null)
-        {
-            _SelectedVillager._Outline.SetActive(false);
-            _SelectedVillager = null;
-        }
-    }
-    public void CancelBuildingSelection()
-    {
-        if (_SelectedBuilding != null)
-        {
-            _SelectedBuilding._Outline.SetActive(false);
-            _SelectedBuilding = null;
-        }
-    }
-    public void SetVillagerTask(int _TaskNumber)
-    {
-        _SelectedVillager.NewTask(_TaskNumber);
-
-    }
-    void WorldResourceOutlineAnimation()
-    {
-        if(_RayInfo.ObjectRaycast().GetComponent<Building>() == true && _SelectedVillager != null)
-        {
-            Building _Building = _RayInfo.ObjectRaycast().GetComponent<Building>();
-            //Return goods
-           /// if (_Building._BuildingType == BuildingType.ResourceCollection)
-           // {
-               // _SelectedVillager._Task = VillagerTask.ReturnGoods;
-           // }
-        }
-        if (_RayInfo.ObjectRaycast().GetComponent<WorldResource>() == true && _SelectedVillager != null)
-        {
-            WorldResource _Object = _RayInfo.ObjectRaycast().GetComponent<WorldResource>();
-            if (_Object._ResourceType == ResourceType.wood)
-            {
-                _Object._Outline.GetComponent<Animator>().SetTrigger("ShowOutline");
-                SetVillagerTask(1);
-                CancelVillagerSelection();
-            }
-            if (_Object._ResourceType == ResourceType.stone)
-            {
-                _Object._Outline.GetComponent<Animator>().SetTrigger("ShowOutline");
-                SetVillagerTask(2);
-                CancelVillagerSelection();
-            }
-            if (_Object._ResourceType == ResourceType.food)
-            {
-                _Object._Outline.GetComponent<Animator>().SetTrigger("ShowOutline");
-                SetVillagerTask(3);
-                CancelVillagerSelection();
-            }
-        }
-        
-    }
 }

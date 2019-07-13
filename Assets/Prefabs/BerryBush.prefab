@@ -1,5 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &475242588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 475242589}
+  - component: {fileID: 475242590}
+  m_Layer: 0
+  m_Name: _Outline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &475242589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475242588}
+  m_LocalRotation: {x: 0.7071069, y: -0.000000014901161, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: 0, y: 2.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8555560795024368805}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!119 &475242590
+Projector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475242588}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: 0.1
+  m_FarClipPlane: 50
+  m_FieldOfView: 47
+  m_AspectRatio: 1
+  m_Orthographic: 1
+  m_OrthographicSize: 1.48
+  m_Material: {fileID: 2100000, guid: c8c80c5b03f5c7e40b07eb2170e667e5, type: 2}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 823
 --- !u!1 &3729475238076328144
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +62,7 @@ GameObject:
   - component: {fileID: 3729475238076328146}
   - component: {fileID: 3729475238076328147}
   m_Layer: 0
-  m_Name: _ResourceOutline
+  m_Name: _AnimatedOutline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,6 +153,7 @@ Transform:
   m_LocalScale: {x: 1.2135, y: 1.2135, z: 1.2135}
   m_Children:
   - {fileID: 3729475238076328109}
+  - {fileID: 475242589}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -168,7 +219,8 @@ MonoBehaviour:
   _SupplyAmount: 50
   _SupplyBeingTaken: 0
   _VillagerTravelingToThis: {fileID: 0}
-  _Outline: {fileID: 3729475238076328144}
+  _AnimatedOutline: {fileID: 3729475238076328144}
+  _Outline: {fileID: 475242588}
 --- !u!135 &3729475238278598587
 SphereCollider:
   m_ObjectHideFlags: 0

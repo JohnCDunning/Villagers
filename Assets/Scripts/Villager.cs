@@ -93,8 +93,8 @@ public class Villager : MonoBehaviour
         if (_ResourceOfInterest != null)
         {
             _ReturningGoods = false;
-            _ResourceOfInterest._SupplyBeingTaken = false;
-            _ResourceOfInterest._VillagerTravelingToThis = null;
+         //   _ResourceOfInterest._SupplyBeingTaken = false;
+         //   _ResourceOfInterest._VillagerTravelingToThis = null;
             _ResourceOfInterest = null;
         }
 

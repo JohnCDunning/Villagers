@@ -1,5 +1,75 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2077629170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2077629171}
+  - component: {fileID: 2077629173}
+  - component: {fileID: 2077629172}
+  m_Layer: 0
+  m_Name: _AnimatedOutline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2077629171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077629170}
+  m_LocalRotation: {x: 0.7071069, y: -0.000000014901161, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: 0, y: 2.6734514, z: 0}
+  m_LocalScale: {x: 1.2135, y: 1.213501, z: 1.213501}
+  m_Children: []
+  m_Father: {fileID: 519385663067828627}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!119 &2077629173
+Projector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077629170}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: 0.1
+  m_FarClipPlane: 50
+  m_FieldOfView: 0.00000001
+  m_AspectRatio: 1
+  m_Orthographic: 0
+  m_OrthographicSize: 0.00000001
+  m_Material: {fileID: 2100000, guid: c8c80c5b03f5c7e40b07eb2170e667e5, type: 2}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 823
+--- !u!95 &2077629172
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077629170}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3807e001373460842bd67ddfb157840b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1879554516846870238
 GameObject:
   m_ObjectHideFlags: 0
@@ -4906,6 +4976,7 @@ Transform:
   - {fileID: 4778194189489413545}
   - {fileID: 4778194190506915742}
   - {fileID: 4651782029455467692}
+  - {fileID: 2077629171}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4970,6 +5041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BuildingType: 5
+  _AnimatedOutline: {fileID: 0}
   _Outline: {fileID: 4651782029455308940}
   _BuildingDetails: {fileID: 11400000, guid: edb1cf5f2505d9d468c5265edd7eeeea, type: 2}
 --- !u!65 &490164976221155738
@@ -5198,6 +5270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BuildingType: 1
+  _AnimatedOutline: {fileID: 0}
   _Outline: {fileID: 0}
   _BuildingDetails: {fileID: 0}
 --- !u!1 &4778194190447126273
@@ -5305,6 +5378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BuildingType: 1
+  _AnimatedOutline: {fileID: 0}
   _Outline: {fileID: 0}
   _BuildingDetails: {fileID: 0}
 --- !u!1 &4778194190506915743
@@ -5614,6 +5688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BuildingType: 1
+  _AnimatedOutline: {fileID: 0}
   _Outline: {fileID: 0}
   _BuildingDetails: {fileID: 0}
 --- !u!1 &4778194190813092652
@@ -5829,6 +5904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BuildingType: 1
+  _AnimatedOutline: {fileID: 0}
   _Outline: {fileID: 0}
   _BuildingDetails: {fileID: 0}
 --- !u!1 &4778194190909110592
@@ -5948,7 +6024,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_Name
-      value: _ResourceOutline
+      value: _Outline
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_IsActive
