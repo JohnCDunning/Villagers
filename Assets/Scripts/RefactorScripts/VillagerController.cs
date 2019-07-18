@@ -12,6 +12,8 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     public Animator _Anim;
 
     public int _Health = 100;
+    public int _CarryCapacity;
+
     public int _Wood;
 
     public GameObject _AnimatedOutline;
@@ -23,7 +25,8 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     public GameObject _CurrentTool;
 
     public GameObject[] _AllTools;
-    public Dictionary<string, GameObject> _Tool = new Dictionary<string, GameObject>();
+    public ToolType _ToolType;
+    public Dictionary<ToolType, GameObject> _Tool = new Dictionary<ToolType, GameObject>();
 
     private bool CanUseTool = true;
 
@@ -66,7 +69,8 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     private void Start()
     {
         //Add Tools to Dictionary
-        _Tool.Add("Axe", _AllTools[0]);
+        _Tool.Add(ToolType.Axe, _AllTools[0]);
+        Debug.Log(_Tool[ToolType.Axe]);
     }
     private void Update()
     {
@@ -79,14 +83,20 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         {
             RunTasks();
         }
+
+        if(_Wood > _CarryCapacity)
+        {
+            _Task = VillagerTask.ReturnGoods;
+        }
     }
     float CheckVelocity()
     {
         return _Nav.velocity.magnitude;
     }
+
     void SetAnimation()
     {
-        if (CheckVelocity() > 1)
+        if (CheckVelocity() > .3f)
         {
             _Anim.SetBool("walking", true);
         }
@@ -95,14 +105,15 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
             _Anim.SetBool("walking", false);
         }
     }
+
     #region Animation and spawning of tool
-    void SpawnTool(string tool)
+    void SpawnTool(ToolType tool)
     {
         GameObject _NewTool = Instantiate(_Tool[tool], _ToolSpawn);
         _NewTool.transform.localPosition = Vector3.zero; _NewTool.transform.localRotation = Quaternion.identity;
         _CurrentTool = _NewTool;
     }
-    void ToolCheck(string tool)
+    void ToolCheck(ToolType tool)
     {
         if (_CurrentTool == null)
         {
@@ -110,7 +121,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         }
         else
         {
-            if (_CurrentTool.GetComponent<Tool>()._ToolType.ToString() != tool)
+            if (_CurrentTool.GetComponent<Tool>()._ToolType != tool)
             {
                 Destroy(_CurrentTool);
                 SpawnTool(tool);
@@ -130,12 +141,16 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                 switch (_ObjectOfInterest.GetComponent<WorldResource>()._ResourceType)
                 {
                     case ResourceType.wood:
-                        ToolCheck("Axe");
+                        ToolCheck(ToolType.Axe);
                         GetComponent<Animator>().SetTrigger("UseAxe");
                         break;
                 }
             }
         }
+    }
+    void ResetAllTriggers()
+    {
+        _Anim.ResetTrigger("UseAxe");
     }
     #endregion
 
@@ -146,7 +161,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
 
         return false;
     }
-    #region Villager Death
+
     void KillVillager()
     {
         Rigidbody[] rbs;
@@ -159,7 +174,6 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         _Nav.enabled = false;
         _Anim.enabled = false;
     }
-    #endregion
 
     void RunTasks()
     {
@@ -168,49 +182,89 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
             case VillagerTask.GatherResources:
                 if (_ObjectOfInterest != null)
                 {
-                    if (Vector3.Distance(transform.position, _ObjectOfInterest.transform.position) < 2)
-                    {
-                        UseTool();
-                        _WantedResource = _ObjectOfInterest.GetComponent<WorldResource>()._ResourceType;
-                    }
-                    else
-                    {
-                        InteractWithObject(_ObjectOfInterest.GetComponent<ISelectable>());
-                    }
-
-                }
-                else
-                {
-                    switch (_WantedResource)
-                    {
-                        case ResourceType.wood:
-                            _ObjectOfInterest = _FindObject.ClosestResourceOfInterest(_FindObject._WoodSupplies,transform.position,gameObject).gameObject;
-                            break;
-                    }
-                }
+                    GatherResource();
+                } 
                 break;
+            case VillagerTask.ReturnGoods:
+                ReturnGoods();
+                break;
+            case VillagerTask.DoNothing:
+                //literally do nothing ayy
+                break;
+        }
+    }
+    void ReturnGoods()
+    {
+        ResetAllTriggers();
+        Transform _ResourceCollection = _FindObject.ClosestBuildingOfInterest(_FindObject._ResourceCollection, transform.position).transform;
+        _Nav.SetDestination(_ResourceCollection.position);
+
+        if(Vector3.Distance(transform.position,_ResourceCollection.position) < 2)
+        {
+            //Add resources to global collection
+            _Wood = 0;
+            _Task = VillagerTask.GatherResources;
+        }
+        
+    }
+    void FindClosestResource()
+    {
+        switch (_WantedResource)
+        {
+            case ResourceType.wood:
+                _ObjectOfInterest = _FindObject.ClosestResourceOfInterest(_FindObject._WoodSupplies, transform.position, gameObject).gameObject;
+                break;
+        }
+    }
+    void GatherResource()
+    {
+        if (Vector3.Distance(transform.position, _ObjectOfInterest.transform.position) < 2)
+        {
+            UseTool();
+            
+            _WantedResource = _ObjectOfInterest.GetComponent<WorldResource>()._ResourceType;
+        }
+        else
+        {
+            InteractWithObject(_ObjectOfInterest.GetComponent<ISelectable>());
         }
     }
     void SetTask()
     {
-        if (_ObjectOfInterest.GetComponent<WorldResource>())
+        if (_ObjectOfInterest != null)
         {
-            _Task = VillagerTask.GatherResources;
+            if (_ObjectOfInterest.GetComponent<WorldResource>())
+            {
+                _Task = VillagerTask.GatherResources;
+            }
+            else
+            {
+                FindClosestResource();
+            }
         }
     }
+
     public void OnGatherResource()
     {
-        if(_ObjectOfInterest != null)
+        if (_ObjectOfInterest != null)
+        {
             _ObjectOfInterest.GetComponent<ITakeDamage>().TakeDamage(5);
+            switch (_WantedResource)
+            {
+                case ResourceType.wood:
+                    _Wood += 5;
+                    break;
+            }
+        }
     }
-    public void CanUseToolCheck(string ableToUse)
+    public void CanUseToolCheck(int ableToUse)
     {
         switch (ableToUse)
         {
-            case "true":
+            case 0: //True
                 CanUseTool = true;
                 break;
-            case "false":
+            case 1: //False
                 CanUseTool = false;
                 break;
         }
