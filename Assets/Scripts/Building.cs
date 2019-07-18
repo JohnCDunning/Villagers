@@ -29,6 +29,18 @@ public class Building : MonoBehaviour,ISelectable,ITakeDamage
     {
         _AnimatedOutline.GetComponent<Animator>().SetTrigger("ShowOutline");
     }
+    public void InteractWithObject(ISelectable selectableObject)
+    {
+        
+    }
+    public void InteractWithLocation(Vector3 location)
+    {
+
+    }
+    public GameObject GetThisObject()
+    {
+        return gameObject;
+    }
     #endregion
-    
+
 }

@@ -104,18 +104,11 @@ public class FindObjectOfInterest : MonoBehaviour
                 float Distance = Vector3.Distance(VillagerPosition, _Supply.transform.position);
                 if (Distance < ClosestDistance)
                 {
-                    if (_Supply._SupplyBeingTaken == false)
-                    {
-                        ClosestDistance = Distance;
-                        _ClosestResource = _Supply;
-                    }
+                    ClosestDistance = Distance;
+                    _ClosestResource = _Supply;
+                    
                 }
             }
-        }
-        if(_ClosestResource != null)
-        {
-            _ClosestResource._VillagerTravelingToThis = Villager;
-            _ClosestResource._SupplyBeingTaken = true;
         }
         return _ClosestResource;
     }

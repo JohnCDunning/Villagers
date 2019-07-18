@@ -3,10 +3,6 @@
 public enum VillagerTask
 {
     DoNothing,
-    Gather_Wood,
-    Gather_Stone,
-    Gather_Food,
+    GatherResources,
     ReturnGoods,
-    MoveToPoint,
-    Sleep
 }

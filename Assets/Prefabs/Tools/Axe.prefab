@@ -4929,6 +4929,7 @@ GameObject:
   - component: {fileID: 8759693721198630441}
   - component: {fileID: 2531051765616097405}
   - component: {fileID: -2849435507221851282}
+  - component: {fileID: 8221044275672903844}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -5106,3 +5107,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _AudioClip: {fileID: 8300000, guid: 7c542ee49303b4343b624f497a8bd1f8, type: 3}
+--- !u!114 &8221044275672903844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7038133409663787765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f51de191e02af489b65e174ab29840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ToolType: 0

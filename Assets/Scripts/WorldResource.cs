@@ -34,10 +34,30 @@ public class WorldResource : MonoBehaviour, ISelectable,ITakeDamage
     {
         _AnimatedOutline.GetComponent<Animator>().SetTrigger("ShowOutline");
     }
+    public void InteractWithObject(ISelectable selectableObject)
+    {
+
+    }
+    public void InteractWithLocation(Vector3 location)
+    {
+
+    }
+    public GameObject GetThisObject()
+    {
+        return gameObject;
+    }
     #endregion
 
     private void Start()
     {
         _OriginalAmount = _SupplyAmount;
+    }
+    private void Update()
+    {
+        if(_SupplyAmount <= 0)
+        {
+            FindObjectOfType<FindObjectOfInterest>().DeleteWorldResource(this);
+            Destroy(gameObject);
+        }
     }
 }
