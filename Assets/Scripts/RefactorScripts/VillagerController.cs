@@ -16,6 +16,10 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     public int _Health = 100;
     public int _CarryCapacity;
     public int _Wood;
+    [Header("Audio")]
+    public AudioSource _Audio;
+    public AudioClip _WoodHit;
+    public AudioClip _StoneHit;
     [Header("Misc")]
     public GameObject _AnimatedOutline;
     public GameObject _Outline;
@@ -271,6 +275,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
             {
                 case ResourceType.wood:
                     _Wood += 5;
+                    PlaySound(_WoodHit);
                     break;
             }
         }
@@ -286,5 +291,9 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                 CanUseTool = false;
                 break;
         }
+    }
+    public void PlaySound(AudioClip _AudioClip)
+    {
+        _Audio.PlayOneShot(_AudioClip);
     }
 }
