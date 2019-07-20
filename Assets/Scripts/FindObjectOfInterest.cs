@@ -8,6 +8,7 @@ public class FindObjectOfInterest : MonoBehaviour
     [Header("Resource Lists")]
     public List<WorldResource> _WoodSupplies = new List<WorldResource>();
     public List<WorldResource> _StoneSupplies = new List<WorldResource>();
+    public List<WorldResource> _FoodSupplies = new List<WorldResource>();
     [Header("Building Lists")]
     public List<Building> _ResourceCollection = new List<Building>();
 
@@ -17,6 +18,7 @@ public class FindObjectOfInterest : MonoBehaviour
         //Clear All Lists
         _WoodSupplies.Clear();
         _StoneSupplies.Clear();
+        _FoodSupplies.Clear();
         _ResourceCollection.Clear();
 
         //Resources
@@ -32,11 +34,14 @@ public class FindObjectOfInterest : MonoBehaviour
             {
                 _StoneSupplies.Add(_resource);
             }
+            if (_resource._ResourceType == ResourceType.food)
+            {
+                _FoodSupplies.Add(_resource);
+            }
         }
         #endregion
         
         //Buildings
-        #region Find Buildings
         Building[] buildings = FindObjectsOfType<Building>();
         foreach (Building _Building in buildings)
         {
@@ -46,7 +51,7 @@ public class FindObjectOfInterest : MonoBehaviour
                 _ResourceCollection.Add(_Building);
             }
         }
-        #endregion
+   
         
     }
     #endregion
@@ -58,7 +63,7 @@ public class FindObjectOfInterest : MonoBehaviour
 
     }
    
-    #region Delete world Resource
+ 
     public void DeleteWorldResource(WorldResource _Resource)
     {
         if (_WoodSupplies.Contains(_Resource))
@@ -66,7 +71,6 @@ public class FindObjectOfInterest : MonoBehaviour
             _WoodSupplies.Remove(_Resource);
         }
     }
-    #endregion
 
     #region Find Closest world resource
     public WorldResource ClosestResourceOfInterest(List<WorldResource> _ResourceToFind,Vector3 VillagerPosition, GameObject Villager)

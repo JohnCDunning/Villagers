@@ -5,7 +5,8 @@ using UnityEngine;
 public enum ToolType
 {
     Axe,
-    Pickaxe
+    Pickaxe,
+    Basket
 }
 public class Tool : MonoBehaviour
 {

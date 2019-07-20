@@ -30,6 +30,7 @@ public class HighlightManager : MonoBehaviour
         //Highlight if hits a selectable object
         if (_RayInfo.ObjectRaycast().GetComponent<ISelectable>() != null)
         {
+           
             SelectObject(_RayInfo.ObjectRaycast().GetComponent<ISelectable>());
             return;
         }
@@ -37,7 +38,10 @@ public class HighlightManager : MonoBehaviour
         if (_UpgradeManager._BuildingUpgradeUI.GetComponent<UIMouseCheck>()._MouseEntered == false) //So clicking on UI doesnt deselect objects
         {
             if (_CurrentlySelectedObject != null)
+            {
                 _CurrentlySelectedObject.UnSelect();
+                _CurrentlySelectedObject = null;
+            }
         }
     }
     void SelectObject(ISelectable SelectableObject)

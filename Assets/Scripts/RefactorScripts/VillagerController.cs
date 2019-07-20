@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using TMPro;
 
 public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
 {
@@ -17,6 +19,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     public int _CarryCapacity;
     public int _Wood;
     public int _Stone;
+    public int _Food;
     [Header("Audio")]
     public AudioSource _Audio;
     public AudioClip _WoodHit;
@@ -25,16 +28,22 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     public GameObject _AnimatedOutline;
     public GameObject _Outline;
     public Transform _ToolSpawn;
+    public Transform _ResourceSpawn;
     public GameObject[] _AllTools;
+    public GameObject[] _SingleResource;
     private GameObject _CurrentTool;
     private WorldResource _ObjectOfInterest;
-    
-    
-    
 
-    
+    [Header("Popups")]
+    public GameObject _PopupCanvas;
+    public GameObject _WoodPopup;
+    public GameObject _StonePopup;
+    public GameObject _FoodPopup;
+    bool _ShowingPopup;
+
     private ToolType _ToolType;
     public Dictionary<ToolType, GameObject> _Tool = new Dictionary<ToolType, GameObject>();
+    public Dictionary<ResourceType, GameObject> _ResourceToCarry = new Dictionary<ResourceType, GameObject>();
 
     private bool CanUseTool = true;
 
@@ -58,7 +67,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     public void InteractWithObject(ISelectable selectableObject)
     {
         GameObject ObjectToInteractWith = selectableObject.GetThisObject();
-        if(ObjectToInteractWith != null)
+        if (ObjectToInteractWith != null)
         {
             if (ObjectToInteractWith.GetComponent<WorldResource>() != null)
             {
@@ -68,7 +77,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                 _Task = VillagerTask.GatherResources;
             }
         }
-       
+
         _Nav.destination = ObjectToInteractWith.transform.position;
 
         SetTask();
@@ -89,6 +98,10 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         //Add Tools to Dictionary
         _Tool.Add(ToolType.Axe, _AllTools[0]);
         _Tool.Add(ToolType.Pickaxe, _AllTools[1]);
+        _Tool.Add(ToolType.Basket, _AllTools[2]);
+        _ResourceToCarry.Add(ResourceType.wood, _SingleResource[0]);
+        _ResourceToCarry.Add(ResourceType.stone, _SingleResource[1]);
+        _ResourceToCarry.Add(ResourceType.food, _SingleResource[2]);
     }
     private void Update()
     {
@@ -102,7 +115,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
             RunTasks();
         }
 
-        if(_Wood > _CarryCapacity || _Stone > _CarryCapacity)
+        if (_Wood >= _CarryCapacity || _Stone >= _CarryCapacity || _Food >= _CarryCapacity)
         {
             _Task = VillagerTask.ReturnGoods;
         }
@@ -127,9 +140,17 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     #region Animation and spawning of tool
     void SpawnTool(ToolType tool)
     {
-        GameObject _NewTool = Instantiate(_Tool[tool], _ToolSpawn);
-        _NewTool.transform.localPosition = Vector3.zero; _NewTool.transform.localRotation = Quaternion.identity;
-        _CurrentTool = _NewTool;
+        GameObject NewTool = null;
+        if (tool != ToolType.Basket)
+        {
+            NewTool = Instantiate(_Tool[tool], _ToolSpawn);
+            NewTool.transform.localPosition = Vector3.zero; NewTool.transform.localRotation = Quaternion.identity;
+        }
+        else
+        {
+            NewTool = Instantiate(_Tool[tool], _ResourceSpawn);
+        }
+        _CurrentTool = NewTool;
     }
     void ToolCheck(ToolType tool)
     {
@@ -166,6 +187,10 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                         ToolCheck(ToolType.Pickaxe);
                         GetComponent<Animator>().SetTrigger("UseAxe");
                         break;
+                    case ResourceType.food:
+                        ToolCheck(ToolType.Basket);
+                        GetComponent<Animator>().SetTrigger("UseBasket");
+                        break;
                 }
             }
         }
@@ -173,6 +198,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     void ResetAllTriggers()
     {
         _Anim.ResetTrigger("UseAxe");
+        _Anim.ResetTrigger("UseBasket");
     }
     #endregion
 
@@ -219,21 +245,79 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                 break;
         }
     }
+    void DisplayResource()
+    {
+        if (_Wood > _Stone && _Wood > _Food)
+        {
+            _CurrentTool = Instantiate(_ResourceToCarry[ResourceType.wood], _ResourceSpawn);
+            
+        }
+        if(_Stone > _Wood && _Stone > _Food)
+        {
+            _CurrentTool = Instantiate(_ResourceToCarry[ResourceType.stone], _ResourceSpawn);
+            
+        }
+        if (_Food > _Wood && _Food > _Stone)
+        {
+            _CurrentTool = Instantiate(_ResourceToCarry[ResourceType.food], _ResourceSpawn);
+            
+        }
+        if (_CurrentTool != null)
+        {
+            _CurrentTool.transform.localPosition = Vector3.zero;
+        }
+    }
     void ReturnGoods()
     {
         ResetAllTriggers();
         Transform _ResourceCollection = _Manager._FindObject.ClosestBuildingOfInterest(_Manager._FindObject._ResourceCollection, transform.position).transform;
         _Nav.SetDestination(_ResourceCollection.position);
+        _Anim.SetLayerWeight(1, 1);
 
+        if(_CurrentTool != null)
+        {
+            Destroy(_CurrentTool);
+        }
+        DisplayResource();
+        
         if (Vector3.Distance(transform.position, _ResourceCollection.position) < 2)
         {
-            _Manager._CollectedResources._CollectedWood += _Wood;
-            _Manager._CollectedResources._CollectedStone += _Stone;
-            _Wood = 0;
-            _Stone = 0;
+            if (!_ShowingPopup)
+            {
+                StartCoroutine(ShowPopup());
+            }
+            Destroy(_CurrentTool);
             _Task = VillagerTask.GatherResources;
+            _Anim.SetLayerWeight(1, 0);
         }
-
+    }
+    IEnumerator ShowPopup()
+    {
+        _ShowingPopup = true;
+        if (_Wood > 0)
+        {
+            yield return new WaitForSeconds(0.5f);
+            _Manager._CollectedResources._CollectedWood += _Wood;
+            Instantiate(_WoodPopup, _PopupCanvas.transform);
+        }
+        
+        if (_Stone > 0)
+        {
+            yield return new WaitForSeconds(0.5f);
+            _Manager._CollectedResources._CollectedStone += _Stone;
+            Instantiate(_StonePopup, _PopupCanvas.transform);
+        }
+        
+        if (_Food > 0)
+        {
+            yield return new WaitForSeconds(0.5f);
+            _Manager._CollectedResources._CollectedStone += _Food;
+            Instantiate(_FoodPopup, _PopupCanvas.transform);
+        }
+        _Wood = 0;
+        _Stone = 0;
+        _Food = 0;
+        _ShowingPopup = false;
     }
     void FindClosestResource()
     {
@@ -244,12 +328,25 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         switch (_WantedResource)
         {
             case ResourceType.wood:
-                _ObjectOfInterest = _Manager._FindObject.ClosestResourceOfInterest(_Manager._FindObject._WoodSupplies, transform.position, gameObject);
-                _ObjectOfInterest._SupplyBeingTaken = true;
+                if(_Manager._FindObject.ClosestResourceOfInterest(_Manager._FindObject._WoodSupplies, transform.position, gameObject) != null)
+                {
+                    _ObjectOfInterest = _Manager._FindObject.ClosestResourceOfInterest(_Manager._FindObject._WoodSupplies, transform.position, gameObject);
+                    _ObjectOfInterest._SupplyBeingTaken = true;
+                }
                 break;
             case ResourceType.stone:
-                _ObjectOfInterest = _Manager._FindObject.ClosestResourceOfInterest(_Manager._FindObject._StoneSupplies, transform.position, gameObject);
-                _ObjectOfInterest._SupplyBeingTaken = true;
+                if(_Manager._FindObject.ClosestResourceOfInterest(_Manager._FindObject._StoneSupplies, transform.position, gameObject))
+                {
+                    _ObjectOfInterest = _Manager._FindObject.ClosestResourceOfInterest(_Manager._FindObject._StoneSupplies, transform.position, gameObject);
+                    _ObjectOfInterest._SupplyBeingTaken = true;
+                }
+                break;
+            case ResourceType.food:
+                if (_Manager._FindObject.ClosestResourceOfInterest(_Manager._FindObject._FoodSupplies, transform.position, gameObject))
+                {
+                    _ObjectOfInterest = _Manager._FindObject.ClosestResourceOfInterest(_Manager._FindObject._FoodSupplies, transform.position, gameObject);
+                    _ObjectOfInterest._SupplyBeingTaken = true;
+                }
                 break;
         }
         
@@ -298,6 +395,11 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                     _Stone += 5;
                     _Audio.pitch = Random.Range(0.8f, 1.2f);
                     PlaySound(_StoneHit);
+                    break;
+                case ResourceType.food:
+                    _Food += 5;
+                    _Audio.pitch = Random.Range(0.8f, 1.2f);
+                    PlaySound(_WoodHit);
                     break;
             }
         }
