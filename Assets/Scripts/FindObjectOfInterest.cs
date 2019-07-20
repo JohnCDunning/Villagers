@@ -7,6 +7,7 @@ public class FindObjectOfInterest : MonoBehaviour
    
     [Header("Resource Lists")]
     public List<WorldResource> _WoodSupplies = new List<WorldResource>();
+    public List<WorldResource> _StoneSupplies = new List<WorldResource>();
     [Header("Building Lists")]
     public List<Building> _ResourceCollection = new List<Building>();
 
@@ -15,6 +16,7 @@ public class FindObjectOfInterest : MonoBehaviour
     {
         //Clear All Lists
         _WoodSupplies.Clear();
+        _StoneSupplies.Clear();
         _ResourceCollection.Clear();
 
         //Resources
@@ -25,6 +27,10 @@ public class FindObjectOfInterest : MonoBehaviour
             if (_resource._ResourceType == ResourceType.wood)
             {
                 _WoodSupplies.Add(_resource);
+            }
+            if (_resource._ResourceType == ResourceType.stone)
+            {
+                _StoneSupplies.Add(_resource);
             }
         }
         #endregion

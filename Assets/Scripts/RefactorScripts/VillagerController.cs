@@ -16,6 +16,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     public int _Health = 100;
     public int _CarryCapacity;
     public int _Wood;
+    public int _Stone;
     [Header("Audio")]
     public AudioSource _Audio;
     public AudioClip _WoodHit;
@@ -59,11 +60,13 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         GameObject ObjectToInteractWith = selectableObject.GetThisObject();
         if(ObjectToInteractWith != null)
         {
-            _WantedResource = ObjectToInteractWith.GetComponent<WorldResource>()._ResourceType;
-            FindClosestResource();
-            
-            _Task = VillagerTask.GatherResources;
-            
+            if (ObjectToInteractWith.GetComponent<WorldResource>() != null)
+            {
+                _WantedResource = ObjectToInteractWith.GetComponent<WorldResource>()._ResourceType;
+                FindClosestResource();
+
+                _Task = VillagerTask.GatherResources;
+            }
         }
        
         _Nav.destination = ObjectToInteractWith.transform.position;
@@ -85,7 +88,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     {
         //Add Tools to Dictionary
         _Tool.Add(ToolType.Axe, _AllTools[0]);
-        Debug.Log(_Tool[ToolType.Axe]);
+        _Tool.Add(ToolType.Pickaxe, _AllTools[1]);
     }
     private void Update()
     {
@@ -99,7 +102,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
             RunTasks();
         }
 
-        if(_Wood > _CarryCapacity)
+        if(_Wood > _CarryCapacity || _Stone > _CarryCapacity)
         {
             _Task = VillagerTask.ReturnGoods;
         }
@@ -157,6 +160,10 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                 {
                     case ResourceType.wood:
                         ToolCheck(ToolType.Axe);
+                        GetComponent<Animator>().SetTrigger("UseAxe");
+                        break;
+                    case ResourceType.stone:
+                        ToolCheck(ToolType.Pickaxe);
                         GetComponent<Animator>().SetTrigger("UseAxe");
                         break;
                 }
@@ -220,8 +227,10 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
 
         if (Vector3.Distance(transform.position, _ResourceCollection.position) < 2)
         {
-            //Add resources to global collection
+            _Manager._CollectedResources._CollectedWood += _Wood;
+            _Manager._CollectedResources._CollectedStone += _Stone;
             _Wood = 0;
+            _Stone = 0;
             _Task = VillagerTask.GatherResources;
         }
 
@@ -238,6 +247,10 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                 _ObjectOfInterest = _Manager._FindObject.ClosestResourceOfInterest(_Manager._FindObject._WoodSupplies, transform.position, gameObject);
                 _ObjectOfInterest._SupplyBeingTaken = true;
                 break;
+            case ResourceType.stone:
+                _ObjectOfInterest = _Manager._FindObject.ClosestResourceOfInterest(_Manager._FindObject._StoneSupplies, transform.position, gameObject);
+                _ObjectOfInterest._SupplyBeingTaken = true;
+                break;
         }
         
     }
@@ -247,6 +260,9 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         {
             if (Vector3.Distance(transform.position, _ObjectOfInterest.transform.position) < 2)
             {
+                Quaternion rotation = Quaternion.LookRotation(_ObjectOfInterest.transform.position - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 1);
+
                 UseTool();
             }
             else
@@ -275,7 +291,13 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
             {
                 case ResourceType.wood:
                     _Wood += 5;
+                    _Audio.pitch = Random.Range(0.8f, 1.2f);
                     PlaySound(_WoodHit);
+                    break;
+                case ResourceType.stone:
+                    _Stone += 5;
+                    _Audio.pitch = Random.Range(0.8f, 1.2f);
+                    PlaySound(_StoneHit);
                     break;
             }
         }
