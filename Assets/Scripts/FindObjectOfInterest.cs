@@ -7,10 +7,7 @@ public class FindObjectOfInterest : MonoBehaviour
    
     [Header("Resource Lists")]
     public List<WorldResource> _WoodSupplies = new List<WorldResource>();
-    public List<WorldResource> _StoneSupplies = new List<WorldResource>();
-    public List<WorldResource> _FoodSupplies = new List<WorldResource>();
     [Header("Building Lists")]
-    public List<Building> _Houses = new List<Building>();
     public List<Building> _ResourceCollection = new List<Building>();
 
     #region RefreshAllLists
@@ -18,10 +15,6 @@ public class FindObjectOfInterest : MonoBehaviour
     {
         //Clear All Lists
         _WoodSupplies.Clear();
-        _StoneSupplies.Clear();
-        _FoodSupplies.Clear();
-
-        _Houses.Clear();
         _ResourceCollection.Clear();
 
         //Resources
@@ -33,14 +26,6 @@ public class FindObjectOfInterest : MonoBehaviour
             {
                 _WoodSupplies.Add(_resource);
             }
-            if (_resource._ResourceType == ResourceType.stone)
-            {
-                _StoneSupplies.Add(_resource);
-            }
-            if (_resource._ResourceType == ResourceType.food)
-            {
-                _FoodSupplies.Add(_resource);
-            }
         }
         #endregion
         
@@ -49,11 +34,6 @@ public class FindObjectOfInterest : MonoBehaviour
         Building[] buildings = FindObjectsOfType<Building>();
         foreach (Building _Building in buildings)
         {
-            //Add building to houses list
-            if (_Building._BuildingType == BuildingType.House)
-            {
-                _Houses.Add(_Building);
-            }
             //Add building to resource collection list
             if (_Building._BuildingType == BuildingType.ResourceCollection)
             {
@@ -79,14 +59,6 @@ public class FindObjectOfInterest : MonoBehaviour
         {
             _WoodSupplies.Remove(_Resource);
         }
-        if (_StoneSupplies.Contains(_Resource))
-        {
-            _StoneSupplies.Remove(_Resource);
-        }
-        if (_FoodSupplies.Contains(_Resource))
-        {
-            _FoodSupplies.Remove(_Resource);
-        }
     }
     #endregion
 
@@ -98,15 +70,20 @@ public class FindObjectOfInterest : MonoBehaviour
 
         foreach(WorldResource _Supply in _ResourceToFind)
         {
-            
             if (_Supply != null)
             {
                 float Distance = Vector3.Distance(VillagerPosition, _Supply.transform.position);
                 if (Distance < ClosestDistance)
                 {
-                    ClosestDistance = Distance;
-                    _ClosestResource = _Supply;
-                    
+                    if (_Supply._SupplyBeingTaken == true)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        ClosestDistance = Distance;
+                        _ClosestResource = _Supply;
+                    }
                 }
             }
         }

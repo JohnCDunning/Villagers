@@ -11,8 +11,8 @@ public class WorldResource : MonoBehaviour, ISelectable,ITakeDamage
     public int _SupplyAmount;
     private int _OriginalAmount;
 
-    [HideInInspector] public bool _SupplyBeingTaken = false;
-    [HideInInspector] public GameObject _VillagerTravelingToThis;
+    public bool _SupplyBeingTaken = false;
+    public GameObject _VillagerTravelingToThis;
 
     public GameObject _AnimatedOutline;
     public GameObject _Outline;
@@ -60,4 +60,18 @@ public class WorldResource : MonoBehaviour, ISelectable,ITakeDamage
             Destroy(gameObject);
         }
     }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        if (_SupplyBeingTaken == true)
+        {
+            Gizmos.color = Color.red;
+        }
+        else
+        {
+            Gizmos.color = Color.blue;
+        }
+        Gizmos.DrawSphere(transform.position, 0.5f);
+    }
 }
+

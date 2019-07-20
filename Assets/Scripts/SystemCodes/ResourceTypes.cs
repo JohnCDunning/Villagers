@@ -2,5 +2,6 @@
 {
     wood,
     stone,
-    food
+    food,
+    nothing
 }
