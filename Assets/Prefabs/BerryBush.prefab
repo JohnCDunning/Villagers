@@ -76,7 +76,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3729475238076328144}
   m_LocalRotation: {x: 0.7071069, y: -0.000000014901161, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: 2.14, z: 0}
+  m_LocalPosition: {x: 0, y: 0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8555560795024368805}
@@ -95,7 +95,7 @@ Projector:
   m_FarClipPlane: 50
   m_FieldOfView: 47
   m_AspectRatio: 1
-  m_Orthographic: 1
+  m_Orthographic: 0
   m_OrthographicSize: 0.00000001
   m_Material: {fileID: 2100000, guid: c8c80c5b03f5c7e40b07eb2170e667e5, type: 2}
   m_IgnoreLayers:
@@ -244,7 +244,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.54, y: 0.845, z: 0.54}
+  m_Extents: {x: 0.73, y: 0.845, z: 0.73}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1

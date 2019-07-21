@@ -55,7 +55,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -220,7 +220,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.10038072, y: 0.000004246831, z: 0}
+  m_ConnectedAnchor: {x: 0.100390464, y: 0.000004246831, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -514,7 +514,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.2062016, y: -0.20398855, z: 0}
+  m_ConnectedAnchor: {x: 0.20619534, y: -0.20398855, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -685,7 +685,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.20364322, y: -0.22554731, z: 0}
+  m_ConnectedAnchor: {x: -0.20365573, y: -0.22554731, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -825,7 +825,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.18886422, y: 0.13364309, z: -0.029306412}
+  m_ConnectedAnchor: {x: -0.18885471, y: 0.13364309, z: -0.029306412}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1220,7 +1220,7 @@ MonoBehaviour:
   _Nav: {fileID: 1114911414943793034}
   _Anim: {fileID: 1114911414943793036}
   _Health: 1
-  _CarryCapacity: 10
+  _CarryCapacity: 30
   _Wood: 0
   _Stone: 0
   _Food: 0
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   - {fileID: 1236763876940056995, guid: 95914727e3833b54cbc8aea2c134e03b, type: 3}
   - {fileID: 5329554379890042812, guid: 67a51cbbbdaeff14aa78eace6f654c71, type: 3}
   - {fileID: 6928702792880924380, guid: 209e5f33110a1ab45b17b3842fccabb7, type: 3}
-  _PopupCanvas: {fileID: 0}
+  _PopupCanvas: {fileID: 200239441}
   _WoodPopup: {fileID: 882438774500794566, guid: 67b011545c47d1c48b1f83161463bb71,
     type: 3}
   _StonePopup: {fileID: 5174948275939249585, guid: 82ca3f0b6c2d61749914de64b9bc1240,
@@ -1439,7 +1439,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.23999064, y: 0.13364309, z: 0}
+  m_ConnectedAnchor: {x: 0.2399783, y: 0.13364309, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1580,7 +1580,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000000014912035, y: -0.30312455, z: 0}
+  m_ConnectedAnchor: {x: -0.000011941789, y: -0.30312455, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1753,7 +1753,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000000014912035, y: 0.303124, z: 0}
+  m_ConnectedAnchor: {x: -0.000011941789, y: 0.303124, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1861,7 +1861,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.100380465, y: 0.00000043213367, z: 0.00000021979213}
+  m_ConnectedAnchor: {x: -0.10039334, y: 0.00000043213367, z: 0.00000021979213}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -2076,7 +2076,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000000014912035, y: 0.3062505, z: 0}
+  m_ConnectedAnchor: {x: -0.000011941789, y: 0.3062505, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:

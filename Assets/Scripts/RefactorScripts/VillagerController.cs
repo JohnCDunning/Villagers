@@ -71,6 +71,11 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         {
             if (ObjectToInteractWith.GetComponent<WorldResource>() != null)
             {
+                if(_CurrentTool != null)
+                {
+                    Destroy(_CurrentTool);
+                }
+                ResetAllTriggers();
                 _WantedResource = ObjectToInteractWith.GetComponent<WorldResource>()._ResourceType;
                 FindClosestResource();
 
@@ -92,7 +97,10 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         return gameObject;
     }
     #endregion
-
+    private void Awake()
+    {
+        _Manager = FindObjectOfType<Manager>();
+    }
     private void Start()
     {
         //Add Tools to Dictionary
@@ -298,21 +306,24 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         {
             yield return new WaitForSeconds(0.5f);
             _Manager._CollectedResources._CollectedWood += _Wood;
-            Instantiate(_WoodPopup, _PopupCanvas.transform);
+            GameObject popup = Instantiate(_WoodPopup, _PopupCanvas.transform);
+            popup.GetComponentInChildren<TextMeshProUGUI>().text = _Wood.ToString();
         }
         
         if (_Stone > 0)
         {
             yield return new WaitForSeconds(0.5f);
             _Manager._CollectedResources._CollectedStone += _Stone;
-            Instantiate(_StonePopup, _PopupCanvas.transform);
+            GameObject popup = Instantiate(_StonePopup, _PopupCanvas.transform);
+            popup.GetComponentInChildren<TextMeshProUGUI>().text = _Stone.ToString();
         }
         
         if (_Food > 0)
         {
             yield return new WaitForSeconds(0.5f);
-            _Manager._CollectedResources._CollectedStone += _Food;
-            Instantiate(_FoodPopup, _PopupCanvas.transform);
+            _Manager._CollectedResources._CollectedFood += _Food;
+            GameObject popup = Instantiate(_FoodPopup, _PopupCanvas.transform);
+            popup.GetComponentInChildren<TextMeshProUGUI>().text = _Food.ToString();
         }
         _Wood = 0;
         _Stone = 0;
@@ -349,7 +360,6 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                 }
                 break;
         }
-        
     }
     void GatherResource()
     {
