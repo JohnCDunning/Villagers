@@ -6,10 +6,15 @@ public class Animal : MonoBehaviour
 {
     public Transform _Target;
     public NavMeshAgent _Nav;
-  
-    // Update is called once per frame
-    void Update()
+
+    private void Start()
     {
-        _Nav.SetDestination(_Target.position);
+        StartCoroutine(RandomMove());
+    }
+    IEnumerator RandomMove()
+    {
+        _Nav.destination = new Vector3(transform.position.x + Random.Range(-10, 10), transform.position.y, transform.position.z + Random.Range(-10, 10));
+        yield return new WaitForSeconds(Random.Range(2,7));
+        StartCoroutine(RandomMove());
     }
 }

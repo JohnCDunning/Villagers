@@ -22,4 +22,5 @@ MonoBehaviour:
   _WoodCost: 100
   _StoneCost: 0
   _FoodCost: 20
-  _ConstructionSize: 9
+  _ConstructionSize: 8
+  _Upgrades: []
