@@ -220,7 +220,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.100390464, y: 0.000004246831, z: 0}
+  m_ConnectedAnchor: {x: 0.100384265, y: 0.000004246831, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -514,7 +514,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.20619534, y: -0.20398855, z: 0}
+  m_ConnectedAnchor: {x: 0.20618914, y: -0.20398855, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -685,7 +685,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.20365573, y: -0.22554731, z: 0}
+  m_ConnectedAnchor: {x: -0.20363142, y: -0.22554731, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -825,7 +825,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.18885471, y: 0.13364309, z: -0.029306412}
+  m_ConnectedAnchor: {x: -0.18886091, y: 0.13364309, z: -0.029306412}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1227,6 +1227,7 @@ MonoBehaviour:
   _Audio: {fileID: 1114911414943793039}
   _WoodHit: {fileID: 8300000, guid: 7c542ee49303b4343b624f497a8bd1f8, type: 3}
   _StoneHit: {fileID: 8300000, guid: 72f7fc67548dcbe4bacc91cc44c22896, type: 3}
+  _Death: {fileID: 8300000, guid: cd87b92dd9b919c478e058aecdffdf0b, type: 3}
   _AnimatedOutline: {fileID: 1114911414838771745}
   _Outline: {fileID: 1114911413845425703}
   _ToolSpawn: {fileID: 1114911414868476568}
@@ -1239,6 +1240,7 @@ MonoBehaviour:
   - {fileID: 1236763876940056995, guid: 95914727e3833b54cbc8aea2c134e03b, type: 3}
   - {fileID: 5329554379890042812, guid: 67a51cbbbdaeff14aa78eace6f654c71, type: 3}
   - {fileID: 6928702792880924380, guid: 209e5f33110a1ab45b17b3842fccabb7, type: 3}
+  _ObjectOfInterest: {fileID: 0}
   _PopupCanvas: {fileID: 200239441}
   _WoodPopup: {fileID: 882438774500794566, guid: 67b011545c47d1c48b1f83161463bb71,
     type: 3}
@@ -1439,7 +1441,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.2399783, y: 0.13364309, z: 0}
+  m_ConnectedAnchor: {x: 0.24000262, y: 0.13364309, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1580,7 +1582,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.000011941789, y: -0.30312455, z: 0}
+  m_ConnectedAnchor: {x: 0.000012376906, y: -0.30312455, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1753,7 +1755,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.000011941789, y: 0.303124, z: 0}
+  m_ConnectedAnchor: {x: 0.000012376906, y: 0.303124, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1861,7 +1863,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.10039334, y: 0.00000043213367, z: 0.00000021979213}
+  m_ConnectedAnchor: {x: -0.10036902, y: 0.00000043213367, z: 0.00000021979213}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -2076,7 +2078,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.000011941789, y: 0.3062505, z: 0}
+  m_ConnectedAnchor: {x: 0.000012376906, y: 0.3062505, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:

@@ -8,7 +8,7 @@ public class HighlightManager : MonoBehaviour
     public RaycastInfo _RayInfo;
     public UpgradeManager _UpgradeManager;
 
-    ISelectable _CurrentlySelectedObject;
+    public ISelectable _CurrentlySelectedObject;
     private void Update()
     {
         if (_Input.LeftMouseDown())

@@ -24,6 +24,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     public AudioSource _Audio;
     public AudioClip _WoodHit;
     public AudioClip _StoneHit;
+    public AudioClip _Death;
     [Header("Misc")]
     public GameObject _AnimatedOutline;
     public GameObject _Outline;
@@ -32,7 +33,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     public GameObject[] _AllTools;
     public GameObject[] _SingleResource;
     private GameObject _CurrentTool;
-    private WorldResource _ObjectOfInterest;
+    [HideInInspector]public WorldResource _ObjectOfInterest;
 
     [Header("Popups")]
     public GameObject _PopupCanvas;
@@ -46,7 +47,8 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     public Dictionary<ResourceType, GameObject> _ResourceToCarry = new Dictionary<ResourceType, GameObject>();
 
     private bool CanUseTool = true;
-
+    private bool Dead = false;
+   
     #region Interfaces
     public void TakeDamage(int damage)
     {
@@ -220,6 +222,11 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
 
     void KillVillager()
     {
+        if (Dead == false)
+        {
+            _Audio.PlayOneShot(_Death);
+            Dead = true;
+        }
         Rigidbody[] rbs;
         rbs = GetComponentsInChildren<Rigidbody>();
         foreach (Rigidbody rb in rbs)
@@ -231,7 +238,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         _Anim.enabled = false;
     }
 
-    void RunTasks()
+    public void RunTasks()
     {
         switch (_Task)
         {
@@ -393,9 +400,11 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     {
         if (_ObjectOfInterest != null)
         {
+            _Health -= 10;
             _ObjectOfInterest.GetComponent<ITakeDamage>().TakeDamage(5);
             switch (_WantedResource)
             {
+                
                 case ResourceType.wood:
                     _Wood += 5;
                     _Audio.pitch = Random.Range(0.8f, 1.2f);

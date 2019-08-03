@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5174948275144896090}
   - component: {fileID: 5174948275144896092}
   - component: {fileID: 5174948275144896091}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,8 +171,8 @@ GameObject:
   - component: {fileID: 5471329744866620028}
   - component: {fileID: 7916551194928381245}
   - component: {fileID: 5471329744866620027}
-  m_Layer: 5
-  m_Name: StonePopup 1
+  m_Layer: 9
+  m_Name: StonePopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 5471329745439503386}
   - component: {fileID: 5471329745439503384}
   - component: {fileID: 5471329745439503385}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Resource
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,13 +14,23 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //RotateCamLeft
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(Vector3.down * 60 * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.Rotate(Vector3.up * 60 * Time.deltaTime);
+        }
         #region Camera Movement
-        CamHeight = Input.mouseScrollDelta.y * 100 * Time.deltaTime;
+        CamHeight = -Input.mouseScrollDelta.y * 100 * Time.deltaTime;
 
         transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * 10 * Time.deltaTime;
         
         float zpos = transform.GetChild(0).transform.localPosition.z;
         #endregion
+
         #region Locking Camera Zoom
         //Cant go below or further than set height when zooming in camera;
         if (zpos > 18)
@@ -28,7 +38,7 @@ public class InputManager : MonoBehaviour
             if (CamHeight < 0)
             {
               
-                transform.GetChild(0).transform.localPosition += new Vector3(0, 0, Mathf.Clamp(CamHeight, -39f, 19f));
+                transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f), 0);
             }
         }
         if (zpos < -30)
@@ -36,15 +46,16 @@ public class InputManager : MonoBehaviour
             if (CamHeight > 0)
             {
 
-                transform.GetChild(0).transform.localPosition += new Vector3(0, 0, Mathf.Clamp(CamHeight, -39f, 19f));
+                transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f), 0);
             }
         }
         if (zpos < 18 && zpos > -30f)
         {
-            transform.GetChild(0).transform.localPosition += new Vector3(0, 0, Mathf.Clamp(CamHeight, -39f, 19f));
+            transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f),0);
         }
         #endregion
     }
+    
     public bool LeftMouseDown()
     {
         if (Input.GetMouseButton(0))

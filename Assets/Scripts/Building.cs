@@ -28,10 +28,22 @@ public class Building : MonoBehaviour,ISelectable,ITakeDamage
     public void InteractSelect()
     {
         _AnimatedOutline.GetComponent<Animator>().SetTrigger("ShowOutline");
+
+        if (_BuildingType == BuildingType.Farm)
+        {
+           // HighlightManager highlight = FindObjectOfType<HighlightManager>();
+            //if (highlight._CurrentlySelectedObject.GetThisObject().GetComponent<VillagerController>())
+           // {
+           //     VillagerController Villager = highlight._CurrentlySelectedObject.GetThisObject().GetComponent<VillagerController>();
+           //     
+           //     Villager._WantedResource = ResourceType.food;
+           //     Villager._Task = VillagerTask.GatherResources;
+           // }
+        }
     }
     public void InteractWithObject(ISelectable selectableObject)
     {
-        
+       
     }
     public void InteractWithLocation(Vector3 location)
     {
