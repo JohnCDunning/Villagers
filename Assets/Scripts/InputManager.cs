@@ -15,20 +15,16 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         //RotateCamLeft
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.LeftAlt))
         {
-            transform.Rotate(Vector3.down * 60 * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            transform.Rotate(Vector3.up * 60 * Time.deltaTime);
+            transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X") * 100 *Time.deltaTime,0));
         }
         #region Camera Movement
         CamHeight = -Input.mouseScrollDelta.y * 100 * Time.deltaTime;
-
+      
         transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * 10 * Time.deltaTime;
         
-        float zpos = transform.GetChild(0).transform.localPosition.z;
+        float zpos = transform.GetChild(0).transform.localPosition.y;
         #endregion
 
         #region Locking Camera Zoom
@@ -41,7 +37,7 @@ public class InputManager : MonoBehaviour
                 transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f), 0);
             }
         }
-        if (zpos < -30)
+        if (zpos < -10)
         {
             if (CamHeight > 0)
             {
@@ -49,7 +45,7 @@ public class InputManager : MonoBehaviour
                 transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f), 0);
             }
         }
-        if (zpos < 18 && zpos > -30f)
+        if (zpos < 18 && zpos > -10)
         {
             transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f),0);
         }

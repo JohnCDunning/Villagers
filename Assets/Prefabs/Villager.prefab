@@ -98,6 +98,36 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &479280297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479280298}
+  m_Layer: 0
+  m_Name: WeaponSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479280298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479280297}
+  m_LocalRotation: {x: 0.693831, y: 0.19328089, z: 0.24401757, w: 0.6493816}
+  m_LocalPosition: {x: -0.087072305, y: 0.00036834145, z: -0.032564502}
+  m_LocalScale: {x: 0.5418402, y: 0.5418405, z: 0.5418404}
+  m_Children: []
+  m_Father: {fileID: 1114911414623948358}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 60.182003, y: 98.740005, z: 99.27801}
 --- !u!1 &1114911413452734058
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +250,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.100384265, y: 0.000004246831, z: 0}
+  m_ConnectedAnchor: {x: 0.100384265, y: 0.0000042021275, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -777,7 +807,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114911414424341773}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.18886422, y: 0.13364266, z: -0.029306632}
+  m_LocalPosition: {x: -0.18886422, y: 0.1336427, z: -0.02930663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1114911415256369165}
@@ -946,7 +976,8 @@ Transform:
   m_LocalRotation: {x: -0.00032975638, y: 0.05231189, z: -0.06459206, w: 0.99653965}
   m_LocalPosition: {x: 0.08090722, y: -0.08120443, z: -0.004469018}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 479280298}
   m_Father: {fileID: 1114911413994842531}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1215,11 +1246,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Task: 0
-  _WantedResource: 3
+  _WantedGoal: 4
   _Manager: {fileID: 0}
   _Nav: {fileID: 1114911414943793034}
   _Anim: {fileID: 1114911414943793036}
-  _Health: 1
+  _Health: 100
   _CarryCapacity: 30
   _Wood: 0
   _Stone: 0
@@ -1231,11 +1262,13 @@ MonoBehaviour:
   _AnimatedOutline: {fileID: 1114911414838771745}
   _Outline: {fileID: 1114911413845425703}
   _ToolSpawn: {fileID: 1114911414868476568}
+  _WeaponSpawn: {fileID: 479280298}
   _ResourceSpawn: {fileID: 1114911413540779360}
   _AllTools:
   - {fileID: 7038133409663787765, guid: c5145b6916458f2498d11ea769d6c9f0, type: 3}
   - {fileID: 7038133409663787765, guid: be1946842500ce64e94775b9f1cc5759, type: 3}
   - {fileID: 2319949381686342546, guid: 0abb079c3425a804990414ea9c699a93, type: 3}
+  - {fileID: 7038133409663787765, guid: a59cbdf1e71e75e45b10879b6bcf01d6, type: 3}
   _SingleResource:
   - {fileID: 1236763876940056995, guid: 95914727e3833b54cbc8aea2c134e03b, type: 3}
   - {fileID: 5329554379890042812, guid: 67a51cbbbdaeff14aa78eace6f654c71, type: 3}
@@ -1407,7 +1440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114911414944789943}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.23999065, y: 0.13364266, z: 0}
+  m_LocalPosition: {x: 0.23999065, y: 0.1336427, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1114911413626790781}
@@ -1863,7 +1896,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.10036902, y: 0.00000043213367, z: 0.00000021979213}
+  m_ConnectedAnchor: {x: -0.10036902, y: 0.0000003874302, z: 0.00000021792948}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:

@@ -3,5 +3,6 @@
     wood,
     stone,
     food,
+    combat,
     nothing
 }
