@@ -35,14 +35,14 @@ public class HighlightManager : MonoBehaviour
             return;
         }
         //Unselect if hits nothing
-        if (_UpgradeManager._BuildingUpgradeUI.GetComponent<UIMouseCheck>()._MouseEntered == false) //So clicking on UI doesnt deselect objects
-        {
+        //if (_UpgradeManager._BuildingUpgradeUI.GetComponent<UIMouseCheck>()._MouseEntered == false) //So clicking on UI doesnt deselect objects
+        //{
             if (_CurrentlySelectedObject != null)
             {
                 _CurrentlySelectedObject.UnSelect();
                 _CurrentlySelectedObject = null;
             }
-        }
+        //}
     }
     void SelectObject(ISelectable SelectableObject)
     {
