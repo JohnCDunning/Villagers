@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1114911414943793033, guid: a031c939637dc604b8a99832831ee895,
         type: 3}
       propertyPath: m_Name
-      value: VillagerEnemy (2)
+      value: VillagerEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 1114911414943793032, guid: a031c939637dc604b8a99832831ee895,
         type: 3}
@@ -70,12 +70,12 @@ PrefabInstance:
     - target: {fileID: 1114911414943793037, guid: a031c939637dc604b8a99832831ee895,
         type: 3}
       propertyPath: _Task
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1114911414943793037, guid: a031c939637dc604b8a99832831ee895,
         type: 3}
       propertyPath: _WantedGoal
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1114911415052132704, guid: a031c939637dc604b8a99832831ee895,
         type: 3}
