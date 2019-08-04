@@ -33,10 +33,13 @@ public class HighlightManager : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                _MultiSelectedVillagers.Add(_RayInfo.ObjectRaycast().GetComponent<ISelectable>());
-                foreach (ISelectable selectable in _MultiSelectedVillagers)
+                if (_RayInfo.ObjectRaycast().GetComponent<TeamSide>()._team == Team.player)
                 {
-                    SelectObject(selectable, false);
+                    _MultiSelectedVillagers.Add(_RayInfo.ObjectRaycast().GetComponent<ISelectable>());
+                    foreach (ISelectable selectable in _MultiSelectedVillagers)
+                    {
+                        SelectObject(selectable, false);
+                    }
                 }
                 return;
             }
@@ -46,8 +49,14 @@ public class HighlightManager : MonoBehaviour
             }
             _MultiSelectedVillagers.Clear();
             _CurrentlySelectedObject = null;
-             SelectObject(_RayInfo.ObjectRaycast().GetComponent<ISelectable>(),true);
-            _MultiSelectedVillagers.Add(_RayInfo.ObjectRaycast().GetComponent<ISelectable>());
+            if (_RayInfo.ObjectRaycast().GetComponent<TeamSide>() != null)
+            {
+                if (_RayInfo.ObjectRaycast().GetComponent<TeamSide>()._team == Team.player)
+                {
+                    SelectObject(_RayInfo.ObjectRaycast().GetComponent<ISelectable>(), true);
+                    _MultiSelectedVillagers.Add(_RayInfo.ObjectRaycast().GetComponent<ISelectable>());
+                }
+            }
             return;
         }
         if (_CurrentlySelectedObject != null)
@@ -99,6 +108,10 @@ public class HighlightManager : MonoBehaviour
         if (_CurrentlySelectedObject != null)
         {
             _CurrentlySelectedObject.InteractWithLocation(_RayInfo.LocationToBuild());
+            foreach (ISelectable selectable in _MultiSelectedVillagers)
+            {
+                selectable.InteractWithLocation(_RayInfo.LocationToBuild());
+            }
         }
     }
     

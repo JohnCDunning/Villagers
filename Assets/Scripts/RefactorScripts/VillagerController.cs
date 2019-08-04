@@ -69,37 +69,41 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     }
     public void InteractWithObject(ISelectable selectableObject)
     {
-        if (selectableObject != this)
+        if (selectableObject != null)
         {
-            GameObject ObjectToInteractWith = selectableObject.GetThisObject();
-            if (ObjectToInteractWith != null)
+            if (selectableObject != this)
             {
-                if (ObjectToInteractWith.GetComponent<WorldResource>() != null)
+                GameObject ObjectToInteractWith = selectableObject.GetThisObject();
+                if (ObjectToInteractWith != null)
                 {
-                    if (_CurrentTool != null)
+                    if (ObjectToInteractWith.GetComponent<WorldResource>() != null)
                     {
-                        Destroy(_CurrentTool);
+                        if (_CurrentTool != null)
+                        {
+                            Destroy(_CurrentTool);
+                        }
+                        ResetAllTriggers();
+                        _WantedGoal = ObjectToInteractWith.GetComponent<WorldResource>()._ResourceType;
+                        FindClosestResource();
+
+                        _Task = VillagerTask.GatherResources;
                     }
-                    ResetAllTriggers();
-                    _WantedGoal = ObjectToInteractWith.GetComponent<WorldResource>()._ResourceType;
-                    FindClosestResource();
 
-                    _Task = VillagerTask.GatherResources;
+                    if (ObjectToInteractWith.GetComponent<VillagerController>() || ObjectToInteractWith.GetComponent<Animal>())
+                    {
+                        FreeWorldResource();
+                        _Task = VillagerTask.Combat;
+                        _WantedGoal = ResourceType.combat;
+                        _ObjectOfInterest = ObjectToInteractWith;
+                    }
                 }
 
-                if (ObjectToInteractWith.GetComponent<VillagerController>())
+                if (Alive())
                 {
-                    _Task = VillagerTask.Combat;
-                    _WantedGoal = ResourceType.combat;
-                    _ObjectOfInterest = ObjectToInteractWith;
+                    _Nav.destination = ObjectToInteractWith.transform.position;
+
+                    SetTask();
                 }
-            }
-
-            if (Alive())
-            {
-                _Nav.destination = ObjectToInteractWith.transform.position;
-
-                SetTask();
             }
         }
     }
@@ -136,9 +140,30 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         {
             if (_ObjectOfInterest != null)
             {
-                if (_ObjectOfInterest.GetComponent<VillagerController>().enabled == false)
+                
+                if (_ObjectOfInterest.GetComponent<VillagerController>())
                 {
-                    _ObjectOfInterest = null;
+                    if (_ObjectOfInterest.GetComponent<VillagerController>().enabled == false)
+                    {
+                        _ObjectOfInterest = null;
+                    }
+                }
+                if (_ObjectOfInterest != null)
+                {
+                    if (_ObjectOfInterest.GetComponent<Animal>() != null)
+                    {
+                        if (_ObjectOfInterest.GetComponent<Animal>().enabled == false)
+                        {
+                            _ObjectOfInterest = null;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (_Manager._FindObject.ClosestEnemyVillager(_Manager._FindObject._Villagers, gameObject).gameObject != null)
+                {
+                    _ObjectOfInterest = _Manager._FindObject.ClosestEnemyVillager(_Manager._FindObject._Villagers, gameObject).gameObject;
                 }
             }
         }
@@ -206,17 +231,17 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         }
         else
         {
-            if (_CurrentTool != null)
+            if (_CurrentTool.GetComponent<Tool>() != null)
             {
-                if (_CurrentTool.GetComponent<Tool>()._ToolType != tool)
-                {
-                    Destroy(_CurrentTool);
-                    SpawnTool(tool);
-                }
-                else
+                if (_CurrentTool.GetComponent<Tool>()._ToolType == tool)
                 {
                     return;
                 }
+            }
+            else
+            {
+                Destroy(_CurrentTool);
+                SpawnTool(tool);
             }
         }
     }
@@ -226,27 +251,33 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         {
             if (CanUseTool == true)
             {
-                if(_Task == VillagerTask.Combat)
+                if (_Task == VillagerTask.Combat)
                 {
-                    ToolCheck(ToolType.Sword);
-                    GetComponent<Animator>().SetTrigger("Attack");
+                    if(_ObjectOfInterest.GetComponent<ITakeDamage>() != null)
+                    {
+                        ToolCheck(ToolType.Sword);
+                        GetComponent<Animator>().SetTrigger("Attack");
+                    }
                     return;
                 }
-                switch (_ObjectOfInterest.GetComponent<WorldResource>()._ResourceType)
+                if (_ObjectOfInterest.GetComponent<WorldResource>() != null)
                 {
-                    case ResourceType.wood:
-                        ToolCheck(ToolType.Axe);
-                        GetComponent<Animator>().SetTrigger("UseAxe");
-                        break;
-                    case ResourceType.stone:
-                        ToolCheck(ToolType.Pickaxe);
-                        GetComponent<Animator>().SetTrigger("UseAxe");
-                        break;
-                    case ResourceType.food:
-                        ToolCheck(ToolType.Basket);
-                        GetComponent<Animator>().SetTrigger("UseBasket");
-                        break;
-                    
+                    switch (_ObjectOfInterest.GetComponent<WorldResource>()._ResourceType)
+                    {
+                        case ResourceType.wood:
+                            ToolCheck(ToolType.Axe);
+                            GetComponent<Animator>().SetTrigger("UseAxe");
+                            break;
+                        case ResourceType.stone:
+                            ToolCheck(ToolType.Pickaxe);
+                            GetComponent<Animator>().SetTrigger("UseAxe");
+                            break;
+                        case ResourceType.food:
+                            ToolCheck(ToolType.Basket);
+                            GetComponent<Animator>().SetTrigger("UseBasket");
+                            break;
+
+                    }
                 }
             }
         }
@@ -266,18 +297,27 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
 
         return false;
     }
-
+    void FreeWorldResource()
+    {
+        if (_ObjectOfInterest != null)
+        {
+            if (_ObjectOfInterest.GetComponent<WorldResource>() != null)
+            {
+                _ObjectOfInterest.GetComponent<WorldResource>()._SupplyBeingTaken = false;
+            }
+        }
+    }
     void KillVillager()
     {
         if (Dead == false)
         {
+            FreeWorldResource();
             _Audio.PlayOneShot(_Death);
             Dead = true;
             GetComponent<Collider>().enabled = false;
             _Outline.SetActive(false);
             _AnimatedOutline.SetActive(false);
             enabled = false;
-
         }
         Rigidbody[] rbs;
         rbs = GetComponentsInChildren<Rigidbody>();
@@ -288,6 +328,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
 
         _Nav.enabled = false;
         _Anim.enabled = false;
+        Destroy(this);
     }
 
     public void RunTasks()
@@ -308,6 +349,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                 ReturnGoods();
                 break;
             case VillagerTask.Combat:
+                FreeWorldResource();
                 GatherResource();
                 ToolCheck(ToolType.Sword);
                 break;
@@ -461,19 +503,35 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         {
             if(_Task == VillagerTask.Combat)
             {
-                VillagerController Villager = _ObjectOfInterest.GetComponent<VillagerController>();
-                Villager._Task = VillagerTask.Combat;
-                Villager._ObjectOfInterest = this.gameObject;
-                Villager._WantedGoal = ResourceType.combat;
-                _ObjectOfInterest.GetComponent<ITakeDamage>().TakeDamage(20);
+                if (_ObjectOfInterest.GetComponent<VillagerController>()) //Makes the other villager attack this villager back
+                {
+                    VillagerController Villager = _ObjectOfInterest.GetComponent<VillagerController>();
+                    if (Villager._ObjectOfInterest != null)
+                    {
+                        if (Villager._ObjectOfInterest.GetComponent<WorldResource>() != null)
+                        {
+                            Villager._ObjectOfInterest.GetComponent<WorldResource>()._SupplyBeingTaken = false;
+                        }
+                    }
+                    Villager._Wood = 0; Villager._Stone = 0; Villager._Food = 0;
+                    Villager._Task = VillagerTask.Combat;
+                    Villager._ObjectOfInterest = this.gameObject;
+                    Villager._WantedGoal = ResourceType.combat;
+                }
+                if (_ObjectOfInterest.GetComponent<ITakeDamage>() != null)
+                {
+                    _ObjectOfInterest.GetComponent<ITakeDamage>().TakeDamage(20); //Deal damage to other entity
+                }
             }
             else
             {
-                _ObjectOfInterest.GetComponent<ITakeDamage>().TakeDamage(5);
+                _ObjectOfInterest.GetComponent<ITakeDamage>().TakeDamage(5); //Deal damage to resources
             }
-            
-            _CurrentTool.GetComponentInChildren<ParticleSystem>().Play();
-            if (_Task == VillagerTask.GatherResources)
+            if (_CurrentTool != null)
+            {
+                _CurrentTool.GetComponentInChildren<ParticleSystem>().Play();
+            }
+            if (_Task == VillagerTask.GatherResources) //Gather resources
             {
                 switch (_WantedGoal)
                 {

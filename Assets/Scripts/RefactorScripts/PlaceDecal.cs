@@ -2,10 +2,11 @@
 public class PlaceDecal : ParticleHit
 {
     public ParticleSystem _PS;
+    public string _PSName;
 
     private void Awake()
     {
-        _PS = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
+        _PS = GameObject.Find(_PSName).GetComponent<ParticleSystem>();
     }
     //Using Particle hit systems to place a drychemdecal.
     public override void DecalPlace()

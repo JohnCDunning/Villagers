@@ -54,6 +54,7 @@ public class WorldResource : MonoBehaviour, ISelectable,ITakeDamage
     }
     private void Update()
     {
+        
         if(_SupplyAmount <= 0)
         {
             FindObjectOfType<FindObjectOfInterest>().DeleteWorldResource(this);
@@ -67,6 +68,8 @@ public class WorldResource : MonoBehaviour, ISelectable,ITakeDamage
                 GetComponentInChildren<Rigidbody>().isKinematic = false;
             }
         }
+
+      
     }
     void OnDrawGizmos()
     {

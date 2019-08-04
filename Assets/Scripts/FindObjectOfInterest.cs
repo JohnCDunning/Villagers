@@ -9,9 +9,11 @@ public class FindObjectOfInterest : MonoBehaviour
     public List<WorldResource> _WoodSupplies = new List<WorldResource>();
     public List<WorldResource> _StoneSupplies = new List<WorldResource>();
     public List<WorldResource> _FoodSupplies = new List<WorldResource>();
+    
     [Header("Building Lists")]
     public List<Building> _ResourceCollection = new List<Building>();
-
+    [Header("Villager Lists")]
+    public List<VillagerController> _Villagers = new List<VillagerController>();
     #region RefreshAllLists
     public void RefreshLists()
     {
@@ -20,6 +22,7 @@ public class FindObjectOfInterest : MonoBehaviour
         _StoneSupplies.Clear();
         _FoodSupplies.Clear();
         _ResourceCollection.Clear();
+        _Villagers.Clear();
 
         //Resources
         #region Find Resources
@@ -38,6 +41,7 @@ public class FindObjectOfInterest : MonoBehaviour
             {
                 _FoodSupplies.Add(_resource);
             }
+            
         }
         #endregion
         
@@ -51,8 +55,11 @@ public class FindObjectOfInterest : MonoBehaviour
                 _ResourceCollection.Add(_Building);
             }
         }
-   
-        
+        VillagerController[] villagers = FindObjectsOfType<VillagerController>();
+        foreach (VillagerController _VillagerPerson in villagers)
+        {
+            _Villagers.Add(_VillagerPerson);
+        }
     }
     #endregion
     void Awake()
@@ -123,5 +130,31 @@ public class FindObjectOfInterest : MonoBehaviour
         return _ClosestBuilding;
     }
     #endregion
+    public VillagerController ClosestEnemyVillager(List<VillagerController> _VillagerToFind, GameObject AgressiveVillager)
+    {
+        float ClosestDistance = 50;
+        VillagerController _ClosestVillager = null;
+
+        foreach (VillagerController _Villager in _VillagerToFind)
+        {
+            if (_Villager != null)
+            {
+                if (_Villager.GetComponent<TeamSide>()._team != AgressiveVillager.GetComponent<TeamSide>()._team && _Villager.gameObject != AgressiveVillager)
+                {
+                    float Distance = Vector3.Distance(AgressiveVillager.transform.position, _Villager.transform.position);
+                    if (Distance < ClosestDistance)
+                    {
+                        ClosestDistance = Distance;
+                        _ClosestVillager = _Villager;
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        return _ClosestVillager;
+    }
 
 }
