@@ -12,12 +12,12 @@ public class UIBuilding : MonoBehaviour, IPointerEnterHandler,IPointerExitHandle
    
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _Description.SetActive(true);
-        _Description.GetComponent<BuildingDescription>()._Description = _BuildingDetails;
+        //_Description.SetActive(true);
+        //_Description.GetComponent<BuildingDescription>()._Description = _BuildingDetails;
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        _Description.SetActive(false);
+        //_Description.SetActive(false);
     }
     void Update()
     {

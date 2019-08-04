@@ -8,10 +8,11 @@ public class HighlightManager : MonoBehaviour
     public RaycastInfo _RayInfo;
     public UpgradeManager _UpgradeManager;
 
+    public List<ISelectable> _MultiSelectedVillagers = new List<ISelectable>();
     public ISelectable _CurrentlySelectedObject;
     private void Update()
     {
-        if (_Input.LeftMouseDown())
+        if (Input.GetMouseButtonDown(0))
         {
             LeftClickSelection();
         }
@@ -30,27 +31,52 @@ public class HighlightManager : MonoBehaviour
         //Highlight if hits a selectable object
         if (_RayInfo.ObjectRaycast().GetComponent<ISelectable>() != null)
         {
-           
-            SelectObject(_RayInfo.ObjectRaycast().GetComponent<ISelectable>());
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                _MultiSelectedVillagers.Add(_RayInfo.ObjectRaycast().GetComponent<ISelectable>());
+                foreach (ISelectable selectable in _MultiSelectedVillagers)
+                {
+                    SelectObject(selectable, false);
+                }
+                return;
+            }
+            foreach (ISelectable selectable in _MultiSelectedVillagers)
+            {
+                selectable.UnSelect();
+            }
+            _MultiSelectedVillagers.Clear();
+            _CurrentlySelectedObject = null;
+             SelectObject(_RayInfo.ObjectRaycast().GetComponent<ISelectable>(),true);
+            _MultiSelectedVillagers.Add(_RayInfo.ObjectRaycast().GetComponent<ISelectable>());
             return;
         }
-        //Unselect if hits nothing
-        //if (_UpgradeManager._BuildingUpgradeUI.GetComponent<UIMouseCheck>()._MouseEntered == false) //So clicking on UI doesnt deselect objects
-        //{
+        if (_CurrentlySelectedObject != null)
+        {
+            _CurrentlySelectedObject.UnSelect();
+            _CurrentlySelectedObject = null;
+        }
+        foreach (ISelectable selectable in _MultiSelectedVillagers)
+        {
+            selectable.UnSelect();
+        }
+        _MultiSelectedVillagers.Clear();
+
+
+    }
+    void SelectObject(ISelectable SelectableObject,bool UnSelectCurrent)
+    {
+        if (UnSelectCurrent == true)
+        {
             if (_CurrentlySelectedObject != null)
             {
                 _CurrentlySelectedObject.UnSelect();
-                _CurrentlySelectedObject = null;
+                _MultiSelectedVillagers.Add(_CurrentlySelectedObject);
             }
-        //}
-    }
-    void SelectObject(ISelectable SelectableObject)
-    {
-        if(_CurrentlySelectedObject != null)
-            _CurrentlySelectedObject.UnSelect();
-
+        }
         _CurrentlySelectedObject = SelectableObject;
         _CurrentlySelectedObject.Select();
+
+        
     }
     void RightClickSelection()
     {
@@ -63,6 +89,10 @@ public class HighlightManager : MonoBehaviour
             if(_CurrentlySelectedObject != null)
             {
                 _CurrentlySelectedObject.InteractWithObject(selectObject);
+                foreach (ISelectable selectable in _MultiSelectedVillagers)
+                {
+                    selectable.InteractWithObject(selectObject);
+                }
                 return; 
             }
         }

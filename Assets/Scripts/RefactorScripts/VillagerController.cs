@@ -206,14 +206,17 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         }
         else
         {
-            if (_CurrentTool.GetComponent<Tool>()._ToolType != tool)
+            if (_CurrentTool != null)
             {
-                Destroy(_CurrentTool);
-                SpawnTool(tool);
-            }
-            else
-            {
-                return;
+                if (_CurrentTool.GetComponent<Tool>()._ToolType != tool)
+                {
+                    Destroy(_CurrentTool);
+                    SpawnTool(tool);
+                }
+                else
+                {
+                    return;
+                }
             }
         }
     }
@@ -394,7 +397,10 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     {
         if(_ObjectOfInterest != null)
         {
-            _ObjectOfInterest.GetComponent<WorldResource>()._SupplyBeingTaken = false;
+            if (_ObjectOfInterest.GetComponent<WorldResource>() != null)
+            {
+                _ObjectOfInterest.GetComponent<WorldResource>()._SupplyBeingTaken = false;
+            }
         }
         switch (_WantedGoal)
         {

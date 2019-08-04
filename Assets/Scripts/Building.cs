@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour,ISelectable,ITakeDamage
+public class Building : MonoBehaviour,ISelectable
 {
     public BuildingType _BuildingType;
 
