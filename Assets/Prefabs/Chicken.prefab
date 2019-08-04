@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 690790574367222337}
   m_Layer: 0
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,6 +74,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Target: {fileID: 0}
   _Nav: {fileID: 690790574367222340}
+  _Health: 50
+  _Outline: {fileID: 690790574134361621}
+  _AnimatedOutline: {fileID: 690790574980983193}
 --- !u!95 &690790574367222342
 Animator:
   serializedVersion: 3
@@ -498,7 +501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.1383
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_LocalPosition.z
@@ -537,6 +540,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11900000, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
+      propertyPath: m_FarClipPlane
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11900000, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_FieldOfView
       value: 47
       objectReference: {fileID: 0}
@@ -546,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11900000, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_OrthographicSize
-      value: 1.17
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 11900000, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_IgnoreLayers.m_Bits
@@ -554,6 +561,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
+--- !u!1 &690790574134361621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682,
+    type: 3}
+  m_PrefabInstance: {fileID: 690790574134327479}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &690790574133928501 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682,
@@ -577,7 +590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6265451
+      value: 0.488
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_LocalPosition.z

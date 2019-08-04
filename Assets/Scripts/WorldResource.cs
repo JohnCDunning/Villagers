@@ -59,6 +59,14 @@ public class WorldResource : MonoBehaviour, ISelectable,ITakeDamage
             FindObjectOfType<FindObjectOfInterest>().DeleteWorldResource(this);
             Destroy(gameObject);
         }
+
+        if(_SupplyAmount == (_OriginalAmount / 2))
+        {
+            if(GetComponentInChildren<Rigidbody>() != null)
+            {
+                GetComponentInChildren<Rigidbody>().isKinematic = false;
+            }
+        }
     }
     void OnDrawGizmos()
     {
