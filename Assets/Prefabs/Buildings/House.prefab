@@ -10267,6 +10267,7 @@ GameObject:
   - component: {fileID: 7286274230067477991}
   - component: {fileID: 278053334}
   - component: {fileID: 1898611001223265150}
+  - component: {fileID: 646232608361238837}
   m_Layer: 0
   m_Name: House
   m_TagString: Object
@@ -10343,6 +10344,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.75, y: 2.96, z: 3.68}
   m_Center: {x: 0, y: 1.36, z: 0}
+--- !u!114 &646232608361238837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286274230067444553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81cc8ecea10b0cd419a91e53f6550478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _team: 0
 --- !u!1 &7286274230067444571
 GameObject:
   m_ObjectHideFlags: 0
@@ -10636,15 +10650,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
---- !u!1 &685060274 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682,
-    type: 3}
-  m_PrefabInstance: {fileID: 685028880}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &684895378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682,
+    type: 3}
+  m_PrefabInstance: {fileID: 685028880}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &685060274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682,
     type: 3}
   m_PrefabInstance: {fileID: 685028880}
   m_PrefabAsset: {fileID: 0}

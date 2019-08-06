@@ -9,6 +9,9 @@ public class TownController : MonoBehaviour
     public GameObject _Villager;
     public Transform _Spawn;
 
+    public int wood;
+    public int stone;
+    public int food;
     void SpawnVillager()
     {
         GameObject Villager = Instantiate(_Villager, _Spawn.position, Quaternion.identity);

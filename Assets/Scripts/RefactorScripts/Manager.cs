@@ -11,6 +11,8 @@ public class Manager : MonoBehaviour
     public RaycastInfo _RaycastManager;
     public FindObjectOfInterest _FindObject;
 
+    public TownController _EnemyTownController;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))

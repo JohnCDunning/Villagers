@@ -8,7 +8,7 @@ public class ParticleHit : MonoBehaviour {
 
     public string[] _Tags;
 
-    private ParticleCollisionEvent[] collisionEvents = new ParticleCollisionEvent[16];
+    private ParticleCollisionEvent[] collisionEvents = new ParticleCollisionEvent[200];
     void OnParticleCollision(GameObject other)
     {
        

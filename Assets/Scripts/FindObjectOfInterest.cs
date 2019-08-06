@@ -109,16 +109,18 @@ public class FindObjectOfInterest : MonoBehaviour
     #endregion
 
     #region Find Closest building
-    public Building ClosestBuildingOfInterest(List<Building> _BuildingToFind, Vector3 VillagerPosition)
+    public Building ClosestBuildingOfInterest(List<Building> _BuildingToFind,GameObject Villager, Vector3 VillagerPosition)
     {
         float ClosestDistance = 50;
         Building _ClosestBuilding = null;
 
         foreach (Building _Building in _BuildingToFind)
         {
-
             if (_Building != null)
             {
+                if(_Building.GetComponent<TeamSide>()._team != Villager.GetComponent<TeamSide>()._team)
+                    continue;
+                
                 float Distance = Vector3.Distance(VillagerPosition, _Building.transform.position);
                 if (Distance < ClosestDistance)
                 {

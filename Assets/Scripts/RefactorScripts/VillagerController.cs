@@ -383,7 +383,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     void ReturnGoods()
     {
         ResetAllTriggers();
-        Transform _ResourceCollection = _Manager._FindObject.ClosestBuildingOfInterest(_Manager._FindObject._ResourceCollection, transform.position).transform;
+        Transform _ResourceCollection = _Manager._FindObject.ClosestBuildingOfInterest(_Manager._FindObject._ResourceCollection,gameObject, transform.position).transform;
         _Nav.SetDestination(_ResourceCollection.position);
         _Anim.SetLayerWeight(1, 1);
 
@@ -404,13 +404,48 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
             _Anim.SetLayerWeight(1, 0);
         }
     }
+    void UpdateCollectedResources(ResourceType resource,int amount)
+    {
+        if(GetComponent<TeamSide>()._team == Team.player)
+        {
+            switch (resource)
+            {
+                case ResourceType.wood:
+                    _Manager._CollectedResources._CollectedWood += amount;
+                    break;
+                case ResourceType.stone:
+                    _Manager._CollectedResources._CollectedStone += amount;
+                    break;
+                case ResourceType.food:
+                    _Manager._CollectedResources._CollectedFood += amount;
+                    break;
+            }
+        }
+        else
+        {
+            switch (resource)
+            {
+                case ResourceType.wood:
+                    _Manager._EnemyTownController.wood += amount;
+                    break;
+                case ResourceType.stone:
+                    _Manager._EnemyTownController.stone += amount;
+                    break;
+                case ResourceType.food:
+                    _Manager._EnemyTownController.food += amount;
+                    break;
+            }
+        }
+        
+        //_Manager._CollectedResources._CollectedStone
+    }
     IEnumerator ShowPopup()
     {
         _ShowingPopup = true;
         if (_Wood > 0)
         {
             yield return new WaitForSeconds(0.5f);
-            _Manager._CollectedResources._CollectedWood += _Wood;
+            UpdateCollectedResources(ResourceType.wood, _Wood);
             GameObject popup = Instantiate(_WoodPopup, _PopupCanvas.transform);
             popup.GetComponentInChildren<TextMeshProUGUI>().text = _Wood.ToString();
         }
@@ -418,7 +453,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         if (_Stone > 0)
         {
             yield return new WaitForSeconds(0.5f);
-            _Manager._CollectedResources._CollectedStone += _Stone;
+            UpdateCollectedResources(ResourceType.stone, _Stone);
             GameObject popup = Instantiate(_StonePopup, _PopupCanvas.transform);
             popup.GetComponentInChildren<TextMeshProUGUI>().text = _Stone.ToString();
         }
@@ -426,7 +461,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         if (_Food > 0)
         {
             yield return new WaitForSeconds(0.5f);
-            _Manager._CollectedResources._CollectedFood += _Food;
+            UpdateCollectedResources(ResourceType.food, _Food);
             GameObject popup = Instantiate(_FoodPopup, _PopupCanvas.transform);
             popup.GetComponentInChildren<TextMeshProUGUI>().text = _Food.ToString();
         }
