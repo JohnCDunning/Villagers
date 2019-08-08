@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1818342936}
   - component: {fileID: 1818342938}
   - component: {fileID: 1818342937}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Construction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4821,7 +4821,7 @@ GameObject:
   - component: {fileID: 2047990125}
   - component: {fileID: 2047990127}
   - component: {fileID: 2047990126}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: _AnimatedOutline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4891,7 +4891,7 @@ GameObject:
   - component: {fileID: 32118706705636596}
   - component: {fileID: 32118706706439324}
   - component: {fileID: 32118706707406428}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCube21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4970,7 +4970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6379527754300749530}
   - component: {fileID: 1339602689}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnVillager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5019,7 +5019,7 @@ GameObject:
   - component: {fileID: 4040396363402082929}
   - component: {fileID: 5793623453779441847}
   - component: {fileID: 5489727264108852806}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -5123,7 +5123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774670418178788657}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MoveToSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5153,7 +5153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3681780648886884184}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: NavMeshBlockers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5190,7 +5190,7 @@ GameObject:
   - component: {fileID: 7373174271768772425}
   - component: {fileID: 1911529147129166894}
   - component: {fileID: 4640310090680137667}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9944,7 +9944,7 @@ GameObject:
   - component: {fileID: 2883225510795740682}
   - component: {fileID: 5515181642826090454}
   - component: {fileID: 8531067663217417031}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (4)
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -10052,7 +10052,7 @@ GameObject:
   - component: {fileID: 3594262316370785145}
   - component: {fileID: 8076450109633278820}
   - component: {fileID: 5518292821692516677}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (2)
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -10160,7 +10160,7 @@ GameObject:
   - component: {fileID: 1658257078377386575}
   - component: {fileID: 5381666634826404095}
   - component: {fileID: 677971056108678173}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (3)
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -10268,7 +10268,7 @@ GameObject:
   - component: {fileID: 278053334}
   - component: {fileID: 1898611001223265150}
   - component: {fileID: 646232608361238837}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: House
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -10370,7 +10370,7 @@ GameObject:
   - component: {fileID: 7286274230069634443}
   - component: {fileID: 4641933646606923697}
   - component: {fileID: 4000089301175820959}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10478,7 +10478,7 @@ GameObject:
   - component: {fileID: 4353540101900560060}
   - component: {fileID: 8751051113175257204}
   - component: {fileID: 4581811180423695158}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (1)
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -10588,6 +10588,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -10676,6 +10680,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_LocalPosition.x

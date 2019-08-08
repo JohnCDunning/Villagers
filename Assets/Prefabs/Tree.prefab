@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5184745524948694994}
   - component: {fileID: 5184745524948694993}
   - component: {fileID: 1705447351}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Tree
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 8991133684049297539}
   - component: {fileID: 8991133684051238466}
   - component: {fileID: 8991133684051238467}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TreeTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,6 +272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _ResourceOutline
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -364,6 +368,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_Name
       value: _Outline
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_IsActive

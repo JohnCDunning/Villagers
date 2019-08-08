@@ -18,8 +18,8 @@ TagManager:
   - PostProcessing
   - 3DUI
   - Ground
-  - 
-  - 
+  - HitTest
+  - Object
   - 
   - 
   - 

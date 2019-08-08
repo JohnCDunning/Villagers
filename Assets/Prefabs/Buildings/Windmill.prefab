@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8060178369363884387}
   - component: {fileID: 7435199143390167572}
   - component: {fileID: 6718041497461691444}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TurnWindBlades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 5675881957726018913}
   - component: {fileID: 1181499694784896902}
   - component: {fileID: 2366263777916269580}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Windmill
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BuildingType: 4
+  _AnimatedOutline: {fileID: 0}
   _Outline: {fileID: 754116768213576212}
   _BuildingDetails: {fileID: 11400000, guid: 358b3dc82d7c83d4791545cfd9f21b4c, type: 2}
 --- !u!1001 &754116768213544118
@@ -235,6 +236,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_LocalPosition.x

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1263036852581498939}
   - component: {fileID: 1263036852581498941}
   - component: {fileID: 1263036852581498938}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4766,7 +4766,7 @@ GameObject:
   - component: {fileID: 167088950153929941}
   - component: {fileID: 1870632390635009708}
   - component: {fileID: 533088529}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Campfire
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -4878,6 +4878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BuildingType: 2
+  _AnimatedOutline: {fileID: 0}
   _Outline: {fileID: 1398219234}
   _BuildingDetails: {fileID: 11400000, guid: 51d7aa0baae3abf4aa3026b3162b6631, type: 2}
 --- !u!1 &3440762117295785959
@@ -4891,7 +4892,7 @@ GameObject:
   - component: {fileID: 3478026901008962283}
   - component: {fileID: 3376749087680283428}
   - component: {fileID: 3440762117295785960}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5005,6 +5006,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 21543d2b66928224f8a9536ff3811682, type: 3}
       propertyPath: m_LocalRotation.x

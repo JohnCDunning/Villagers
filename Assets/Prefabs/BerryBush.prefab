@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475242589}
   - component: {fileID: 475242590}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: _Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 3729475238076328109}
   - component: {fileID: 3729475238076328146}
   - component: {fileID: 3729475238076328147}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: _AnimatedOutline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 3729475238278598584}
   - component: {fileID: 3729475238278598587}
   - component: {fileID: 3729475238278598586}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BerryBush
   m_TagString: Object
   m_Icon: {fileID: 0}

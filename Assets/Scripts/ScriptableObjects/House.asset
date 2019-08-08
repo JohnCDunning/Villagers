@@ -22,7 +22,7 @@ MonoBehaviour:
   _WoodCost: 80
   _StoneCost: 40
   _FoodCost: 50
-  _ConstructionSize: 4.5
+  _ConstructionSize: 6
   _Upgrades:
   - {fileID: 4971362922453126733, guid: db0b95c54f5ab2a45bd2e056ed0ddb9a, type: 3}
   - {fileID: 4971362922453126733, guid: db0b95c54f5ab2a45bd2e056ed0ddb9a, type: 3}

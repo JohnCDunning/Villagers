@@ -161,7 +161,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
             }
             else
             {
-                if (_Manager._FindObject.ClosestEnemyVillager(_Manager._FindObject._Villagers, gameObject).gameObject != null)
+                if (_Manager._FindObject.ClosestEnemyVillager(_Manager._FindObject._Villagers, gameObject) != null)
                 {
                     _ObjectOfInterest = _Manager._FindObject.ClosestEnemyVillager(_Manager._FindObject._Villagers, gameObject).gameObject;
                 }
