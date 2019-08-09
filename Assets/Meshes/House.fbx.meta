@@ -1,100 +1,287 @@
 fileFormatVersion: 2
 guid: e94f984e3e4da4d4196a704d2162f44c
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: pCube1
-    100004: pCube10
-    100006: pCube11
-    100008: pCube12
-    100010: pCube13
-    100012: pCube14
-    100014: pCube15
-    100016: pCube16
-    100018: pCube17
-    100020: pCube18
-    100022: pCube19
-    100024: pCube2
-    100026: pCube3
-    100028: pCube4
-    100030: pCube5
-    100032: pCube6
-    100034: pCube7
-    100036: pCube8
-    100038: pCube9
-    100040: transform1
-    100042: transform10
-    100044: transform11
-    100046: transform12
-    100048: transform13
-    100050: transform14
-    100052: transform15
-    100054: transform16
-    100056: transform17
-    100058: transform18
-    100060: transform2
-    100062: transform3
-    100064: transform4
-    100066: transform5
-    100068: transform6
-    100070: transform7
-    100072: transform8
-    100074: transform9
-    100076: pCube21
-    400000: //RootNode
-    400002: pCube1
-    400004: pCube10
-    400006: pCube11
-    400008: pCube12
-    400010: pCube13
-    400012: pCube14
-    400014: pCube15
-    400016: pCube16
-    400018: pCube17
-    400020: pCube18
-    400022: pCube19
-    400024: pCube2
-    400026: pCube3
-    400028: pCube4
-    400030: pCube5
-    400032: pCube6
-    400034: pCube7
-    400036: pCube8
-    400038: pCube9
-    400040: transform1
-    400042: transform10
-    400044: transform11
-    400046: transform12
-    400048: transform13
-    400050: transform14
-    400052: transform15
-    400054: transform16
-    400056: transform17
-    400058: transform18
-    400060: transform2
-    400062: transform3
-    400064: transform4
-    400066: transform5
-    400068: transform6
-    400070: transform7
-    400072: transform8
-    400074: transform9
-    400076: pCube21
-    2100000: lambert2
-    2100002: lambert4
-    2100004: lambert3
-    2100006: lambert1
-    2300000: pCube19
-    2300002: pCube17
-    2300004: pCube21
-    3300000: pCube19
-    3300002: pCube17
-    3300004: pCube21
-    4300000: pCube19
-    4300002: pCube17
-    4300004: pCube21
-  externalObjects: {}
+  serializedVersion: 25
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: pCube1
+  - first:
+      1: 100004
+    second: pCube10
+  - first:
+      1: 100006
+    second: pCube11
+  - first:
+      1: 100008
+    second: pCube12
+  - first:
+      1: 100010
+    second: pCube13
+  - first:
+      1: 100012
+    second: pCube14
+  - first:
+      1: 100014
+    second: pCube15
+  - first:
+      1: 100016
+    second: pCube16
+  - first:
+      1: 100018
+    second: pCube17
+  - first:
+      1: 100020
+    second: pCube18
+  - first:
+      1: 100022
+    second: pCube19
+  - first:
+      1: 100024
+    second: pCube2
+  - first:
+      1: 100026
+    second: pCube3
+  - first:
+      1: 100028
+    second: pCube4
+  - first:
+      1: 100030
+    second: pCube5
+  - first:
+      1: 100032
+    second: pCube6
+  - first:
+      1: 100034
+    second: pCube7
+  - first:
+      1: 100036
+    second: pCube8
+  - first:
+      1: 100038
+    second: pCube9
+  - first:
+      1: 100040
+    second: transform1
+  - first:
+      1: 100042
+    second: transform10
+  - first:
+      1: 100044
+    second: transform11
+  - first:
+      1: 100046
+    second: transform12
+  - first:
+      1: 100048
+    second: transform13
+  - first:
+      1: 100050
+    second: transform14
+  - first:
+      1: 100052
+    second: transform15
+  - first:
+      1: 100054
+    second: transform16
+  - first:
+      1: 100056
+    second: transform17
+  - first:
+      1: 100058
+    second: transform18
+  - first:
+      1: 100060
+    second: transform2
+  - first:
+      1: 100062
+    second: transform3
+  - first:
+      1: 100064
+    second: transform4
+  - first:
+      1: 100066
+    second: transform5
+  - first:
+      1: 100068
+    second: transform6
+  - first:
+      1: 100070
+    second: transform7
+  - first:
+      1: 100072
+    second: transform8
+  - first:
+      1: 100074
+    second: transform9
+  - first:
+      1: 100076
+    second: pCube21
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: pCube1
+  - first:
+      4: 400004
+    second: pCube10
+  - first:
+      4: 400006
+    second: pCube11
+  - first:
+      4: 400008
+    second: pCube12
+  - first:
+      4: 400010
+    second: pCube13
+  - first:
+      4: 400012
+    second: pCube14
+  - first:
+      4: 400014
+    second: pCube15
+  - first:
+      4: 400016
+    second: pCube16
+  - first:
+      4: 400018
+    second: pCube17
+  - first:
+      4: 400020
+    second: pCube18
+  - first:
+      4: 400022
+    second: pCube19
+  - first:
+      4: 400024
+    second: pCube2
+  - first:
+      4: 400026
+    second: pCube3
+  - first:
+      4: 400028
+    second: pCube4
+  - first:
+      4: 400030
+    second: pCube5
+  - first:
+      4: 400032
+    second: pCube6
+  - first:
+      4: 400034
+    second: pCube7
+  - first:
+      4: 400036
+    second: pCube8
+  - first:
+      4: 400038
+    second: pCube9
+  - first:
+      4: 400040
+    second: transform1
+  - first:
+      4: 400042
+    second: transform10
+  - first:
+      4: 400044
+    second: transform11
+  - first:
+      4: 400046
+    second: transform12
+  - first:
+      4: 400048
+    second: transform13
+  - first:
+      4: 400050
+    second: transform14
+  - first:
+      4: 400052
+    second: transform15
+  - first:
+      4: 400054
+    second: transform16
+  - first:
+      4: 400056
+    second: transform17
+  - first:
+      4: 400058
+    second: transform18
+  - first:
+      4: 400060
+    second: transform2
+  - first:
+      4: 400062
+    second: transform3
+  - first:
+      4: 400064
+    second: transform4
+  - first:
+      4: 400066
+    second: transform5
+  - first:
+      4: 400068
+    second: transform6
+  - first:
+      4: 400070
+    second: transform7
+  - first:
+      4: 400072
+    second: transform8
+  - first:
+      4: 400074
+    second: transform9
+  - first:
+      4: 400076
+    second: pCube21
+  - first:
+      21: 2100000
+    second: lambert2
+  - first:
+      21: 2100002
+    second: lambert4
+  - first:
+      21: 2100004
+    second: lambert3
+  - first:
+      21: 2100006
+    second: lambert1
+  - first:
+      23: 2300000
+    second: pCube19
+  - first:
+      23: 2300002
+    second: pCube17
+  - first:
+      23: 2300004
+    second: pCube21
+  - first:
+      33: 3300000
+    second: pCube19
+  - first:
+      33: 3300002
+    second: pCube17
+  - first:
+      33: 3300004
+    second: pCube21
+  - first:
+      43: 4300000
+    second: pCube19
+  - first:
+      43: 4300002
+    second: pCube17
+  - first:
+      43: 4300004
+    second: pCube21
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GenericObject
+    second: {fileID: 2100000, guid: 97846adc4b6bedb439d9bd0661fb2565, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -136,18 +323,19 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -156,10 +344,11 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -169,6 +358,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 50
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
