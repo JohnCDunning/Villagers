@@ -21,7 +21,12 @@ ModelImporter:
   - first:
       43: 4300000
     second: pCube8
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GenericObject
+    second: {instanceID: 0}
   materials:
     importMaterials: 1
     materialName: 0

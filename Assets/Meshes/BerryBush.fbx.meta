@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: GenericObject
+    second: {fileID: 2100000, guid: 36332248aa472b54cb993ce5e2895832, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: lambert6
     second: {fileID: 2100000, guid: 15a6bb74062c3ee4fa1c571156252446, type: 2}
   materials:

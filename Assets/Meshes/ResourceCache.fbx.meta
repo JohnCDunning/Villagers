@@ -54,6 +54,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Cloth
     second: {fileID: 2100000, guid: 82d16ebf49f551049b85265f91959071, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GenericObject
+    second: {instanceID: 0}
   materials:
     importMaterials: 1
     materialName: 0
