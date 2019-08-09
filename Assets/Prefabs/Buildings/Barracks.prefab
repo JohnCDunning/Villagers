@@ -49,7 +49,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2427458362596464101}
-  m_Mesh: {fileID: -5840284170326959453, guid: 805c0c2189437784982b826ce70e7796, type: 3}
+  m_Mesh: {fileID: -15797666336669938, guid: 805c0c2189437784982b826ce70e7796, type: 3}
 --- !u!23 &4146907651635093817
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -67,9 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1444460858095362738, guid: 805c0c2189437784982b826ce70e7796, type: 3}
-  - {fileID: -7362229831176964375, guid: 805c0c2189437784982b826ce70e7796, type: 3}
-  - {fileID: 8256314533186613319, guid: 805c0c2189437784982b826ce70e7796, type: 3}
+  - {fileID: 2100000, guid: 97846adc4b6bedb439d9bd0661fb2565, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BuildingType: 6
+  _AnimatedOutline: {fileID: 0}
   _Outline: {fileID: 1667010076}
   _BuildingDetails: {fileID: 11400000, guid: 127573eb73a838f49b2d3ff5dcc64c44, type: 2}
 --- !u!1 &3600829964561864408
@@ -626,7 +625,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2035086486455736929}
-  - component: {fileID: 6698668389866292270}
   m_Layer: 0
   m_Name: SpawnVillager
   m_TagString: Untagged
@@ -648,22 +646,6 @@ Transform:
   m_Father: {fileID: 1723551950173890550}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6698668389866292270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8752084499033386630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fa8ff57943773944bf5837672994a9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _SpawnAtStart: 0
-  _Villager: {fileID: 8486613174862473730, guid: a031c939637dc604b8a99832831ee895,
-    type: 3}
-  _MoveToSpawn: {fileID: 9219002244180704598}
 --- !u!1001 &1667041470
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1606,9 +1606,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c651834741af964e94193e3b74f863a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _CollectedWood: 100
-  _CollectedStone: 100
-  _CollectedFood: 100
+  _CollectedWood: 1000
+  _CollectedStone: 1000
+  _CollectedFood: 1000
   _CollectedWoodText: {fileID: 985783382}
   _CollectedStoneText: {fileID: 1291627532}
   _CollectedFoodText: {fileID: 321389765}
@@ -20702,7 +20702,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4829032208676947259}
-  m_Mesh: {fileID: -5840284170326959453, guid: 805c0c2189437784982b826ce70e7796, type: 3}
+  m_Mesh: {fileID: -15797666336669938, guid: 805c0c2189437784982b826ce70e7796, type: 3}
 --- !u!1001 &690790575336808994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28032,9 +28032,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1444460858095362738, guid: 805c0c2189437784982b826ce70e7796, type: 3}
-  - {fileID: -7362229831176964375, guid: 805c0c2189437784982b826ce70e7796, type: 3}
-  - {fileID: 8256314533186613319, guid: 805c0c2189437784982b826ce70e7796, type: 3}
+  - {fileID: 2100000, guid: 97846adc4b6bedb439d9bd0661fb2565, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
