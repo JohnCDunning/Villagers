@@ -106,12 +106,15 @@ public class TownController : MonoBehaviour
     IEnumerator SpawnNewVillager()
     {
         yield return new WaitForSeconds(10);
-        if (CheckIfCanAfford(_Costs._Villager) == true)
+        if (_CurrentVillagerCount < _MaxVillagers)
         {
-            SpawnVillager();
-            _CurrentVillagerCount++;
+            if (CheckIfCanAfford(_Costs._Villager) == true)
+            {
+                SpawnVillager();
+                _CurrentVillagerCount++;
 
-        }       
+            }
+        }
 
         StartCoroutine(SpawnNewVillager());
     }

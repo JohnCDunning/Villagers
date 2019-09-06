@@ -1254,7 +1254,7 @@ MonoBehaviour:
   _Nav: {fileID: 1114911414943793034}
   _Anim: {fileID: 1114911414943793036}
   _Health: 100
-  _CarryCapacity: 30
+  _CarryCapacity: 15
   _Wood: 0
   _Stone: 0
   _Food: 0
