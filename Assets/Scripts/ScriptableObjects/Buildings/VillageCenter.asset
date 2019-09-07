@@ -18,7 +18,7 @@ MonoBehaviour:
   _ObjectPrefab: {fileID: 3561893597034857344, guid: d339c842265a4454795c37a6a823ff96,
     type: 3}
   _BuildingName: Village Center
-  _BuildingDescription: The heart of any village
+  _BuildingDescription: Village Center
   _WoodCost: 300
   _StoneCost: 300
   _FoodCost: 200

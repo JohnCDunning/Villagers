@@ -18,7 +18,7 @@ MonoBehaviour:
   _ObjectPrefab: {fileID: 2835898805626409566, guid: 22a24e0e8aa47cf419ec37c191fdab07,
     type: 3}
   _BuildingName: Campfire
-  _BuildingDescription: Warm up the villagers
+  _BuildingDescription: Campfire
   _WoodCost: 50
   _StoneCost: 20
   _FoodCost: 0

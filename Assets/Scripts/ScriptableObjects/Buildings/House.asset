@@ -18,9 +18,9 @@ MonoBehaviour:
   _ObjectPrefab: {fileID: 7286274230067444553, guid: ffc94e2c976de764ea3815ce0a38abea,
     type: 3}
   _BuildingName: House
-  _BuildingDescription: A house good enough for a king
-  _WoodCost: 80
-  _StoneCost: 40
+  _BuildingDescription: Village House
+  _WoodCost: 100
+  _StoneCost: 0
   _FoodCost: 50
   _ConstructionSize: 6
   _Upgrades:

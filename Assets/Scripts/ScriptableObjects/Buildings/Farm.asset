@@ -18,7 +18,7 @@ MonoBehaviour:
   _ObjectPrefab: {fileID: 8077689506537751081, guid: 18732ef87263dac45be9491634a96891,
     type: 3}
   _BuildingName: Farm
-  _BuildingDescription: Grow some food
+  _BuildingDescription: Farm
   _WoodCost: 100
   _StoneCost: 0
   _FoodCost: 20

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class UIBuilding : MonoBehaviour, IPointerEnterHandler,IPointerExitHandler
 {
     public BuildingDetails _BuildingDetails;
-    public GameObject _Description;
     public CollectedResources _CurrentResources;
 
    

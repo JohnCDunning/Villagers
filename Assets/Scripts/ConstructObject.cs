@@ -66,5 +66,5 @@ public class ConstructObject : MonoBehaviour
 
         _CanPlaceObject = false;
         _RotatingObject = false;
-}
+    }
 }

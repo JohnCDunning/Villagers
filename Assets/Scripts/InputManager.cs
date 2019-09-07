@@ -27,28 +27,28 @@ public class InputManager : MonoBehaviour
         float zpos = transform.GetChild(0).transform.localPosition.y;
         #endregion
 
+        transform.Translate(-Vector3.forward * CamHeight * 200 * Time.deltaTime) ;
         #region Locking Camera Zoom
         //Cant go below or further than set height when zooming in camera;
-        if (zpos > 18)
-        {
-            if (CamHeight < 0)
-            {
-              
-                transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f), 0);
-            }
-        }
-        if (zpos < -10)
-        {
-            if (CamHeight > 0)
-            {
-
-                transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f), 0);
-            }
-        }
-        if (zpos < 18 && zpos > -10)
-        {
-            transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f),0);
-        }
+        //if (zpos > 18)
+        //{
+          //  if (CamHeight < 0)
+         //   {
+       //         transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f), 0);
+       //     }
+       // }
+       // if (zpos < -10)
+       // {
+        //    if (CamHeight > 0)
+        //    {
+//
+        //        transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f), 0);
+        //    }
+       // }
+       // if (zpos < 18 && zpos > -10)
+       // {
+       //     transform.GetChild(0).transform.localPosition += new Vector3(0, Mathf.Clamp(CamHeight, -39f, 19f),0);
+       // }
         #endregion
     }
     

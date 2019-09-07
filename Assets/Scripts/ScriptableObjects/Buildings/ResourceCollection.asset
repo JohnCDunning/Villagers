@@ -18,7 +18,7 @@ MonoBehaviour:
   _ObjectPrefab: {fileID: 95953438532374429, guid: 61c451be1e2b0ac428160b71ce9962c7,
     type: 3}
   _BuildingName: Resource Collection
-  _BuildingDescription: Villagers can return good here
+  _BuildingDescription: Resource Cache
   _WoodCost: 60
   _StoneCost: 40
   _FoodCost: 0

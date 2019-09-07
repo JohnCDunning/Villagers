@@ -18,7 +18,7 @@ MonoBehaviour:
   _ObjectPrefab: {fileID: 2427458362596464101, guid: b66176e340092814a84ed2c7ff9cf12c,
     type: 3}
   _BuildingName: Barracks
-  _BuildingDescription: Military Building
+  _BuildingDescription: Barracks
   _WoodCost: 200
   _StoneCost: 200
   _FoodCost: 0

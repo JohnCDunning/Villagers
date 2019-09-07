@@ -18,7 +18,7 @@ MonoBehaviour:
   _ObjectPrefab: {fileID: 3322154813785296191, guid: 5a493e2312b10a740bd9e220e1f25ec3,
     type: 3}
   _BuildingName: Windmill
-  _BuildingDescription: Assists in farming
+  _BuildingDescription: Windmill
   _WoodCost: 250
   _StoneCost: 100
   _FoodCost: 50
