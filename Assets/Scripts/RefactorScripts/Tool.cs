@@ -7,7 +7,8 @@ public enum ToolType
     Axe,
     Pickaxe,
     Basket,
-    Sword
+    Sword,
+    Hammer
 }
 public class Tool : MonoBehaviour
 {

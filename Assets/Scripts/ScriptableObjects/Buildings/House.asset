@@ -15,7 +15,7 @@ MonoBehaviour:
   _BuildingType: 0
   _ConstructionPrefab: {fileID: 1851045261926119257, guid: 66877e7273ce00843944e747a07eee73,
     type: 3}
-  _ObjectPrefab: {fileID: 7286274230067444553, guid: ffc94e2c976de764ea3815ce0a38abea,
+  _ObjectPrefab: {fileID: 6977940306266324352, guid: a911a74ec8aab0a499ae5e867cc8c9f6,
     type: 3}
   _BuildingName: House
   _BuildingDescription: Village House

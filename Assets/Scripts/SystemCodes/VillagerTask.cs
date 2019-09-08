@@ -5,5 +5,6 @@ public enum VillagerTask
     DoNothing,
     GatherResources,
     ReturnGoods,
-    Combat
+    Combat,
+    Building
 }

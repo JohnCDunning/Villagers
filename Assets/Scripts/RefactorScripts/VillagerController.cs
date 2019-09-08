@@ -84,17 +84,34 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                         }
                         ResetAllTriggers();
                         _WantedGoal = ObjectToInteractWith.GetComponent<WorldResource>()._ResourceType;
+                        
                         FindClosestResource();
 
-                        _Task = VillagerTask.GatherResources;
+                        if(_WantedGoal != ResourceType.building)
+                        {
+                            _Task = VillagerTask.GatherResources;
+                        }
+                        else
+                        {
+                            _Task = VillagerTask.Building;
+                            _ObjectOfInterest = ObjectToInteractWith;
+                        }
+                        
                     }
 
                     if (ObjectToInteractWith.GetComponent<VillagerController>() || ObjectToInteractWith.GetComponent<Animal>())
                     {
+                       // if(ObjectToInteractWith.GetComponent<TeamSide>() != null)
+                        //{
+                            //if(ObjectToInteractWith.GetComponent<TeamSide>()._team != GetComponent<TeamSide>()._team)
+                           // {
                         FreeWorldResource();
                         _Task = VillagerTask.Combat;
                         _WantedGoal = ResourceType.combat;
                         _ObjectOfInterest = ObjectToInteractWith;
+                            //}
+                        //}
+                       
                     }
                 }
 
@@ -130,6 +147,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         _Tool.Add(ToolType.Pickaxe, _AllTools[1]);
         _Tool.Add(ToolType.Basket, _AllTools[2]);
         _Tool.Add(ToolType.Sword, _AllTools[3]);
+        _Tool.Add(ToolType.Hammer, _AllTools[4]);
         _ResourceToCarry.Add(ResourceType.wood, _SingleResource[0]);
         _ResourceToCarry.Add(ResourceType.stone, _SingleResource[1]);
         _ResourceToCarry.Add(ResourceType.food, _SingleResource[2]);
@@ -205,11 +223,12 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         GameObject NewTool = null;
         if (tool != ToolType.Basket)
         {
-            if(tool != ToolType.Sword)
+            if(tool != ToolType.Sword && tool != ToolType.Hammer) //Tools that need to spawn in right hand
             {
                 NewTool = Instantiate(_Tool[tool], _ToolSpawn);
                 NewTool.transform.localPosition = Vector3.zero; NewTool.transform.localRotation = Quaternion.identity;
             }
+            
             else
             {
                 NewTool = Instantiate(_Tool[tool], _WeaponSpawn);
@@ -260,6 +279,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                     }
                     return;
                 }
+
                 if (_ObjectOfInterest.GetComponent<WorldResource>() != null)
                 {
                     switch (_ObjectOfInterest.GetComponent<WorldResource>()._ResourceType)
@@ -276,6 +296,10 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                             ToolCheck(ToolType.Basket);
                             GetComponent<Animator>().SetTrigger("UseBasket");
                             break;
+                        case ResourceType.building:
+                            ToolCheck(ToolType.Hammer);
+                            GetComponent<Animator>().SetTrigger("Hammer");
+                            break;
 
                     }
                 }
@@ -287,6 +311,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         _Anim.ResetTrigger("UseAxe");
         _Anim.ResetTrigger("UseBasket");
         _Anim.ResetTrigger("Attack");
+        _Anim.ResetTrigger("Hammer");
     }
     #endregion
 
@@ -343,6 +368,11 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                 else
                 {
                     FindClosestResource();
+                }
+                break;
+            case VillagerTask.Building:
+                if(_ObjectOfInterest != null) { 
+                    GatherResource();
                 }
                 break;
             case VillagerTask.ReturnGoods:
@@ -508,6 +538,17 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     {
         if (_ObjectOfInterest != null)
         {
+            if(_WantedGoal == ResourceType.building)
+            {
+                if (Vector3.Distance(transform.position, _ObjectOfInterest.transform.position) < 5)
+                {
+                    Quaternion rotation = Quaternion.LookRotation(_ObjectOfInterest.transform.position - transform.position);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 1);
+
+                    UseTool();
+                    return;
+                }
+            }
             if (Vector3.Distance(transform.position, _ObjectOfInterest.transform.position) < 2)
             {
                 Quaternion rotation = Quaternion.LookRotation(_ObjectOfInterest.transform.position - transform.position);
@@ -554,34 +595,40 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                     Villager._WantedGoal = ResourceType.combat;
                 }
                 if (_ObjectOfInterest.GetComponent<ITakeDamage>() != null)
-                {
+                {   
                     _ObjectOfInterest.GetComponent<ITakeDamage>().TakeDamage(20); //Deal damage to other entity
                 }
             }
             else
             {
-                _ObjectOfInterest.GetComponent<ITakeDamage>().TakeDamage(5); //Deal damage to resources
+                if (_ObjectOfInterest.GetComponent<ITakeDamage>() != null)
+                {
+                    _ObjectOfInterest.GetComponent<ITakeDamage>().TakeDamage(1); //Deal damage to resources
+                }
+                
+                
             }
             if (_CurrentTool != null)
             {
-                _CurrentTool.GetComponentInChildren<ParticleSystem>().Play();
+                if(_CurrentTool.GetComponentInChildren<ParticleSystem>() != null)
+                    _CurrentTool.GetComponentInChildren<ParticleSystem>().Play();
             }
             if (_Task == VillagerTask.GatherResources) //Gather resources
             {
                 switch (_WantedGoal)
                 {
                     case ResourceType.wood:
-                        _Wood += 5;
+                        _Wood += 1;
                         _Audio.pitch = Random.Range(0.8f, 1.2f);
                         PlaySound(_WoodHit);
                         break;
                     case ResourceType.stone:
-                        _Stone += 5;
+                        _Stone += 1;
                         _Audio.pitch = Random.Range(0.8f, 1.2f);
                         PlaySound(_StoneHit);
                         break;
                     case ResourceType.food:
-                        _Food += 5;
+                        _Food += 1;
                         _Audio.pitch = Random.Range(0.8f, 1.2f);
                         PlaySound(_WoodHit);
                         break;

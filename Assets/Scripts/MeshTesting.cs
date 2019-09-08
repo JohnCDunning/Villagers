@@ -11,6 +11,11 @@ public class MeshTesting : MonoBehaviour
 
     public int xSize = 20;
     public int zSize = 20;
+
+    public float Amplitude;
+    public float FreqX;
+    public float FreqZ;
+    public float flatHeight;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +33,12 @@ public class MeshTesting : MonoBehaviour
         {
             for (int x = 0; x <= xSize; x++)
             {
-                float y = Mathf.PerlinNoise(x * 1, z * Mathf.Sin(Time.time * 3 + x));
+                float y = Mathf.PerlinNoise(x * FreqX, z * FreqZ) * Amplitude;
+                if(y / Amplitude < flatHeight)
+                {
+                    
+                    y = Random.Range(0,0.1f);
+                }
                 verticies[i] = new Vector3(x,y,z);
                 i++;
             }

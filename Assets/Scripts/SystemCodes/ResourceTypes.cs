@@ -4,5 +4,6 @@
     stone,
     food,
     combat,
+    building,
     nothing
 }
