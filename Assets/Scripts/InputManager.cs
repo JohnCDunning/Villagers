@@ -5,6 +5,13 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     float CamHeight;
+    public float zoomSpeed = 100f;
+    public float zoomTime = 0.1f;
+
+    public float maxHeight = 31;
+    public float minHeight = 5f;
+    [SerializeField]
+    private float targetHeight;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,17 +24,18 @@ public class InputManager : MonoBehaviour
         //RotateCamLeft
         if (Input.GetKey(KeyCode.LeftAlt))
         {
-            transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X") * 100 *Time.deltaTime,0));
+            transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X") * 100 *Time.deltaTime,0),Space.World);
         }
+
         #region Camera Movement
-        CamHeight = -Input.mouseScrollDelta.y * 100 * Time.deltaTime;
-      
-        transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * 10 * Time.deltaTime;
-        
+
+        targetHeight += (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed/10) * -1f;
+        targetHeight = Mathf.Clamp(targetHeight, minHeight, maxHeight);
+        transform.Translate(new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * 10 * Time.deltaTime,Space.Self); ;
+        transform.position = new Vector3(this.transform.position.x, Mathf.MoveTowards(this.transform.position.y, targetHeight,10f * Time.deltaTime)  , this.transform.position.z);
+
         float zpos = transform.GetChild(0).transform.localPosition.y;
         #endregion
-
-        transform.Translate(-Vector3.forward * CamHeight * 200 * Time.deltaTime) ;
         #region Locking Camera Zoom
         //Cant go below or further than set height when zooming in camera;
         //if (zpos > 18)
