@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Summary
+//The town controller script will run an enemy town, controls when to spawn villagers
+//what to assign the villagers role to, and build new buildings. 
+
 public class TownController : MonoBehaviour
 {
     public List<VillagerController> VillagersInTown = new List<VillagerController>();
@@ -37,27 +41,7 @@ public class TownController : MonoBehaviour
         Villager.GetComponent<VillagerController>()._Task = VillagerTask.GatherResources;
         Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.wood;
         VillagersInTown.Add(Villager.GetComponent<VillagerController>());
-        int randRoll = 0;
-        randRoll = Random.Range(0, 5);
-        switch (randRoll)
-        {
-            case 1:
-                Villager.GetComponent<VillagerController>()._Task = VillagerTask.GatherResources;
-                Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.wood;
-                break;
-            case 2:
-                Villager.GetComponent<VillagerController>()._Task = VillagerTask.GatherResources;
-                Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.stone;
-                break;
-            case 3:
-                Villager.GetComponent<VillagerController>()._Task = VillagerTask.GatherResources;
-                Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.food;
-                break;
-            case 4:
-                Villager.GetComponent<VillagerController>()._Task = VillagerTask.Combat;
-                Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.combat;
-                break;
-        }
+        
         if (wood < 50)
         {
             Villager.GetComponent<VillagerController>()._Task = VillagerTask.GatherResources;
@@ -68,12 +52,38 @@ public class TownController : MonoBehaviour
             Villager.GetComponent<VillagerController>()._Task = VillagerTask.GatherResources;
             Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.stone;
         }
-        if (food < 50)
+        if (food < 15)
         {
             Villager.GetComponent<VillagerController>()._Task = VillagerTask.GatherResources;
             Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.food;
         }
         Villager.GetComponent<VillagerController>()._Nav.SetDestination(_Spawn.position);
+       
+        //what to do when you dont need anything
+        if(wood > 50 || stone > 50 || food > 15)
+        {
+            int randRoll = 0;
+            randRoll = Random.Range(0, 4); //make 5 to allow combat
+            switch (randRoll)
+            {
+                case 1:
+                    Villager.GetComponent<VillagerController>()._Task = VillagerTask.GatherResources;
+                    Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.wood;
+                    break;
+                case 2:
+                    Villager.GetComponent<VillagerController>()._Task = VillagerTask.GatherResources;
+                    Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.stone;
+                    break;
+                case 3:
+                    Villager.GetComponent<VillagerController>()._Task = VillagerTask.GatherResources;
+                    Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.food;
+                    break;
+                //case 4:
+                    //Villager.GetComponent<VillagerController>()._Task = VillagerTask.Combat;
+                    //Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.combat;
+                    break;
+            }
+        }
     }
 
     public List<GameObject> TownBuildings = new List<GameObject>();
@@ -146,8 +156,16 @@ public class TownController : MonoBehaviour
 
             if (BuildTester.GetComponent<BuildTest>().collisionCount == 0)
             {
+                //house logic
+                if (_CurrentVillagerCount >= (_MaxVillagers * 0.8f))
+                {
+                    GameObject building = Instantiate(_Buildings[3], BuildPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 270), 0)));
+                    TownBuildings.Add(building);
+                    _MaxVillagers += 5;
+                }
                 //Logic for how enemy to decide what to place.
-                if(food < 50)
+                //farm
+                if (food < 50 && VillagersInTown.Count > BuildingsInTown.Count)
                 {
                     if (CheckIfCanAfford(_Costs._Farm))
                     {
@@ -155,12 +173,7 @@ public class TownController : MonoBehaviour
                         TownBuildings.Add(building);
                     }                        
                 }
-                if(_CurrentVillagerCount >= (_MaxVillagers * 0.8f))
-                {
-                    GameObject building = Instantiate(_Buildings[3], BuildPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 270), 0)));
-                    TownBuildings.Add(building);
-                    _MaxVillagers += 5;
-                }
+               
             }
         }
         StartCoroutine(PlaceBuilding());
