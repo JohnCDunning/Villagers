@@ -8,15 +8,10 @@ public class InputManager : MonoBehaviour
     public float zoomSpeed = 100f;
     public float zoomTime = 0.1f;
 
-    public float maxHeight = 31;
-    public float minHeight = 5f;
+    public float maxHeight = 0;
+    public float minHeight = -25f;
     [SerializeField]
     private float targetHeight;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
