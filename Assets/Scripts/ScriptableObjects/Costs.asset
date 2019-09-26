@@ -16,7 +16,7 @@ MonoBehaviour:
   _House: {x: 100, y: 50, z: 0}
   _Campfire: {x: 25, y: 0, z: 0}
   _ResourceCache: {x: 50, y: 50, z: 0}
-  _Farm: {x: 100, y: 0, z: 0}
+  _Farm: {x: 50, y: 0, z: 0}
   _Windmill: {x: 100, y: 100, z: 25}
   _Barracks: {x: 100, y: 50, z: 0}
   _TownCenter: {x: 200, y: 200, z: 150}
