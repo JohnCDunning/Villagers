@@ -88,8 +88,7 @@ public class HighlightManager : MonoBehaviour
     }
     void RightClickSelection()
     {
-        _HighlightInteract.transform.position = _RayInfo.LocationToBuild();
-        _HighlightInteract.GetComponent<Animator>().SetTrigger("Interact");
+        
         if (_RayInfo.ObjectRaycast().GetComponent<ISelectable>() != null)
         {
             ISelectable selectObject = _RayInfo.ObjectRaycast().GetComponent<ISelectable>();
@@ -105,6 +104,11 @@ public class HighlightManager : MonoBehaviour
                 }
                 return; 
             }
+        }
+        else
+        {
+            _HighlightInteract.transform.position = _RayInfo.LocationToBuild();
+            _HighlightInteract.GetComponent<Animator>().SetTrigger("Interact");
         }
         if (_CurrentlySelectedObject != null)
         {
