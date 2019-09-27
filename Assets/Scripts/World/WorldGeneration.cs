@@ -32,16 +32,23 @@ public class WorldGeneration : MonoBehaviour
     Vector3[] ChickenPos;
     public GameObject _Chicken;
 
+    //ParentObjects
+    [Header("Parent Assignments")]
+    public Transform _TreeParent;
+    public Transform _RockParent;
+    public Transform _BushParent;
+    public Transform _ChickenParent;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        SetUpObject(_RockGroups, RockPos, _Rock, _RockPerPoint,_RockRangeFromPoint);
-        SetUpObject(_ChickenGroups, ChickenPos, _Chicken, _ChickenPerPoint, ChickenRangeFromPoint);
-        SetUpObject(_BerryGroups, BerryPos, _BerryBush, _BerryPerPoint, BerryRangeFromPoint);
-        SetUpObject(_TreeGroups, TreePos, _Tree, _TreesPerPoint,_TreeRangeFromPoint);
+        SetUpObject(_RockGroups, RockPos, _Rock, _RockPerPoint,_RockRangeFromPoint,_RockParent);
+        SetUpObject(_ChickenGroups, ChickenPos, _Chicken, _ChickenPerPoint, ChickenRangeFromPoint,_ChickenParent);
+        SetUpObject(_BerryGroups, BerryPos, _BerryBush, _BerryPerPoint, BerryRangeFromPoint,_BushParent);
+        SetUpObject(_TreeGroups, TreePos, _Tree, _TreesPerPoint,_TreeRangeFromPoint,_TreeParent);
     }
-    void SetUpObject(int objectGroups, Vector3[] objectPos, GameObject obj, int objectsPerPoint, float objectRangeFromPoint)
+    void SetUpObject(int objectGroups, Vector3[] objectPos, GameObject obj, int objectsPerPoint, float objectRangeFromPoint,Transform Parent)
     {
         objectPos = new Vector3[objectGroups];
 
@@ -49,22 +56,22 @@ public class WorldGeneration : MonoBehaviour
         for (int i = 0; i < objectGroups; i++)
         {
             objectPos[i] = CheckSpot();
-            PlaceObject(obj, objectPos[i]);
+            PlaceObject(obj, objectPos[i], Parent);
             for (int x = 0; x < objectsPerPoint; x++)
             {
                 Vector3 tempPos = CheckClosePosition(objectPos[i], objectRangeFromPoint);
                 
-                PlaceObject(obj, tempPos);
+                PlaceObject(obj, tempPos,Parent);
             }
         }
     }
 
-    void PlaceObject(GameObject obj, Vector3 pos)
+    void PlaceObject(GameObject obj, Vector3 pos, Transform Parent)
     {
         if (pos == Vector3.zero)
             return;
 
-        Instantiate(obj, pos, Quaternion.identity);
+        Instantiate(obj, pos, Quaternion.identity,Parent);
     }
     Vector3 CheckClosePosition(Vector3 pos, float objectRangeFromPoint)
     {

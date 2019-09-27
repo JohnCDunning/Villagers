@@ -8,6 +8,7 @@ public class ConstructObject : MonoBehaviour
     public static ConstructObject _Instance;
     
     public Transform _ContructionSphere;
+    public Transform _BuildingParent;
     private CanBuildCheck _BuildCheck;
     [Space]
     public RaycastInfo _RayInfo;
@@ -59,7 +60,7 @@ public class ConstructObject : MonoBehaviour
     //Finalize building
     void PlaceNewBuilding()
     {
-        GameObject newBuilding = Instantiate(_BuildCheck._BuildingToSpawn, _BuildCheck.transform.position, _ContructionSphere.transform.rotation);
+        GameObject newBuilding = Instantiate(_BuildCheck._BuildingToSpawn, _BuildCheck.transform.position, _ContructionSphere.transform.rotation, _BuildingParent);
         Destroy(_BuildCheck._ConstructionBuilding);
         _BuildCheck._ConstructionBuilding = null;
         _ContructionSphere.gameObject.SetActive(false);

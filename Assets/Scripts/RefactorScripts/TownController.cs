@@ -12,6 +12,7 @@ public class TownController : MonoBehaviour
     public List<Building> BuildingsInTown = new List<Building>();
 
     public Transform BuildTester;
+    public Transform BuildingParent;
 
     public GameObject _Villager;
     public GameObject[] _Buildings;
@@ -81,7 +82,7 @@ public class TownController : MonoBehaviour
                 //case 4:
                     //Villager.GetComponent<VillagerController>()._Task = VillagerTask.Combat;
                     //Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.combat;
-                    break;
+                    //break;
             }
         }
     }
@@ -159,7 +160,7 @@ public class TownController : MonoBehaviour
                 //house logic
                 if (_CurrentVillagerCount >= (_MaxVillagers * 0.8f))
                 {
-                    GameObject building = Instantiate(_Buildings[3], BuildPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 270), 0)));
+                    GameObject building = Instantiate(_Buildings[3], BuildPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 270), 0)),BuildingParent);
                     TownBuildings.Add(building);
                     _MaxVillagers += 5;
                 }

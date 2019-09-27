@@ -6,7 +6,6 @@ public class HighlightManager : MonoBehaviour
 {
     public InputManager _Input;
     public RaycastInfo _RayInfo;
-    public UpgradeManager _UpgradeManager;
 
     public List<ISelectable> _MultiSelectedVillagers = new List<ISelectable>();
     public ISelectable _CurrentlySelectedObject;
