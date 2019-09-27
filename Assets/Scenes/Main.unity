@@ -1231,6 +1231,7 @@ MonoBehaviour:
   _RockParent: {fileID: 1263242189}
   _BushParent: {fileID: 1588836652}
   _ChickenParent: {fileID: 2091533657}
+  TreePositions: []
 --- !u!114 &342284288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17958,6 +17959,7 @@ GameObject:
   - component: {fileID: 4044710141757896496}
   - component: {fileID: 7718390323502500809}
   - component: {fileID: 632333854}
+  - component: {fileID: 8296172668609101590}
   m_Layer: 10
   m_Name: Ground
   m_TagString: Ground
@@ -17965,6 +17967,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!114 &8296172668609101590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296172668609101589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b635619358c277c44af0923bfaa04f46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _HighColor: {r: 0.4475317, g: 1, b: 0, a: 1}
+  _LowColor: {r: 0.5471698, g: 0.45304984, b: 0, a: 1}
+  TreePositions: []
+  _WorldGen: {fileID: 342284287}
 --- !u!65 &8410377508705087067
 BoxCollider:
   m_ObjectHideFlags: 0
