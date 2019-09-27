@@ -15,26 +15,28 @@ public class VertexColorTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TreePositions = _WorldGen.TreePositions;
+
         Invoke("LateStart", 0.5f);
 
     }
     void LateStart()
     {
-        TreePositions = _WorldGen.TreePositions;
+
+
         Mesh mesh = GetComponent<MeshFilter>().mesh;
         Vector3[] vertices = mesh.vertices;
-
         // create new colors array where the colors will be created.
         Color[] colors = new Color[vertices.Length];
 
-        for (int i = 0; i < vertices.Length; i++)
+        for (int i = 0; i < vertices.Length; i++) //lerp verts
         {
-            foreach (Vector2 pos in TreePositions)
+            foreach (Vector2 pos in TreePositions) //loop tree pos
             {
-                Vector3 vertPos = transform.TransformPoint(vertices[i]);
-                if (Vector3.Distance(vertPos, new Vector3(pos.x,vertPos.y,pos.x)) < 10)
+                Vector3 vertPos = transform.TransformPoint(vertices[i]); //worldspace vert
+                if (Vector3.Distance(vertPos, new Vector3(pos.x,vertPos.y,pos.y)) < 20) //compare distance vert and tree
                 {
-                    colors[i] = _HighColor;
+                    colors[i] = _HighColor; 
                 }
                 else
                 {
@@ -46,6 +48,7 @@ public class VertexColorTest : MonoBehaviour
 
         // assign the array of colors to the Mesh.
         mesh.colors = colors;
+        mesh.RecalculateNormals();
     }
     // Update is called once per frame
     void Update()
