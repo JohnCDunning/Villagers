@@ -33,9 +33,7 @@ public class UIBuilding : MonoBehaviour, IPointerEnterHandler,IPointerExitHandle
     //Shows the object the user is about to place
     public void DisplayConstructionHoligram()
     {
-        _CurrentResources._CollectedWood -= _BuildingDetails._WoodCost;
-        _CurrentResources._CollectedStone -= _BuildingDetails._StoneCost;
-        _CurrentResources._CollectedFood -= _BuildingDetails._FoodCost;
+
 
         CanBuildCheck _BuildCheck = ConstructObject._Instance._ContructionSphere.GetComponent<CanBuildCheck>();
 
