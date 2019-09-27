@@ -15,7 +15,7 @@ public class HighlightManager : MonoBehaviour
         {
             LeftClickSelection();
         }
-        if (_Input.RightMouseDown())
+        if (Input.GetMouseButtonDown(1))
         {
             RightClickSelection();
         }
