@@ -333,8 +333,8 @@ namespace RTS_Cam
         {
             Ray ray = new Ray(m_Transform.position, Vector3.down);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, groundMask.value))
-                return (hit.point - m_Transform.position).magnitude;
+            //if (Physics.Raycast(ray, out hit, groundMask.value))
+            //    return (hit.point - m_Transform.position).magnitude;
 
             return 0f;
         }

@@ -597,7 +597,6 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                 if (_ObjectOfInterest.GetComponent<ITakeDamage>() != null && _ObjectOfInterest.GetComponent<WorldResource>() == null)
                 {
                     _ObjectOfInterest.GetComponent<ITakeDamage>().TakeDamage(20); //Deal damage to other entity
-                    Debug.Log("attacking");
                 }
                 else { Destroy(_CurrentTool);_Task = VillagerTask.GatherResources; }
             }

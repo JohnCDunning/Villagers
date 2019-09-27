@@ -6,6 +6,12 @@ using UnityEngine;
 //The town controller script will run an enemy town, controls when to spawn villagers
 //what to assign the villagers role to, and build new buildings. 
 
+public enum AIBehaviour
+{
+    NONE,
+    AGGRESSIVE = 1
+}
+
 public class TownController : MonoBehaviour
 {
     public List<VillagerController> VillagersInTown = new List<VillagerController>();
@@ -29,11 +35,12 @@ public class TownController : MonoBehaviour
     public float MinDist, MaxDist;
 
     public Vector3 PlaceToBuild;
-
+    public AIBehaviour _AIBehaviour = AIBehaviour.NONE;
     private bool tryingToFindPlaceToBuild = false;
 
     public MarketCost _Costs;
 
+    List<TeamSide> PotentialTarget = new List<TeamSide>();
 
     void SpawnVillager()
     {
@@ -59,7 +66,7 @@ public class TownController : MonoBehaviour
             Villager.GetComponent<VillagerController>()._WantedGoal = ResourceType.food;
         }
         Villager.GetComponent<VillagerController>()._Nav.SetDestination(_Spawn.position);
-       
+
         //what to do when you dont need anything
         if(wood > 50 || stone > 50 || food > 15)
         {
@@ -97,7 +104,84 @@ public class TownController : MonoBehaviour
 
     private void Update()
     {
-        
+        switch (_AIBehaviour)
+        {
+            case AIBehaviour.AGGRESSIVE:
+                {
+                    if (VillagersInTown.Count > 6)
+                    {
+
+                        GameObject _enemyTarget = null;
+
+                        foreach (var enemy in GameObject.FindObjectsOfType<TeamSide>())
+                        {
+                            if (enemy.GetComponent<VillagerController>() == null)
+                                continue;
+
+                            if (PotentialTarget.Contains(enemy))
+                            {
+                                if (enemy.GetComponent<VillagerController>()._Health <= 0)
+                                {
+                                    PotentialTarget.Remove(enemy);
+                                }
+                                continue;
+                            }
+
+                            if (enemy._team == Team.player)
+                            {
+
+                                PotentialTarget.Add(enemy);
+
+                            }
+                        }
+
+
+                        foreach (var villager in VillagersInTown)
+                        {
+                            villager._Task = VillagerTask.Combat;
+                            villager._WantedGoal = ResourceType.combat;
+                            float min = 1000000f;
+                            if (PotentialTarget.Count != 0)
+                            {
+                                foreach (var target in PotentialTarget)
+                                {
+                                    float cur = Vector3.Distance(target.transform.position, villager.transform.position);
+                                    if (cur < min)
+                                    {
+                                        _enemyTarget = target.gameObject;
+                                        min = cur;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (_enemyTarget != null)
+                                {
+                                    if (_enemyTarget.GetComponent<Animal>() == null)
+                                    {
+                                        _enemyTarget = GameObject.FindObjectOfType<Animal>().gameObject;
+                                    }
+                                }
+                                else
+                                {
+                                    if (GameObject.FindObjectOfType<Animal>())
+                                        _enemyTarget = GameObject.FindObjectOfType<Animal>().gameObject;
+                                }
+
+                            }
+                            if (villager != null && _enemyTarget != null)
+                            {
+                                if (villager._ObjectOfInterest != _enemyTarget.gameObject)
+                                    villager._ObjectOfInterest = _enemyTarget.gameObject;
+                            }
+                        }
+                    }
+                    break;
+                }
+            default:
+                break;
+        }
+
     }
     bool CheckIfCanAfford(Vector3 ItemToBuy) //Accesses global costs and finds out if it can afford the specific item.
     {
