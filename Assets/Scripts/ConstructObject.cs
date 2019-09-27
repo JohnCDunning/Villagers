@@ -16,11 +16,28 @@ public class ConstructObject : MonoBehaviour
 
     private bool _CanPlaceObject = false;
     public bool _RotatingObject = false;
+    private BuildingDetails _BuildingDetails;
+    public CollectedResources _CurrentResources;
+
     // Start is called before the first frame update
     void Start()
     {
         _Instance = this;
         _BuildCheck = _ContructionSphere.GetComponent<CanBuildCheck>();
+    }
+    public void SetMostRecentBuildOrder(BuildingDetails a_buldingDetails)
+    {
+        _BuildingDetails = a_buldingDetails;
+    }
+    public void CancelBuildOrder()
+    {
+        // attempt to refund the cost
+        if (_BuildCheck._ConstructionBuilding)
+            Destroy(_BuildCheck._ConstructionBuilding);
+        _ContructionSphere.gameObject.SetActive(false);
+        _CanPlaceObject = false;
+        _RotatingObject = false;
+
     }
     public void StartTimer()
     {
@@ -51,10 +68,12 @@ public class ConstructObject : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0) && _RotatingObject == true)
             {
-                
                 PlaceNewBuilding();
-                
             }
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            CancelBuildOrder();
         }
     }
     //Finalize building
@@ -67,5 +86,13 @@ public class ConstructObject : MonoBehaviour
 
         _CanPlaceObject = false;
         _RotatingObject = false;
+
+        if (_CurrentResources)
+        {
+            _CurrentResources._CollectedWood -= _BuildingDetails._WoodCost;
+            _CurrentResources._CollectedStone -= _BuildingDetails._StoneCost;
+            _CurrentResources._CollectedFood -= _BuildingDetails._FoodCost;
+            _BuildingDetails = null;
+        }
     }
 }
