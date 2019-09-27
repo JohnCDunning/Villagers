@@ -1173,6 +1173,7 @@ MonoBehaviour:
   _ChickenParent: {fileID: 2091533657}
   TreePositions: []
   RockPositions: []
+  BerryPositions: []
 --- !u!114 &342284288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18452,7 +18453,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _GrassColor: {r: 0.46660647, g: 0.8301887, b: 0.06657174, a: 1}
   _DefaultGround: {r: 0.8784314, g: 0.7809997, b: 0.22745095, a: 1}
-  _RockColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+  _RockColor: {r: 0.7169812, g: 0.63358927, b: 0.1724813, a: 1}
+  _BerryBushColor: {r: 0.7134304, g: 0.83137256, b: 0.06666668, a: 1}
   TreePositions:
   - {x: 43.813595, y: -27.130621, z: 9.9920225}
   - {x: 32.15699, y: -27.130533, z: 13.70757}
@@ -18585,6 +18587,7 @@ MonoBehaviour:
   - {x: 62.49991, y: -27.13021, z: -13.350468}
   - {x: 47.31527, y: -27.130346, z: -0.646845}
   RockPositions: []
+  BerryPositions: []
   _WorldGen: {fileID: 342284287}
 --- !u!1 &8296172669106640376 stripped
 GameObject:
