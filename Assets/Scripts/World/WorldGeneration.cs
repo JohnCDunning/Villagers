@@ -39,7 +39,7 @@ public class WorldGeneration : MonoBehaviour
     public Transform _BushParent;
     public Transform _ChickenParent;
 
-    public List<Vector2> TreePositions = new List<Vector2>();
+    public List<Vector3> TreePositions = new List<Vector3>();
 
     // Start is called before the first frame update
     void Start()
@@ -73,9 +73,9 @@ public class WorldGeneration : MonoBehaviour
             return;
 
         Instantiate(obj, pos, Quaternion.identity, Parent);
-        if (obj = _Tree)
+        if (obj == _Tree)
         {
-            TreePositions.Add(new Vector2(pos.x, pos.z));
+            TreePositions.Add(new Vector3(pos.x, pos.y,pos.z));
         }
         
     }
