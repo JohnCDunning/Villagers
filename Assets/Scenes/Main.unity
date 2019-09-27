@@ -4002,6 +4002,11 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.y
       value: 0.0000037252903
       objectReference: {fileID: 0}
+    - target: {fileID: 8682115208001795967, guid: f6036c490ae1b6643a09e4c42ad090e0,
+        type: 3}
+      propertyPath: _WantedGoal
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6036c490ae1b6643a09e4c42ad090e0, type: 3}
 --- !u!1 &1263242188
