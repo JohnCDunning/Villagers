@@ -6,7 +6,7 @@ public class HighlightManager : MonoBehaviour
 {
     public InputManager _Input;
     public RaycastInfo _RayInfo;
-
+    public GameObject _HighlightInteract;
     public List<ISelectable> _MultiSelectedVillagers = new List<ISelectable>();
     public ISelectable _CurrentlySelectedObject;
     private void Update()
@@ -88,6 +88,8 @@ public class HighlightManager : MonoBehaviour
     }
     void RightClickSelection()
     {
+        _HighlightInteract.transform.position = _RayInfo.LocationToBuild();
+        _HighlightInteract.GetComponent<Animator>().SetTrigger("Interact");
         if (_RayInfo.ObjectRaycast().GetComponent<ISelectable>() != null)
         {
             ISelectable selectObject = _RayInfo.ObjectRaycast().GetComponent<ISelectable>();
