@@ -138,7 +138,7 @@ public class TownController : MonoBehaviour
 
         BuildTester.localScale = new Vector3(buildSize, buildSize, buildSize);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(10);
 
         float xpos, ypos, zpos;
 
