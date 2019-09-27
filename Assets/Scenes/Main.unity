@@ -1171,6 +1171,7 @@ MonoBehaviour:
   _BushParent: {fileID: 1588836652}
   _ChickenParent: {fileID: 2091533657}
   TreePositions: []
+  RockPositions: []
 --- !u!114 &342284288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5526,7 +5527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11455738, guid: 407bd5cbe8c43334bb1b25c0f3826974, type: 3}
       propertyPath: lastTab
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11455738, guid: 407bd5cbe8c43334bb1b25c0f3826974, type: 3}
       propertyPath: useScreenEdgeInput
@@ -5579,6 +5580,10 @@ PrefabInstance:
     - target: {fileID: 11455738, guid: 407bd5cbe8c43334bb1b25c0f3826974, type: 3}
       propertyPath: mouseRotationSpeed
       value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455738, guid: 407bd5cbe8c43334bb1b25c0f3826974, type: 3}
+      propertyPath: keyboardMovementSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11488424, guid: 407bd5cbe8c43334bb1b25c0f3826974, type: 3}
       propertyPath: m_Enabled
@@ -18285,9 +18290,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8296172668609101589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b635619358c277c44af0923bfaa04f46, type: 3}
+  m_Script: {fileID: 11500000, guid: b316653bcc47f0f4da64c946cd4100a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _GrassColor: {r: 0.46660647, g: 0.8301887, b: 0.06657174, a: 1}
+  _DefaultGround: {r: 0.9150943, g: 0.7251906, b: 0.004316493, a: 1}
+  _RockColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+  TreePositions: []
+  RockPositions: []
+  _WorldGen: {fileID: 342284287}
 --- !u!65 &8410377508705087067
 BoxCollider:
   m_ObjectHideFlags: 0

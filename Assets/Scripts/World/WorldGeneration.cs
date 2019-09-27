@@ -40,7 +40,7 @@ public class WorldGeneration : MonoBehaviour
     public Transform _ChickenParent;
 
     public List<Vector3> TreePositions = new List<Vector3>();
-
+    public List<Vector3> RockPositions = new List<Vector3>();
     // Start is called before the first frame update
     void Start()
     {
@@ -77,7 +77,11 @@ public class WorldGeneration : MonoBehaviour
         {
             TreePositions.Add(new Vector3(pos.x, pos.y,pos.z));
         }
-        
+        if (obj == _Rock)
+        {
+            RockPositions.Add(new Vector3(pos.x, pos.y, pos.z));
+        }
+
     }
     Vector3 CheckClosePosition(Vector3 pos, float objectRangeFromPoint)
     {
