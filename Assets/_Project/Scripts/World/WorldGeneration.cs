@@ -42,6 +42,8 @@ public class WorldGeneration : MonoBehaviour
     public List<Vector3> TreePositions = new List<Vector3>();
     public List<Vector3> RockPositions = new List<Vector3>();
     public List<Vector3> BerryPositions = new List<Vector3>();
+
+  
     // Start is called before the first frame update
     void Start()
     {

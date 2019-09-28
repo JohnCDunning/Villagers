@@ -57,7 +57,7 @@ public class VertexColorTest : MonoBehaviour
                     }
                     foreach (Vector3 berryPos in BerryPositions)
                     {
-                        if (Vector3.Distance(berryPos, vertPos) < 2.5f)
+                        if (Vector3.Distance(berryPos, vertPos) < 2)
                         {
                             colors[i] = _BerryBushColor;
                         }
