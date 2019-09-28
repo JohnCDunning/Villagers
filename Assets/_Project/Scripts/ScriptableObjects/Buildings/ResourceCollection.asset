@@ -15,7 +15,7 @@ MonoBehaviour:
   _BuildingType: 1
   _ConstructionPrefab: {fileID: 5822179527728865458, guid: d70fc403641abeb4185da0d0a9a5defe,
     type: 3}
-  _ObjectPrefab: {fileID: 95953438532374429, guid: 61c451be1e2b0ac428160b71ce9962c7,
+  _ObjectPrefab: {fileID: 6977940306266324352, guid: 33dfd1481b7c90a4e9229b0beea7ca28,
     type: 3}
   _BuildingName: Resource Collection
   _BuildingDescription: Resource Cache

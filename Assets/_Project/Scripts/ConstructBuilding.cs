@@ -64,5 +64,10 @@ public class ConstructBuilding : MonoBehaviour, ISelectable,ITakeDamage
                 Destroy(this);
             }
         }
+        if (transform.GetChild(transform.childCount -1).gameObject.activeInHierarchy)
+        {
+            Debug.Log("last phase is active");
+            GetComponent<NavMeshObstacle>().enabled = false;
+        }
     }
 }
