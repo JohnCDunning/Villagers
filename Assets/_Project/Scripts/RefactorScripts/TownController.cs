@@ -223,7 +223,7 @@ public class TownController : MonoBehaviour
 
         BuildTester.localScale = new Vector3(buildSize, buildSize, buildSize);
 
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(1);
 
         float xpos, ypos, zpos;
 
@@ -242,20 +242,26 @@ public class TownController : MonoBehaviour
             if (BuildTester.GetComponent<BuildTest>().collisionCount == 0)
             {
                 //house logic
-                if (_CurrentVillagerCount >= (_MaxVillagers * 0.8f))
+                if (_CurrentVillagerCount >= (_MaxVillagers * 0.6f))
                 {
                     GameObject building = Instantiate(_Buildings[3], BuildPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 270), 0)),BuildingParent);
                     TownBuildings.Add(building);
+                    wood -= (int)_Costs._House.x;
+                    stone -= (int)_Costs._House.y;
+                    food -= (int)_Costs._House.z;
                     _MaxVillagers += 5;
                 }
                 //Logic for how enemy to decide what to place.
                 //farm
-                if (food < 50 && VillagersInTown.Count > BuildingsInTown.Count)
+                if (food < 45 && VillagersInTown.Count > BuildingsInTown.Count)
                 {
                     if (CheckIfCanAfford(_Costs._Farm))
                     {
                         GameObject building = Instantiate(_Buildings[2], BuildPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 270), 0)));
                         TownBuildings.Add(building);
+                        wood -= (int)_Costs._Farm.x;
+                        stone -= (int)_Costs._Farm.y;
+                        food -= (int)_Costs._Farm.z;
                     }                        
                 }
                

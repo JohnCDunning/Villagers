@@ -65,7 +65,7 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
     }
     public void InteractSelect()
     {
-        _AnimatedOutline.GetComponent<Animator>().SetTrigger("ShowOutline");
+        _AnimatedOutline.GetComponent<Animator>().SetTrigger("Interact");
     }
     public void InteractWithObject(ISelectable selectableObject)
     {

@@ -66,7 +66,7 @@ public class Animal : MonoBehaviour, ITakeDamage,ISelectable
 
     public void InteractSelect()
     {
-        _AnimatedOutline.GetComponent<Animator>().SetTrigger("ShowOutline");
+        _AnimatedOutline.GetComponent<Animator>().SetTrigger("Interact");
     }
 
     public void InteractWithObject(ISelectable selectableObject)

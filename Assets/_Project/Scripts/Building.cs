@@ -27,7 +27,7 @@ public class Building : MonoBehaviour,ISelectable
     }
     public void InteractSelect()
     {
-        _AnimatedOutline.GetComponent<Animator>().SetTrigger("ShowOutline");
+        _AnimatedOutline.GetComponent<Animator>().SetTrigger("Interact");
 
         if (_BuildingType == BuildingType.Farm)
         {
