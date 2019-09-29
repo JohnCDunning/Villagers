@@ -5,7 +5,7 @@ using UnityEngine;
 public class Building : MonoBehaviour,ISelectable
 {
     public BuildingType _BuildingType;
-
+    
     public GameObject _AnimatedOutline;
     public GameObject _Outline;
     public BuildingDetails _BuildingDetails;
@@ -49,7 +49,7 @@ public class Building : MonoBehaviour,ISelectable
     {
 
     }
-    public GameObject GetThisObject()
+    public GameObject GetObject()
     {
         return gameObject;
     }

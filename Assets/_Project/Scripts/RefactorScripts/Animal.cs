@@ -77,7 +77,7 @@ public class Animal : MonoBehaviour, ITakeDamage,ISelectable
     {
     }
 
-    public GameObject GetThisObject()
+    public GameObject GetObject()
     {
         return gameObject;
     }

@@ -8,5 +8,5 @@ public interface ISelectable
     void InteractWithObject(ISelectable selectableObject);
     void InteractWithLocation(Vector3 location);
     
-    GameObject GetThisObject();
+    GameObject GetObject();
 }

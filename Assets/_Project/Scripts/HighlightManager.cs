@@ -30,6 +30,7 @@ public class HighlightManager : MonoBehaviour
         //Highlight if hits a selectable object
         if (_RayInfo.ObjectRaycast().GetComponent<ISelectable>() != null)
         {
+            
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 if (_RayInfo.ObjectRaycast().GetComponent<TeamSide>()._team == Team.player)
@@ -92,7 +93,7 @@ public class HighlightManager : MonoBehaviour
         if (_RayInfo.ObjectRaycast().GetComponent<ISelectable>() != null)
         {
             ISelectable selectObject = _RayInfo.ObjectRaycast().GetComponent<ISelectable>();
-            selectObject.GetThisObject();
+            selectObject.GetObject();
             InteractObject(selectObject);
             //Currently selected object will attempt to interact with the object
             if(_CurrentlySelectedObject != null)

@@ -42,7 +42,7 @@ public class WorldResource : MonoBehaviour, ISelectable,ITakeDamage
     {
 
     }
-    public GameObject GetThisObject()
+    public GameObject GetObject()
     {
         return gameObject;
     }

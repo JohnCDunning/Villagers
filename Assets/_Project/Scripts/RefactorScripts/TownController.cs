@@ -171,8 +171,8 @@ public class TownController : MonoBehaviour
                             }
                             if (villager != null && _enemyTarget != null)
                             {
-                                if (villager._ObjectOfInterest != _enemyTarget.gameObject)
-                                    villager._ObjectOfInterest = _enemyTarget.gameObject;
+                                if (villager._ObjOfFocus != _enemyTarget.gameObject)
+                                    villager._ObjOfFocus = _enemyTarget.gameObject;
                             }
                         }
                     }

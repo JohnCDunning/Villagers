@@ -15,6 +15,7 @@ public class ConstructBuilding : MonoBehaviour, ISelectable,ITakeDamage
     }
     public void Select()
     {
+        
     }
 
     public void UnSelect()
@@ -24,7 +25,7 @@ public class ConstructBuilding : MonoBehaviour, ISelectable,ITakeDamage
     public void InteractSelect()
     {
 
-        _AnimatedOutline.GetComponent<Animator>().SetTrigger("ShowOutline");
+        _AnimatedOutline.GetComponent<Animator>().SetTrigger("Interact");
     }
 
     public void InteractWithObject(ISelectable selectableObject)
@@ -35,7 +36,7 @@ public class ConstructBuilding : MonoBehaviour, ISelectable,ITakeDamage
     {
     }
 
-    public GameObject GetThisObject()
+    public GameObject GetObject()
     {
         return gameObject;
     }
