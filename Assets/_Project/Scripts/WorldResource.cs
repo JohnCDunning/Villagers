@@ -51,6 +51,16 @@ public class WorldResource : MonoBehaviour, ISelectable,ITakeDamage
     private void Start()
     {
         _OriginalAmount = _SupplyAmount;
+        Invoke("LateStart",1);
+    }
+
+    private void LateStart()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100))
+        {
+            transform.position = hit.point;
+        }
     }
     private void Update()
     {

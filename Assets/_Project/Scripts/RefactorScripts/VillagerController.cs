@@ -160,6 +160,15 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
         _ResourceToCarry.Add(ResourceType.wood, _SingleResource[0]);
         _ResourceToCarry.Add(ResourceType.stone, _SingleResource[1]);
         _ResourceToCarry.Add(ResourceType.food, _SingleResource[2]);
+        Invoke("LateStart", 1);
+    }
+    private void LateStart()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100))
+        {
+            transform.position = hit.point;
+        }
     }
     private void Update()
     {

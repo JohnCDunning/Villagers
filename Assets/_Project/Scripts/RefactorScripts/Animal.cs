@@ -14,6 +14,15 @@ public class Animal : MonoBehaviour, ITakeDamage,ISelectable
     private void Start()
     {
         StartCoroutine(RandomMove());
+        Invoke("LateStart", 1);
+    }
+    private void LateStart()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100))
+        {
+            transform.position = hit.point;
+        }
     }
     void Update()
     {

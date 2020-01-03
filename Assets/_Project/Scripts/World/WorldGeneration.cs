@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WorldGeneration : MonoBehaviour
 {
+    
     public Vector2 _WorldX;
     public Vector2 _WorldZ;
 
@@ -39,8 +40,11 @@ public class WorldGeneration : MonoBehaviour
     public Transform _BushParent;
     public Transform _ChickenParent;
 
+    [HideInInspector]
     public List<Vector3> TreePositions = new List<Vector3>();
+    [HideInInspector]
     public List<Vector3> RockPositions = new List<Vector3>();
+    [HideInInspector]
     public List<Vector3> BerryPositions = new List<Vector3>();
 
   
@@ -75,7 +79,7 @@ public class WorldGeneration : MonoBehaviour
         if (pos == Vector3.zero)
             return;
 
-        Instantiate(obj, pos, Quaternion.identity, Parent);
+        Instantiate(obj, new Vector3(pos.x,50,pos.z), Quaternion.identity, Parent);
         if (obj == _Tree)
         {
             TreePositions.Add(new Vector3(pos.x, pos.y,pos.z));

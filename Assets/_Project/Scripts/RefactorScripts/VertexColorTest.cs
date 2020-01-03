@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class VertexColorTest : MonoBehaviour
 {
+    public NavMeshSurface _Navmesh;
     Mesh mesh;
     MeshFilter meshFilter;
 
@@ -12,10 +13,27 @@ public class VertexColorTest : MonoBehaviour
     public Color _RockColor;
     public Color _BerryBushColor;
 
-    public List<Vector3> TreePositions = new List<Vector3>();
-    public List<Vector3> RockPositions = new List<Vector3>();
-    public List<Vector3> BerryPositions = new List<Vector3>();
+
+    private List<Vector3> TreePositions = new List<Vector3>();
+    private List<Vector3> RockPositions = new List<Vector3>();
+    private List<Vector3> BerryPositions = new List<Vector3>();
     public WorldGeneration _WorldGen;
+
+    private void Awake()
+    {
+
+        mesh = GetComponent<MeshFilter>().mesh;
+
+        meshFilter = GetComponent<MeshFilter>();
+        Vector3[] vertices = mesh.vertices;
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            vertices[i] = new Vector3(vertices[i].x, vertices[i].y + Mathf.Abs(Mathf.PerlinNoise(vertices[i].x * .05f, vertices[i].z * .05f)) * 1.5f, vertices[i].z);
+        }
+        
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +65,10 @@ public class VertexColorTest : MonoBehaviour
                 // Vector3 pos2 = new Vector2(vertPos.x, vertPos.z);
 
                 if (Vector3.Distance(pos, vertPos) < 5)
+                {
                     colors[i] = _GrassColor;
+                    vertices[i] = new Vector3(vertices[i].x, vertices[i].y + 1f, vertices[i].z);
+                }
 
                 foreach(Vector3 rockPos in RockPositions)
                 {
@@ -66,9 +87,16 @@ public class VertexColorTest : MonoBehaviour
 
             }
         }
+
+        mesh.vertices = vertices;
+        meshFilter.mesh = mesh;
+        GetComponent<MeshCollider>().sharedMesh = mesh;
+        meshFilter.mesh.RecalculateNormals();
+        meshFilter.mesh.RecalculateBounds();
         // assign the array of colors to the Mesh.
         mesh.colors = colors;
         //mesh.RecalculateNormals();
+        _Navmesh.BuildNavMesh();
     }
 
     void PaintWorld(List<Vector3> treePosition, Color color)
