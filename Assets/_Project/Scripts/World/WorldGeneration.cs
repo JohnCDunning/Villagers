@@ -47,7 +47,7 @@ public class WorldGeneration : MonoBehaviour
     public Color _BerryBushColor;
     public GameObject _Ground;
     public Material _Leaves;
-    public GameObject _Village, _EnemyVillage;
+    public GameObject[] _Villages;
 
     // Start is called before the first frame update
     void Awake()
@@ -91,17 +91,19 @@ public class WorldGeneration : MonoBehaviour
             {
                 if (Vector3.Distance(pos, vertPos) < 5)
                 {
-                    vertices[i] = new Vector3(vertices[i].x, vertices[i].y + 0.3f, vertices[i].z); //+ Random.Range(0.1f, 0.3f)
+                    vertices[i] = new Vector3(vertices[i].x, vertices[i].y + 0.1f, vertices[i].z); //+ Random.Range(0.1f, 0.3f)
                 }
             }
             //Debug.Log(vertPos);
             Vector3 testPos = _Ground.transform.TransformPoint(vertices[i]);
-            if (Vector3.Distance(new Vector3(_Village.transform.localPosition.x, testPos.y, _Village.transform.localPosition.z), testPos) < 10)
+            for (int x = 0; x < _Villages.Length; x++)
             {
-                vertices[i] = new Vector3(vertices[i].x, 0, vertices[i].z);
-                
-
+                if (Vector3.Distance(new Vector3(_Villages[x].transform.localPosition.x, testPos.y, _Villages[x].transform.localPosition.z), testPos) < 10)
+                {
+                    vertices[i] = new Vector3(vertices[i].x, 0, vertices[i].z);
+                }
             }
+            
         }
         SetMesh(vertices, groundMesh, null);
     }
@@ -172,11 +174,15 @@ public class WorldGeneration : MonoBehaviour
             {
                 Vector3 tempPos = CheckClosePosition(objectPos[i], objectRangeFromPoint);
 
-                Vector3 villagePos = _Village.transform.position;
-                if (Vector3.Distance(tempPos, new Vector3(villagePos.x, tempPos.y, villagePos.z)) > 7)
+                for (int v = 0; v < _Villages.Length; v++)
                 {
-                    PlaceObject(obj, tempPos, Parent);
+                    Vector3 pos = _Villages[v].transform.position;
+                    if (Vector3.Distance(tempPos, new Vector3(pos.x, tempPos.y, pos.z)) > 7)
+                    {
+                        PlaceObject(obj, tempPos, Parent);
+                    }
                 }
+               
             }
         }
     }
