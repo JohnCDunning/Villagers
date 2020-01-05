@@ -30,7 +30,7 @@ public class WorldGeneration : MonoBehaviour
     public List<Vector3> RockPositions = new List<Vector3>();
     [HideInInspector]
     public List<Vector3> BerryPositions = new List<Vector3>();
-    [HideInInspector]
+  
     public List<GameObject> _AllObjects = new List<GameObject>();
     public List<Vector3> _ObjectPositions = new List<Vector3>();
 
@@ -46,6 +46,8 @@ public class WorldGeneration : MonoBehaviour
     public Color _RockColor;
     public Color _BerryBushColor;
     public GameObject _Ground;
+    public Material _Leaves;
+    public GameObject _Village, _EnemyVillage;
 
     // Start is called before the first frame update
     void Awake()
@@ -80,17 +82,25 @@ public class WorldGeneration : MonoBehaviour
     }
     void CarveWorld()
     {
+        
         Vector3[] vertices = groundMesh.vertices;
-
         for (int i = 0; i < vertices.Length; i++)
         {
-            Vector3 vertPos = transform.TransformPoint(vertices[i]);
+            Vector3 vertPos = _Ground.transform.TransformPoint(vertices[i]);
             foreach (Vector3 pos in _ObjectPositions)
             {
                 if (Vector3.Distance(pos, vertPos) < 5)
                 {
                     vertices[i] = new Vector3(vertices[i].x, vertices[i].y + 0.3f, vertices[i].z); //+ Random.Range(0.1f, 0.3f)
                 }
+            }
+            //Debug.Log(vertPos);
+            Vector3 testPos = _Ground.transform.TransformPoint(vertices[i]);
+            if (Vector3.Distance(new Vector3(_Village.transform.localPosition.x, testPos.y, _Village.transform.localPosition.z), testPos) < 10)
+            {
+                vertices[i] = new Vector3(vertices[i].x, 0, vertices[i].z);
+                
+
             }
         }
         SetMesh(vertices, groundMesh, null);
@@ -107,18 +117,28 @@ public class WorldGeneration : MonoBehaviour
         {
             colors[i] = _DefaultGround[defaultGrassColor];
 
-            Vector3 vertPos = transform.TransformPoint(vertices[i]);
-            foreach (Vector3 pos in _ObjectPositions)
+            Vector3 vertPos = _Ground.transform.TransformPoint(vertices[i]);
+            WorldResource[] allObs = FindObjectsOfType<WorldResource>();
+            foreach (WorldResource worldObject in allObs)
             {
-
-                if (Vector3.Distance(pos, vertPos) < 5)
+                
+                if (Vector3.Distance(worldObject.transform.position, vertPos) < 5)
                 {
-                    colors[i] = _GrassColors[grassColor];
+                    if(worldObject._ResourceType == ResourceType.wood)
+                    {
+                        colors[i] = _GrassColors[grassColor];
+                        Color color = _Leaves.color;
+                        float b = 0;
+                        Color leaves = new Color(_GrassColors[grassColor].r * 1.1f, _GrassColors[grassColor].g, _GrassColors[grassColor].b - 0.5f, _GrassColors[grassColor].a);
+                        _Leaves.SetColor("_BaseColor", leaves);
+                        
+                    }
                 }
             }
         }
         SetMesh(vertices, groundMesh, colors);
     }
+   
     void SetMesh(Vector3[] vertices, Mesh mesh, Color[] meshColors)
     {
         MeshFilter mf = _Ground.GetComponent<MeshFilter>();
@@ -151,8 +171,12 @@ public class WorldGeneration : MonoBehaviour
             for (int x = 0; x < objectsPerPoint; x++)
             {
                 Vector3 tempPos = CheckClosePosition(objectPos[i], objectRangeFromPoint);
-                
-                PlaceObject(obj, tempPos,Parent);
+
+                Vector3 villagePos = _Village.transform.position;
+                if (Vector3.Distance(tempPos, new Vector3(villagePos.x, tempPos.y, villagePos.z)) > 7)
+                {
+                    PlaceObject(obj, tempPos, Parent);
+                }
             }
         }
     }
