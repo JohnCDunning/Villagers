@@ -1,29 +1,29 @@
 fileFormatVersion: 2
 guid: 638ec313c5c4ee541961f82f34bb088a
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert2
-    second: {fileID: 2100000, guid: 1e75cfebf1a25af46b3e310a10a6b9aa, type: 2}
+    second: {fileID: 2100000, guid: 9f93cd19f51b63d4facd5597152e58e7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert3
-    second: {fileID: 2100000, guid: 7f893dd81cba5464d82a778d25a7e22c, type: 2}
+    second: {fileID: 2100000, guid: da94a5510ba5cc04c882c9547a2cd1af, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert5
-    second: {fileID: 2100000, guid: d0fab838deed6fa40a3dd62281467d0b, type: 2}
+    second: {fileID: 2100000, guid: 3986680e5dbb46145b28cbbef135a68a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert6
-    second: {fileID: 2100000, guid: 312daba6124ef9141916398cd23e4d3b, type: 2}
+    second: {fileID: 2100000, guid: 6307c4f23a2297f43801d291172383c3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,13 +51,14 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 60
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

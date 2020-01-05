@@ -1,14 +1,14 @@
 fileFormatVersion: 2
 guid: 935c4d4499773cf48ba9c316847f14aa
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: GenericObject
-    second: {fileID: 2100000, guid: 36332248aa472b54cb993ce5e2895832, type: 2}
+    second: {fileID: 2100000, guid: b5a416f7f2e1d0b4286eb760c42fa122, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -41,13 +41,14 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 50
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

@@ -4,41 +4,25 @@ using UnityEngine;
 
 public class WorldGeneration : MonoBehaviour
 {
-    
+    [System.Serializable]
+    public struct SpawnableObject
+    {
+        [Header("Object To Spawn")]
+        public string _Name;
+        public GameObject _ObjectPrefab;
+        public int _ObjectTotalGroups;
+        public int _ObjectsPerPoint;
+        public float _ObjectRangeFromPoint;
+        public Transform _ObjectParent;
+
+        [HideInInspector] public Vector3[] ObjectPos;
+    }
+    public SpawnableObject[] _SpawnableObjects;
+
+
     public Vector2 _WorldX;
     public Vector2 _WorldZ;
 
-    [Header("Tree Settings")]
-    public int _TreesPerPoint = 10;
-    public float _TreeRangeFromPoint;
-    public int _TreeGroups;
-    Vector3[] TreePos;
-    public GameObject _Tree;
-    [Header("Rock Settings")]
-    public int _RockPerPoint = 10;
-    public float _RockRangeFromPoint;
-    public int _RockGroups;
-    Vector3[] RockPos;
-    public GameObject _Rock;
-    [Header("BerryBush Settings")]
-    public int _BerryPerPoint = 10;
-    public float BerryRangeFromPoint;
-    public int _BerryGroups;
-    Vector3[] BerryPos;
-    public GameObject _BerryBush;
-    [Header("Chicken Settings")]
-    public int _ChickenPerPoint = 10;
-    public float ChickenRangeFromPoint;
-    public int _ChickenGroups;
-    Vector3[] ChickenPos;
-    public GameObject _Chicken;
-
-    //ParentObjects
-    [Header("Parent Assignments")]
-    public Transform _TreeParent;
-    public Transform _RockParent;
-    public Transform _BushParent;
-    public Transform _ChickenParent;
 
     [HideInInspector]
     public List<Vector3> TreePositions = new List<Vector3>();
@@ -46,15 +30,20 @@ public class WorldGeneration : MonoBehaviour
     public List<Vector3> RockPositions = new List<Vector3>();
     [HideInInspector]
     public List<Vector3> BerryPositions = new List<Vector3>();
+    [HideInInspector]
+    public List<GameObject> _AllObjects = new List<GameObject>();
 
+  
   
     // Start is called before the first frame update
     void Start()
     {
-        SetUpObject(_RockGroups, RockPos, _Rock, _RockPerPoint,_RockRangeFromPoint,_RockParent);
-        SetUpObject(_ChickenGroups, ChickenPos, _Chicken, _ChickenPerPoint, ChickenRangeFromPoint,_ChickenParent);
-        SetUpObject(_BerryGroups, BerryPos, _BerryBush, _BerryPerPoint, BerryRangeFromPoint,_BushParent);
-        SetUpObject(_TreeGroups, TreePos, _Tree, _TreesPerPoint,_TreeRangeFromPoint,_TreeParent);
+       
+        for (int i = 0; i < _SpawnableObjects.Length; i++)
+        {
+            SpawnableObject _Object = _SpawnableObjects[i];
+            SetUpObject(_Object._ObjectTotalGroups, _Object.ObjectPos, _Object._ObjectPrefab, _Object._ObjectsPerPoint, _Object._ObjectRangeFromPoint, _Object._ObjectParent);
+        }
     }
     void SetUpObject(int objectGroups, Vector3[] objectPos, GameObject obj, int objectsPerPoint, float objectRangeFromPoint,Transform Parent)
     {
@@ -79,19 +68,9 @@ public class WorldGeneration : MonoBehaviour
         if (pos == Vector3.zero)
             return;
 
-        Instantiate(obj, new Vector3(pos.x,50,pos.z), Quaternion.identity, Parent);
-        if (obj == _Tree)
-        {
-            TreePositions.Add(new Vector3(pos.x, pos.y,pos.z));
-        }
-        if (obj == _Rock)
-        {
-            RockPositions.Add(new Vector3(pos.x, pos.y, pos.z));
-        }
-        if (obj == _BerryBush)
-        {
-            BerryPositions.Add(new Vector3(pos.x, pos.y, pos.z));
-        }
+        GameObject placedObject = Instantiate(obj, new Vector3(pos.x,pos.y + 60 ,pos.z), Quaternion.identity, Parent);
+
+        _AllObjects.Add(placedObject);
 
     }
     Vector3 CheckClosePosition(Vector3 pos, float objectRangeFromPoint)

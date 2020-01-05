@@ -17,6 +17,8 @@ public class WorldResource : MonoBehaviour, ISelectable,ITakeDamage
     public GameObject _AnimatedOutline;
     public GameObject _Outline;
 
+    public Vector3 _PosWherehit;
+
     #region Interfaces
     public void TakeDamage(int damage)
     {

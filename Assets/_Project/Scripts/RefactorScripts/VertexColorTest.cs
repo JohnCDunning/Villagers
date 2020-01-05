@@ -14,9 +14,8 @@ public class VertexColorTest : MonoBehaviour
     public Color _BerryBushColor;
 
 
-    private List<Vector3> TreePositions = new List<Vector3>();
-    private List<Vector3> RockPositions = new List<Vector3>();
-    private List<Vector3> BerryPositions = new List<Vector3>();
+    private List<GameObject> _ObjectPositions = new List<GameObject>();
+
     public WorldGeneration _WorldGen;
 
     private void Awake()
@@ -60,30 +59,30 @@ public class VertexColorTest : MonoBehaviour
 
             colors[i] = _DefaultGround;//Color.Lerp(Color.blue, Color.red, i/vertices.Length);
             Vector3 vertPos = transform.TransformPoint(vertices[i]); //worldspace vert
-            foreach (Vector3 pos in TreePositions) //loop tree pos
+            foreach (GameObject ob in _ObjectPositions) //loop tree pos
             {
                 // Vector3 pos2 = new Vector2(vertPos.x, vertPos.z);
 
-                if (Vector3.Distance(pos, vertPos) < 5)
+                if (Vector3.Distance(ob.transform.position, vertPos) < 5)
                 {
                     colors[i] = _GrassColor;
-                    vertices[i] = new Vector3(vertices[i].x, vertices[i].y + 1f, vertices[i].z);
+                    vertices[i] = new Vector3(vertices[i].x, vertices[i].y + Random.Range(0.5f,1), vertices[i].z);
                 }
 
-                foreach(Vector3 rockPos in RockPositions)
-                {
-                    if (Vector3.Distance(rockPos, vertPos) < 2.5f)
-                    {
-                        colors[i] = _RockColor;
-                    }
-                    foreach (Vector3 berryPos in BerryPositions)
-                    {
-                        if (Vector3.Distance(berryPos, vertPos) < 2)
-                        {
-                            colors[i] = _BerryBushColor;
-                        }
-                    }
-                }
+               // foreach(Vector3 rockPos in RockPositions)
+               // {
+                  //  if (Vector3.Distance(rockPos, vertPos) < 2.5f)
+                   // {
+                      //  colors[i] = _RockColor;
+                    //}
+                   // foreach (Vector3 berryPos in BerryPositions)
+                   // {
+                       // if (Vector3.Distance(berryPos, vertPos) < 2)
+                       // {
+                        //    colors[i] = _BerryBushColor;
+                       // }
+                   // }
+               // }
 
             }
         }
@@ -97,15 +96,5 @@ public class VertexColorTest : MonoBehaviour
         mesh.colors = colors;
         //mesh.RecalculateNormals();
         _Navmesh.BuildNavMesh();
-    }
-
-    void PaintWorld(List<Vector3> treePosition, Color color)
-    {
-        
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
