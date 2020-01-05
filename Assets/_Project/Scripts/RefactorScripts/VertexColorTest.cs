@@ -14,7 +14,7 @@ public class VertexColorTest : MonoBehaviour
     public Color _BerryBushColor;
 
 
-    private List<GameObject> _ObjectPositions = new List<GameObject>();
+    private List<Vector3> _ObjectPositions = new List<Vector3>();
 
     public WorldGeneration _WorldGen;
 
@@ -36,17 +36,14 @@ public class VertexColorTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // TreePositions = _WorldGen.TreePositions;
-
-        Invoke("LateStart", 0f);
+        LateStart();
+        //Invoke("LateStart", 0f);
 
     }
 
     void LateStart()
     {
-        TreePositions = _WorldGen.TreePositions;
-        RockPositions = _WorldGen.RockPositions;
-        BerryPositions = _WorldGen.BerryPositions;
+        
         // PaintWorld(_WorldGen.RockPositions, _RockColor, true);
 
         Mesh mesh = GetComponent<MeshFilter>().mesh;
@@ -59,11 +56,11 @@ public class VertexColorTest : MonoBehaviour
 
             colors[i] = _DefaultGround;//Color.Lerp(Color.blue, Color.red, i/vertices.Length);
             Vector3 vertPos = transform.TransformPoint(vertices[i]); //worldspace vert
-            foreach (GameObject ob in _ObjectPositions) //loop tree pos
+            foreach (Vector3 pos in _ObjectPositions) //loop tree pos
             {
                 // Vector3 pos2 = new Vector2(vertPos.x, vertPos.z);
 
-                if (Vector3.Distance(ob.transform.position, vertPos) < 5)
+                if (Vector3.Distance(pos, vertPos) < 5)
                 {
                     colors[i] = _GrassColor;
                     vertices[i] = new Vector3(vertices[i].x, vertices[i].y + Random.Range(0.5f,1), vertices[i].z);
