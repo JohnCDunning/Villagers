@@ -20,44 +20,39 @@ public class WorldGeneration : MonoBehaviour
     public SpawnableObject[] _SpawnableObjects;
 
 
-    public Vector2 _WorldX;
-    public Vector2 _WorldZ;
-
+    private Vector2 _WorldX, _WorldZ;
 
     [HideInInspector]
-    public List<Vector3> TreePositions = new List<Vector3>();
-    [HideInInspector]
-    public List<Vector3> RockPositions = new List<Vector3>();
-    [HideInInspector]
-    public List<Vector3> BerryPositions = new List<Vector3>();
-  
-    public List<GameObject> _AllObjects = new List<GameObject>();
     public List<Vector3> _ObjectPositions = new List<Vector3>();
 
-
-
-
-    public NavMeshSurface _Navmesh;
-    Mesh groundMesh;
+    private NavMeshSurface _Navmesh;
+    private Mesh groundMesh;
 
  
     public Color[] _GrassColors;
     public Color[] _DefaultGround;
-    public Color _RockColor;
-    public Color _BerryBushColor;
+
+    [Header("World Gen Variable Requirments")]
     public GameObject _Ground;
     public Material _Leaves;
     public GameObject[] _Villages;
+    public float _MinDistanceAllowedNearVillage; //For objects to spawn nearbye
 
     // Start is called before the first frame update
     void Awake()
     {
+        Collider groundCol = _Ground.GetComponent<Collider>();
+        //Sets Object spawn range based on the world collider
+        _WorldX = new Vector2(-groundCol.bounds.size.x / 2, groundCol.bounds.size.x / 2);
+        _WorldZ = new Vector2(-groundCol.bounds.size.z / 2, groundCol.bounds.size.z / 2);
+
+        _Navmesh = FindObjectOfType<NavMeshSurface>();
         groundMesh = _Ground.GetComponent<MeshFilter>().mesh;
 
         SpawnObjects();
         PerlinNoise();
         CarveWorld();
-        Invoke("PaintWorld", 2f);
+        Invoke("PaintWorld", 1.5f);
         
     }
     void SpawnObjects()
@@ -75,7 +70,7 @@ public class WorldGeneration : MonoBehaviour
 
         for (int i = 0; i < vertices.Length; i++)
         {
-            vertices[i] = new Vector3(vertices[i].x, vertices[i].y + Mathf.Abs(Mathf.PerlinNoise(vertices[i].x * .05f, vertices[i].z * .05f)) * 1f, vertices[i].z);
+            vertices[i] = new Vector3(vertices[i].x, vertices[i].y + Mathf.Abs(Mathf.PerlinNoise(vertices[i].x * .1f, vertices[i].z * .1f)) * 0.5f, vertices[i].z);
         }
 
         SetMesh(vertices, groundMesh,null);
@@ -177,9 +172,13 @@ public class WorldGeneration : MonoBehaviour
                 for (int v = 0; v < _Villages.Length; v++)
                 {
                     Vector3 pos = _Villages[v].transform.position;
-                    if (Vector3.Distance(tempPos, new Vector3(pos.x, tempPos.y, pos.z)) > 7)
+                    if (Vector3.Distance(tempPos, new Vector3(pos.x, tempPos.y, pos.z)) > _MinDistanceAllowedNearVillage)
                     {
                         PlaceObject(obj, tempPos, Parent);
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
                
@@ -196,7 +195,7 @@ public class WorldGeneration : MonoBehaviour
         _ObjectPositions.Add(placedObject.transform.position);
         placedObject.transform.position = new Vector3(pos.x, pos.y + 60, pos.z);
 
-        _AllObjects.Add(placedObject);
+
         
 
     }

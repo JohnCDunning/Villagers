@@ -53,7 +53,7 @@ public class WorldResource : MonoBehaviour, ISelectable,ITakeDamage
     private void Start()
     {
         _OriginalAmount = _SupplyAmount;
-        Invoke("LateStart",1);
+        Invoke("LateStart",1f);
     }
 
     private void LateStart()

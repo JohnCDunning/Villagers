@@ -48,7 +48,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 214.74
@@ -181,12 +181,13 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 34116041429b0c04584014660c80e7d1, type: 3}
-  - {fileID: -4597107667637640440, guid: 34116041429b0c04584014660c80e7d1, type: 3}
-  - {fileID: 8748892135801146194, guid: 34116041429b0c04584014660c80e7d1, type: 3}
+  - {fileID: 2100000, guid: 11381425cf1792441a7df87bd2ac595d, type: 2}
+  - {fileID: 2100000, guid: f696639170c724a4c83234cb7075ebe7, type: 2}
+  - {fileID: 2100000, guid: 11381425cf1792441a7df87bd2ac595d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -194,6 +195,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -260,12 +262,13 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 34116041429b0c04584014660c80e7d1, type: 3}
-  - {fileID: -4597107667637640440, guid: 34116041429b0c04584014660c80e7d1, type: 3}
-  - {fileID: 8748892135801146194, guid: 34116041429b0c04584014660c80e7d1, type: 3}
+  - {fileID: 2100000, guid: 11381425cf1792441a7df87bd2ac595d, type: 2}
+  - {fileID: 2100000, guid: f696639170c724a4c83234cb7075ebe7, type: 2}
+  - {fileID: 2100000, guid: 11381425cf1792441a7df87bd2ac595d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -273,6 +276,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -373,11 +377,12 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4597107667637640440, guid: 34116041429b0c04584014660c80e7d1, type: 3}
-  - {fileID: 5561349426305759274, guid: 34116041429b0c04584014660c80e7d1, type: 3}
+  - {fileID: 2100000, guid: f696639170c724a4c83234cb7075ebe7, type: 2}
+  - {fileID: 2100000, guid: 11381425cf1792441a7df87bd2ac595d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -385,6 +390,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -451,14 +457,15 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4597107667637640440, guid: 34116041429b0c04584014660c80e7d1, type: 3}
+  - {fileID: 2100000, guid: 11381425cf1792441a7df87bd2ac595d, type: 2}
   - {fileID: 5561349426305759274, guid: 34116041429b0c04584014660c80e7d1, type: 3}
-  - {fileID: 8748892135801146194, guid: 34116041429b0c04584014660c80e7d1, type: 3}
-  - {fileID: 6034957751646507721, guid: 34116041429b0c04584014660c80e7d1, type: 3}
-  - {fileID: 8368722655750445499, guid: 34116041429b0c04584014660c80e7d1, type: 3}
+  - {fileID: 2100000, guid: 11381425cf1792441a7df87bd2ac595d, type: 2}
+  - {fileID: 2100000, guid: f696639170c724a4c83234cb7075ebe7, type: 2}
+  - {fileID: 2100000, guid: f696639170c724a4c83234cb7075ebe7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -466,6 +473,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

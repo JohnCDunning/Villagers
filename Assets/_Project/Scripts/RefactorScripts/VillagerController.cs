@@ -106,7 +106,8 @@ public class VillagerController : MonoBehaviour, ISelectable, ITakeDamage
                     //Move to the point if alive
                     if (Alive())
                     {
-                        _Nav.destination = obj.transform.position;
+                        if(_Nav.isOnNavMesh)
+                            _Nav.destination = obj.transform.position;
 
                         SetTask();
                     }

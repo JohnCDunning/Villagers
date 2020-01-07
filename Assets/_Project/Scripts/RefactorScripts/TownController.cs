@@ -241,6 +241,11 @@ public class TownController : MonoBehaviour
 
             if (BuildTester.GetComponent<BuildTest>().collisionCount == 0)
             {
+                RaycastHit hit;
+                if(Physics.Raycast(new Vector3(BuildPos.x,30,BuildPos.z),Vector3.down,out hit, 20))
+                {
+                    BuildPos = hit.point;
+                }
                 //house logic
                 if (_CurrentVillagerCount >= (_MaxVillagers * 0.6f))
                 {
