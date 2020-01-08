@@ -5,8 +5,9 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
     public GameObject _WallPart;
+    public GameObject _RockTower;
     private GameObject _LatestWall;
-    private int num = 1;
+    private int num = 0;
 
     public List<GameObject> wallSegments = new List<GameObject>();
 
@@ -14,6 +15,19 @@ public class Wall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Transform tempTran = transform;
+        if(wallSegments.Count != 0)
+        {
+            if (wallSegments[0].gameObject != null)
+            {
+                tempTran = wallSegments[0].transform;
+            }
+
+        }
+        
+        GameObject tower = Instantiate(_RockTower, tempTran);
+        tower.transform.position = tempTran.position;
+        tower.transform.rotation = tempTran.rotation;
         originPoint = transform;
     }
 
@@ -22,7 +36,9 @@ public class Wall : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            //Destroy(wallSegments[wallSegments.Count - 1]);
             Wall newWall =_LatestWall.AddComponent<Wall>();
+            newWall._RockTower = _RockTower;
             newWall._WallPart = _WallPart;
             Destroy(this);
         }
@@ -32,7 +48,10 @@ public class Wall : MonoBehaviour
             {
                 Destroy(wallSegments[i].gameObject);
             }
+            Destroy(GetComponent<MeshRenderer>());
+            Destroy(GetComponent<MeshFilter>());
             Destroy(this);
+            
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

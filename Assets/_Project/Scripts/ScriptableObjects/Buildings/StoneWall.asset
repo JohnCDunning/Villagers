@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 960f43a1fad462f459be6bdd53ae4dd3, type: 3}
+  m_Name: StoneWall
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingObject
+  _BuildingType: 7
+  _ConstructionPrefab: {fileID: 8465180873656174515, guid: 6d8051d430e915b4394ac3519461abca,
+    type: 3}
+  _ObjectPrefab: {fileID: 7063868996820460000, guid: de597eeb211ca0f4892fa634a20ad7ca,
+    type: 3}
+  _BuildingName: StoneWall
+  _BuildingDescription: StoneWall
+  _WoodCost: 0
+  _StoneCost: 50
+  _FoodCost: 0
+  _ConstructionSize: 2
+  _Upgrades: []

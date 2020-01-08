@@ -15,14 +15,14 @@ public class WorldGeneration : MonoBehaviour
         public float _ObjectRangeFromPoint;
         public Transform _ObjectParent;
 
-        [HideInInspector] public Vector3[] ObjectPos;
+        public Vector3[] ObjectPos;
     }
     public SpawnableObject[] _SpawnableObjects;
 
 
     private Vector2 _WorldX, _WorldZ;
 
-    [HideInInspector]
+   
     public List<Vector3> _ObjectPositions = new List<Vector3>();
 
     private NavMeshSurface _Navmesh;
@@ -52,7 +52,7 @@ public class WorldGeneration : MonoBehaviour
         SpawnObjects();
         PerlinNoise();
         CarveWorld();
-        Invoke("PaintWorld", 1.5f);
+        Invoke("PaintWorld", 3f);
         
     }
     void SpawnObjects()
@@ -86,7 +86,7 @@ public class WorldGeneration : MonoBehaviour
             {
                 if (Vector3.Distance(pos, vertPos) < 5)
                 {
-                    vertices[i] = new Vector3(vertices[i].x, vertices[i].y + 0.1f, vertices[i].z); //+ Random.Range(0.1f, 0.3f)
+                    vertices[i] = new Vector3(vertices[i].x, vertices[i].y + 0.3f, vertices[i].z); //+ Random.Range(0.1f, 0.3f)
                 }
             }
             //Debug.Log(vertPos);
@@ -163,25 +163,45 @@ public class WorldGeneration : MonoBehaviour
         //Generating the origin treepoints;
         for (int i = 0; i < objectGroups; i++)
         {
-            objectPos[i] = CheckSpot();
+            Vector3 setPos = Vector3.zero;
+            while(setPos == Vector3.zero)
+            {
+                Vector3 testPos = CheckSpot();
+                if (_ObjectPositions.Contains(testPos)) 
+                {
+                    testPos = Vector3.zero;
+                }
+                
+                setPos = testPos;
+            }
+            objectPos[i] = setPos;
             PlaceObject(obj, objectPos[i], Parent);
+
+
+            //For branching out objectsz 
             for (int x = 0; x < objectsPerPoint; x++)
             {
-                Vector3 tempPos = CheckClosePosition(objectPos[i], objectRangeFromPoint);
+                Vector3 closePos = Vector3.zero;
+                while (closePos == Vector3.zero)
+                {
+                    Vector3 position = CheckClosePosition(objectPos[i], objectRangeFromPoint);
+                    if (position != Vector3.zero && !_ObjectPositions.Contains(position))
+                    {
+                        closePos = position;
+                    }
+                }
+                //CheckClosePosition(objectPos[i], objectRangeFromPoint);
 
                 for (int v = 0; v < _Villages.Length; v++)
                 {
                     Vector3 pos = _Villages[v].transform.position;
-                    if (Vector3.Distance(tempPos, new Vector3(pos.x, tempPos.y, pos.z)) > _MinDistanceAllowedNearVillage)
+                    if (Vector3.Distance(closePos, new Vector3(pos.x, closePos.y, pos.z)) > _MinDistanceAllowedNearVillage)
                     {
-                        PlaceObject(obj, tempPos, Parent);
-                    }
-                    else
-                    {
+
+                        PlaceObject(obj, closePos, Parent);
                         break;
                     }
                 }
-               
             }
         }
     }
@@ -210,6 +230,7 @@ public class WorldGeneration : MonoBehaviour
         {
             if (hit.transform.gameObject.tag == "Ground")
             {
+
                 return hit.point;
             }
             else
@@ -231,6 +252,7 @@ public class WorldGeneration : MonoBehaviour
         {
             if (hit.transform.gameObject.tag == "Ground")
             {
+                
                 return hit.point;
             }
             else

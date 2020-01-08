@@ -6,5 +6,7 @@
     Farm,
     WindMill,
     VillageCenter,
-    Barracks
+    Barracks,
+    StoneWall,
+    WoodWall,
 }
