@@ -192,15 +192,23 @@ public class WorldGeneration : MonoBehaviour
                 }
                 //CheckClosePosition(objectPos[i], objectRangeFromPoint);
 
+                bool canPlace = false;
                 for (int v = 0; v < _Villages.Length; v++)
                 {
                     Vector3 pos = _Villages[v].transform.position;
                     if (Vector3.Distance(closePos, new Vector3(pos.x, closePos.y, pos.z)) > _MinDistanceAllowedNearVillage)
                     {
-
-                        PlaceObject(obj, closePos, Parent);
+                        canPlace = true;
+                    }
+                    else
+                    {
+                        canPlace = false;
                         break;
                     }
+                }
+                if(canPlace == true)
+                {
+                    PlaceObject(obj, closePos, Parent);
                 }
             }
         }

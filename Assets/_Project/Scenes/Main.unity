@@ -1766,7 +1766,7 @@ MonoBehaviour:
   _Villages:
   - {fileID: 1234003837}
   - {fileID: 3561893596620306327}
-  _MinDistanceAllowedNearVillage: 8
+  _MinDistanceAllowedNearVillage: 9
 --- !u!114 &342284288
 MonoBehaviour:
   m_ObjectHideFlags: 0
