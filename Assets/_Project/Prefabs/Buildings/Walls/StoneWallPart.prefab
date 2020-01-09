@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8465180873656174514}
   - component: {fileID: 8465180873656174511}
   - component: {fileID: 8465180873656174508}
-  m_Layer: 0
+  - component: {fileID: 3953727285383406983}
+  m_Layer: 2
   m_Name: StoneWallPart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,6 +81,22 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!208 &3953727285383406983
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465180873656174515}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.48, y: 0.59, z: 0.96}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.47, z: 0.58}
+  m_TimeToStationary: 0.5
 --- !u!1001 &9054386588112276180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -151,6 +168,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StoneWall
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2c2049cc1cf44ca4db28a8759b1d7137,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c2049cc1cf44ca4db28a8759b1d7137, type: 3}

@@ -48,3 +48,6 @@ MonoBehaviour:
   _RockTower: {fileID: 1256178606860942728, guid: 0e5c684c2540f694d9cdbb0a1a9c36bb,
     type: 3}
   wallSegments: []
+  _Layer:
+    serializedVersion: 2
+    m_Bits: 1024

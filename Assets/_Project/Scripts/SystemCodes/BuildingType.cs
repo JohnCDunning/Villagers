@@ -7,6 +7,5 @@
     WindMill,
     VillageCenter,
     Barracks,
-    StoneWall,
-    WoodWall,
+    Wall
 }

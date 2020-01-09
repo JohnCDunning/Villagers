@@ -64,7 +64,17 @@ public class ConstructObject : MonoBehaviour
         {
             if (Input.GetMouseButtonUp(0) && _CanPlaceObject == true)
             {
-                _RotatingObject = true;
+                //Skip rotation for walls
+             
+                if (_BuildingDetails._BuildingType == BuildingType.Wall)
+                {
+                    PlaceNewBuilding();
+                    return;
+                }
+                else
+                {
+                    _RotatingObject = true;
+                }
             }
             if (Input.GetMouseButtonDown(0) && _RotatingObject == true)
             {

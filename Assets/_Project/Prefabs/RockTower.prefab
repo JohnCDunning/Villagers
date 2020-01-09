@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2825320546989952923}
-  - component: {fileID: 6516295993590150573}
-  - component: {fileID: 671601240621582676}
+  - component: {fileID: 7715799972948037763}
+  - component: {fileID: 4798323050813053542}
+  - component: {fileID: 1169200488090427292}
   m_Layer: 0
   m_Name: RockTower
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6516295993590150573
+--- !u!33 &7715799972948037763
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +41,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256178606860942728}
   m_Mesh: {fileID: -6635217777843087021, guid: 6c5ee13f4ec653946b67ad91730cb2e3, type: 3}
---- !u!23 &671601240621582676
+--- !u!23 &4798323050813053542
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,3 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!208 &1169200488090427292
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256178606860942728}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.73700005, y: 0.99700004, z: 0.59400004}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.94600004, z: -0.004}
+  m_TimeToStationary: 0.5

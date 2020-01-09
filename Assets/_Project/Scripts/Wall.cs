@@ -12,6 +12,8 @@ public class Wall : MonoBehaviour
     public List<GameObject> wallSegments = new List<GameObject>();
 
     Transform originPoint;
+
+    public LayerMask _Layer;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,30 +26,32 @@ public class Wall : MonoBehaviour
             }
 
         }
-        
-        GameObject tower = Instantiate(_RockTower, tempTran);
-        tower.transform.position = tempTran.position;
-        tower.transform.rotation = tempTran.rotation;
+
+        SpawnTower(tempTran.position, tempTran.rotation,transform); //tempTran.position + transform.TransformDirection(Vector3.forward)
         originPoint = transform;
     }
-
+    void SpawnTower(Vector3 spawnPosition, Quaternion rotation,Transform parent)
+    {
+        GameObject tower = Instantiate(_RockTower, parent);
+        tower.transform.position = spawnPosition;
+        tower.transform.rotation = rotation;
+    }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
             //Destroy(wallSegments[wallSegments.Count - 1]);
             Wall newWall =_LatestWall.AddComponent<Wall>();
             newWall._RockTower = _RockTower;
             newWall._WallPart = _WallPart;
+            newWall._Layer = _Layer;
             Destroy(this);
         }
         if (Input.GetMouseButtonDown(1))
         {
-            for (int i = 0; i < wallSegments.Count; i++)
-            {
-                Destroy(wallSegments[i].gameObject);
-            }
+            SpawnTower(transform.position , transform.rotation,null);
+            Destroy(gameObject);
             Destroy(GetComponent<MeshRenderer>());
             Destroy(GetComponent<MeshFilter>());
             Destroy(this);
@@ -57,14 +61,14 @@ public class Wall : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 200))
+        if (Physics.Raycast(ray, out hit, 200, _Layer))
         {
             transform.LookAt(new Vector3(hit.point.x, hit.point.y,hit.point.z));
 
             float dist = Vector3.Distance(originPoint.position, hit.point);
             if(dist > 1)
             {
-                if(Mathf.RoundToInt(dist) > wallSegments.Count)
+                if(Mathf.RoundToInt(dist) > wallSegments.Count && num < 10)
                 {
                     GameObject temp = Instantiate(_WallPart, new Vector3(originPoint.position.x, originPoint.position.y, originPoint.position.z + num), Quaternion.identity, originPoint);
                     temp.transform.localPosition = new Vector3(0, 0, 0 + num);
